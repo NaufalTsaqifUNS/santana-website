@@ -786,7 +786,7 @@ const loadMoreRiwayat = () => {
               <!-- Description -->
               <p class="text-gray-300 group-hover:text-white leading-relaxed mb-6 
                         transition-colors duration-300">
-                Perjalanan nyaman dan aman dengan driver berpengalaman untuk destinasi wisata Anda
+                Pengalaman terbaik untuk perjalanan anda 
               </p>
 
               <!-- Features List -->
@@ -797,7 +797,7 @@ const loadMoreRiwayat = () => {
                        fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
                   </svg>
-                  <span>Driver Profesional</span>
+                  <span>Nyaman</span>
                 </li>
                 <li class="flex items-center gap-3 text-sm text-gray-400 group-hover:text-white 
                            transition-colors duration-300">
@@ -875,46 +875,206 @@ const loadMoreRiwayat = () => {
       </div>
     </section>
 
-    <!-- RIWAYAT PERJALANAN SECTION -->
-    <section class="bg-white py-12 sm:py-16 md:py-20">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <!-- Header -->
-        <div class="text-center mb-12 sm:mb-16">
-          <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Riwayat Perjalanan
+    <!-- RIWAYAT PERJALANAN SECTION - REDESIGNED -->
+    <section class="relative bg-gradient-to-br from-gray-100 via-white to-gray-50 py-16 sm:py-20 md:py-28 overflow-hidden">
+      <!-- Decorative Background Elements -->
+      <div class="absolute inset-0 opacity-5">
+        <div class="absolute top-10 left-10 w-72 h-72 bg-red-500 rounded-full filter blur-3xl"></div>
+        <div class="absolute bottom-10 right-10 w-96 h-96 bg-red-600 rounded-full filter blur-3xl"></div>
+        <div class="absolute top-1/2 left-1/3 w-64 h-64 bg-red-400 rounded-full filter blur-3xl"></div>
+      </div>
+
+      <!-- Floating Geometric Shapes -->
+      <div class="absolute inset-0 opacity-10">
+        <div class="absolute top-20 right-20 w-8 h-8 border-2 border-red-400 rotate-45 animate-pulse"></div>
+        <div class="absolute bottom-32 left-16 w-6 h-6 bg-red-500 rounded-full animate-bounce" style="animation-delay: 0.5s;"></div>
+        <div class="absolute top-1/3 right-1/4 w-4 h-4 bg-red-600 rotate-45 animate-pulse" style="animation-delay: 1s;"></div>
+        <div class="absolute bottom-20 right-1/3 w-10 h-10 border border-red-300 rounded-full animate-bounce" style="animation-delay: 1.5s;"></div>
+      </div>
+
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Enhanced Header -->
+        <div class="text-center mb-16 sm:mb-20">
+          <!-- Badge -->
+          <div class="inline-flex items-center gap-2 px-4 py-2 bg-red-50 
+                      border border-red-200 rounded-full mb-6 shadow-sm">
+            <svg class="w-5 h-5 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z"/>
+              <path fill-rule="evenodd" d="M3 8h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm5 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" clip-rule="evenodd"/>
+            </svg>
+            <span class="text-red-600 text-sm font-semibold">Galeri Perjalanan</span>
+          </div>
+
+          <!-- Main Title with Animation -->
+          <h2 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight">
+            <span class="block">Riwayat</span>
+            <span class="relative inline-block">
+              <span class="text-red-500">Perjalanan</span>
+              <svg class="absolute -bottom-2 sm:-bottom-4 left-0 w-full" height="12" viewBox="0 0 300 16" fill="none">
+                <path d="M3 13C90 3 210 3 297 13" stroke="#EF4444" stroke-width="4" stroke-linecap="round"/>
+              </svg>
+            </span>
           </h2>
-          <div class="w-20 h-1 mx-auto bg-red-500 rounded-full"></div>
-          <p class="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto mt-6 leading-relaxed">
-            Lihat momen-momen perjalanan pelanggan kami yang telah mempercayai Santana Cars
+
+          <!-- Enhanced Description -->
+          <div class="max-w-4xl mx-auto">
+            <p class="text-lg sm:text-xl md:text-2xl text-gray-600 mb-6 leading-relaxed">
+              Saksikan momen-momen indah perjalanan pelanggan kami yang telah 
+              <span class="text-gray-900 font-semibold">mempercayai Santana Cars</span> 
+              untuk menghadirkan pengalaman tak terlupakan
+            </p>
+          </div>
+        </div>
+
+        <!-- Enhanced Gallery with Masonry Layout -->
+        <div class="relative">
+          <!-- Gallery Grid with Different Sizes -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+            <!-- Featured Large Card (First Item) -->
+            <div v-if="visibleRiwayat.length > 0" 
+                 class="sm:col-span-2 lg:row-span-2 group relative overflow-hidden 
+                        rounded-3xl shadow-2xl hover:shadow-red-500/20 
+                        transition-all duration-500 hover:scale-[1.02]">
+              <div class="relative aspect-[4/3] sm:aspect-[2/1] lg:aspect-[1/1]">
+                <img 
+                  :src="visibleRiwayat[0].imageUrl" 
+                  :alt="visibleRiwayat[0].title"
+                  class="w-full h-full object-cover transition-transform duration-700 
+                         group-hover:scale-110"
+                />
+                <!-- Gradient Overlay -->
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                
+                <!-- Content -->
+                <div class="absolute bottom-0 left-0 right-0 p-6 sm:p-8">
+                  <div class="inline-flex items-center gap-2 px-3 py-1 bg-red-500 
+                              rounded-full mb-4 text-white text-sm font-medium">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                    </svg>
+                    Featured Trip
+                  </div>
+                  <h3 class="text-2xl sm:text-3xl font-bold text-white mb-2">
+                    {{ visibleRiwayat[0].title }}
+                  </h3>
+                  <p class="text-gray-200 text-sm sm:text-base">
+                    Perjalanan yang tak terlupakan bersama Santana Cars
+                  </p>
+                </div>
+
+                <!-- Hover Effect -->
+                <div class="absolute inset-0 bg-red-500/0 group-hover:bg-red-500/10 
+                           transition-colors duration-300 pointer-events-none"></div>
+              </div>
+            </div>
+
+            <!-- Regular Gallery Items -->
+            <div v-for="(item, index) in visibleRiwayat.slice(1)" 
+                 :key="item.id"
+                 class="group relative overflow-hidden rounded-2xl shadow-lg 
+                        hover:shadow-red-500/20 transition-all duration-500 
+                        hover:scale-105 cursor-pointer"
+                 :class="{
+                   'lg:row-span-1': index % 3 === 0,
+                   'lg:row-span-2': index % 3 === 1,
+                   'lg:row-span-1': index % 3 === 2
+                 }">
+              <div class="relative aspect-square lg:aspect-auto lg:h-full">
+                <img 
+                  :src="item.imageUrl" 
+                  :alt="item.title"
+                  class="w-full h-full object-cover transition-transform duration-700 
+                         group-hover:scale-110"
+                />
+                
+                <!-- Gradient Overlay -->
+                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent 
+                           opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                
+                <!-- Content (Shows on Hover) -->
+                <div class="absolute bottom-0 left-0 right-0 p-4 transform translate-y-full 
+                           group-hover:translate-y-0 transition-transform duration-300">
+                  <h4 class="text-white font-semibold text-sm sm:text-base mb-1">
+                    {{ item.title }}
+                  </h4>
+                  <div class="flex items-center gap-2 text-gray-200 text-xs">
+                    <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                    </svg>
+                    <span>Santana Journey</span>
+                  </div>
+                </div>
+
+                <!-- Hover Border Effect -->
+                <div class="absolute inset-0 border-2 border-red-500/0 group-hover:border-red-500/50 
+                           rounded-2xl transition-colors duration-300 pointer-events-none"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Decorative Elements -->
+          <div class="absolute -top-4 -left-4 w-8 h-8 border-l-4 border-t-4 border-red-500 opacity-30"></div>
+          <div class="absolute -bottom-4 -right-4 w-8 h-8 border-r-4 border-b-4 border-red-500 opacity-30"></div>
+        </div>
+
+        <!-- Enhanced Load More Section -->
+        <div v-if="visibleRiwayatCount < riwayatImages.length" 
+             class="text-center mt-16 sm:mt-20">
+          <!-- Progress Bar -->
+          <div class="max-w-md mx-auto mb-8">
+            <div class="flex justify-between text-sm text-gray-600 mb-2">
+              <span>Foto ditampilkan</span>
+              <span>{{ visibleRiwayatCount }}/{{ riwayatImages.length }}</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-2">
+              <div class="bg-red-500 h-2 rounded-full transition-all duration-500" 
+                   :style="{ width: (visibleRiwayatCount / riwayatImages.length * 100) + '%' }"></div>
+            </div>
+          </div>
+
+          <!-- Load More Button -->
+          <button
+            @click="loadMoreRiwayat"
+            class="group relative inline-flex items-center gap-3 
+                   bg-gradient-to-r from-red-500 to-red-600 
+                   hover:from-red-600 hover:to-red-700 
+                   text-white px-10 py-4 rounded-full font-semibold text-lg
+                   shadow-2xl hover:shadow-red-500/50 
+                   transition-all duration-300 hover:scale-105
+                   before:absolute before:inset-0 before:rounded-full 
+                   before:bg-white/20 before:opacity-0 
+                   hover:before:opacity-100 before:transition-opacity before:duration-300"
+          >
+            <span class="relative z-10">Lihat Lebih Banyak</span>
+            <svg class="relative z-10 w-6 h-6 group-hover:translate-x-1 transition-transform duration-300" 
+                 fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                    d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+
+          <!-- Additional Info -->
+          <p class="text-gray-500 text-sm mt-4">
+            Masih ada {{ riwayatImages.length - visibleRiwayatCount }} foto perjalanan lainnya
           </p>
         </div>
 
-        <!-- Grid Gallery -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-          <RiwayatCard
-            v-for="item in visibleRiwayat"
-            :key="item.id"
-            :image-url="item.imageUrl"
-            :title="item.title"
-          />
-        </div>
-
-        <!-- Load More Button -->
-        <div 
-          v-if="visibleRiwayatCount < riwayatImages.length" 
-          class="text-center mt-8 sm:mt-12"
-        >
-          <button
-            @click="loadMoreRiwayat"
-            class="inline-flex items-center gap-2 bg-red-500 hover:bg-red-600 
-                   text-white px-8 py-3 rounded-full font-medium 
-                   shadow-lg hover:shadow-xl transition-all duration-300 
-                   hover:scale-105"
-          >
-            <span>Load More</span>
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                    d="M19 9l-7 7-7-7"/>
+        <!-- Call to Action -->
+        <div class="text-center mt-16 sm:mt-20 bg-gradient-to-r from-red-50 to-red-100 
+                    rounded-3xl p-8 sm:p-12 border border-red-200">
+          <h3 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
+            Ingin Menciptakan Momen Serupa?
+          </h3>
+          <p class="text-gray-600 text-lg mb-8 max-w-2xl mx-auto">
+            Bergabunglah dengan ribuan pelanggan yang telah merasakan pengalaman luar biasa bersama Santana Cars
+          </p>
+          <button class="group inline-flex items-center gap-3 bg-red-500 hover:bg-red-600 
+                         text-white px-8 py-4 rounded-full font-semibold text-lg
+                         shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105">
+            <span>Mulai Perjalanan Anda</span>
+            <svg class="w-6 h-6 group-hover:translate-x-1 transition-transform duration-300" 
+                 fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
             </svg>
           </button>
         </div>
