@@ -1,8 +1,9 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import MainLayout from "@/Layouts/MainLayout.vue"
 import CarCard from '@/Components/CarCard.vue'
 import RiwayatCard from '@/Components/RiwayatCard.vue'
+import TestimonialCard from '@/Components/TestimonialCard.vue'
 
 // Set layout
 defineOptions({
@@ -15,7 +16,7 @@ const heroSearchQuery = ref('')
 // Reactive data untuk rental list
 const searchQuery = ref('')
 const activeCategory = ref('All')
-const isDropdownOpen = ref(false)
+const isDropdownOpen = ref(false) 
 
 const cars = ref([
   {
@@ -224,6 +225,228 @@ const visibleRiwayat = computed(() => {
 const loadMoreRiwayat = () => {
   visibleRiwayatCount.value += 4
 }
+
+// Data untuk Testimonials
+const testimonials = ref([
+  {
+    id: 1,
+    name: 'Melinda Lenny',
+    location: 'Medan',
+    avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face',
+    rating: 5,
+    comment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque nam suscipit amet nec eget fermentum, elementum purus aliquet. Porttitor elementum a felis, tempus erat orci.',
+  },
+  {
+    id: 2,
+    name: 'Jacob Stevan',
+    location: 'Bandung',
+    avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face',
+    rating: 5,
+    comment: 'Pelayanan sangat memuaskan dan mobil selalu dalam kondisi prima. Tim Santana Cars sangat profesional dan responsif terhadap kebutuhan customer.',
+  },
+  {
+    id: 3,
+    name: 'Sarah Johnson',
+    location: 'Jakarta',
+    avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face',
+    rating: 5,
+    comment: 'Booking mudah, harga transparan, dan kualitas kendaraan sangat baik. Recommended banget untuk yang butuh rental mobil berkualitas!',
+  },
+  {
+    id: 4,
+    name: 'Michael Chen',
+    location: 'Surabaya',
+    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
+    rating: 5,
+    comment: 'Sudah beberapa kali sewa di Santana Cars dan selalu puas. Customer service 24/7 membantu banget, terutama saat perjalanan jauh.',
+  },
+  {
+    id: 5,
+    name: 'Roben Musstar',
+    location: 'Bali',
+    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face',
+    rating: 5,
+    comment: 'Pengalaman terbaik rental mobil di Bali. Mobil bersih, terawat, dan driver sangat ramah. Pasti akan sewa lagi di masa depan.',
+  },
+  {
+    id: 6,
+    name: 'Diana Putri',
+    location: 'Yogyakarta',
+    avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face',
+    rating: 5,
+    comment: 'Pelayanan cepat dan efisien. Proses booking online sangat mudah dan tidak ribet. Kualitas mobil sesuai dengan ekspektasi, bahkan lebih baik.',
+  }
+])
+
+// Testimonials Slider
+const testimonialSlider = ref(null)
+const currentSlide = ref(0)
+const isAutoPlay = ref(true)
+const slideWidth = ref(0)
+let autoPlayInterval = null
+const windowWidth = ref(typeof window !== 'undefined' ? window.innerWidth : 0)
+
+// Drag/Swipe functionality
+const isDragging = ref(false)
+const startX = ref(0)
+const currentX = ref(0)
+const dragOffset = ref(0)
+const startSlide = ref(0)
+
+const slidesToShow = computed(() => {
+  if (windowWidth.value >= 1280) return 3 // xl screens
+  if (windowWidth.value >= 768) return 2   // md screens and up
+  return 1 // sm screens
+})
+
+const maxSlide = computed(() => {
+  if (!testimonials.value.length) return 0
+  return Math.max(0, testimonials.value.length - slidesToShow.value)
+})
+
+const nextSlide = () => {
+  const newSlide = currentSlide.value + 1
+  currentSlide.value = newSlide > maxSlide.value ? 0 : newSlide
+}
+
+const prevSlide = () => {
+  const newSlide = currentSlide.value - 1
+  currentSlide.value = newSlide < 0 ? maxSlide.value : newSlide
+}
+
+const goToSlide = (index) => {
+  currentSlide.value = Math.max(0, Math.min(index, maxSlide.value))
+}
+
+const startAutoPlay = () => {
+  stopAutoPlay()
+  if (isAutoPlay.value) {
+    autoPlayInterval = setInterval(() => {
+      nextSlide()
+    }, 3000)
+  }
+}
+
+const stopAutoPlay = () => {
+  if (autoPlayInterval) {
+    clearInterval(autoPlayInterval)
+    autoPlayInterval = null
+  }
+}
+
+// Mouse drag handlers
+const handleMouseDown = (e) => {
+  isDragging.value = true
+  startX.value = e.pageX
+  currentX.value = e.pageX
+  startSlide.value = currentSlide.value
+  stopAutoPlay()
+  
+  if (testimonialSlider.value) {
+    testimonialSlider.value.style.cursor = 'grabbing'
+  }
+}
+
+const handleMouseMove = (e) => {
+  if (!isDragging.value) return
+  
+  currentX.value = e.pageX
+  const diff = startX.value - currentX.value
+  dragOffset.value = diff
+}
+
+const handleMouseUp = () => {
+  if (!isDragging.value) return
+  
+  const threshold = slideWidth.value / 4
+  const diff = startX.value - currentX.value
+  
+  if (Math.abs(diff) > threshold) {
+    if (diff > 0) {
+      nextSlide()
+    } else {
+      prevSlide()
+    }
+  }
+  
+  isDragging.value = false
+  dragOffset.value = 0
+  startAutoPlay()
+  
+  if (testimonialSlider.value) {
+    testimonialSlider.value.style.cursor = 'grab'
+  }
+}
+
+const handleMouseLeave = () => {
+  if (isDragging.value) {
+    handleMouseUp()
+  }
+}
+
+// Touch handlers for mobile/tablet
+const handleTouchStart = (e) => {
+  isDragging.value = true
+  startX.value = e.touches[0].pageX
+  currentX.value = e.touches[0].pageX
+  startSlide.value = currentSlide.value
+  stopAutoPlay()
+}
+
+const handleTouchMove = (e) => {
+  if (!isDragging.value) return
+  
+  currentX.value = e.touches[0].pageX
+  const diff = startX.value - currentX.value
+  dragOffset.value = diff
+}
+
+const handleTouchEnd = () => {
+  if (!isDragging.value) return
+  
+  const threshold = slideWidth.value / 4
+  const diff = startX.value - currentX.value
+  
+  if (Math.abs(diff) > threshold) {
+    if (diff > 0) {
+      nextSlide()
+    } else {
+      prevSlide()
+    }
+  }
+  
+  isDragging.value = false
+  dragOffset.value = 0
+  startAutoPlay()
+}
+
+const updateDimensions = () => {
+  if (typeof window !== 'undefined') {
+    windowWidth.value = window.innerWidth
+  }
+  if (testimonialSlider.value) {
+    const container = testimonialSlider.value
+    // Calculate the width of one slide including gap
+    const containerWidth = container.offsetWidth
+    const gap = windowWidth.value >= 768 ? 32 : windowWidth.value >= 640 ? 24 : 16 // md:32px, sm:24px, mobile:16px
+    const totalGapWidth = gap * (slidesToShow.value - 1)
+    slideWidth.value = (containerWidth - totalGapWidth) / slidesToShow.value
+  }
+  if (currentSlide.value > maxSlide.value) {
+    currentSlide.value = maxSlide.value
+  }
+}
+
+onMounted(() => {
+  updateDimensions()
+  startAutoPlay()
+  window.addEventListener('resize', updateDimensions)
+})
+
+onUnmounted(() => {
+  stopAutoPlay()
+  window.removeEventListener('resize', updateDimensions)
+})
 </script>
 
 <template>
@@ -836,7 +1059,7 @@ const loadMoreRiwayat = () => {
       </div>
     </section>
 
-    <!-- RIWAYAT PERJALANAN SECTION - REDESIGNED -->
+    <!-- RIWAYAT PERJALANAN SECTION -->
     <section class="relative bg-gradient-to-br from-gray-100 via-white to-gray-50 py-16 sm:py-20 md:py-28 overflow-hidden">
       <!-- Decorative Background Elements -->
       <div class="absolute inset-0 opacity-5">
@@ -931,25 +1154,109 @@ const loadMoreRiwayat = () => {
             </svg>
           </button>
         </div>
+      </div>
+    </section>
 
-        <!-- Call to Action -->
-        <div class="text-center mt-16 sm:mt-20 bg-gradient-to-r from-red-50 to-red-100 
-                    rounded-3xl p-8 sm:p-12 border border-red-200">
-          <h3 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
-            Ingin Menciptakan Momen Serupa?
-          </h3>
-          <p class="text-gray-600 text-lg mb-8 max-w-2xl mx-auto">
-            Bergabunglah dengan ribuan pelanggan yang telah merasakan pengalaman luar biasa bersama Santana Cars
-          </p>
-          <button class="group inline-flex items-center gap-3 bg-red-500 hover:bg-red-600 
-                         text-white px-8 py-4 rounded-full font-semibold text-lg
-                         shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105">
-            <span>Mulai Perjalanan Anda</span>
-            <svg class="w-6 h-6 group-hover:translate-x-1 transition-transform duration-300" 
-                 fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+    <!-- TESTIMONIALS SECTION - What They Say? -->
+    <section class="relative bg-white py-16 sm:py-20 md:py-28 overflow-hidden">
+      <!-- Background Decorations -->
+      <div class="absolute inset-0 opacity-5">
+        <div class="absolute top-20 left-10 w-72 h-72 bg-red-400 rounded-full mix-blend-multiply filter blur-3xl animate-blob"></div>
+        <div class="absolute top-40 right-10 w-72 h-72 bg-yellow-400 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-2000"></div>
+        <div class="absolute -bottom-8 left-20 w-72 h-72 bg-pink-400 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-4000"></div>
+      </div>
+
+      <!-- Floating Elements -->
+      <div class="absolute inset-0 opacity-10">
+        <div class="absolute top-1/4 left-1/4 w-2 h-2 bg-red-500 rounded-full animate-ping"></div>
+        <div class="absolute top-3/4 right-1/4 w-2 h-2 bg-red-500 rounded-full animate-ping" style="animation-delay: 1s;"></div>
+        <div class="absolute top-1/2 right-1/3 w-2 h-2 bg-red-500 rounded-full animate-ping" style="animation-delay: 2s;"></div>
+      </div>
+
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Section Header -->
+        <div class="text-center mb-12 sm:mb-16 space-y-4 animate-fade-in">
+          <div class="inline-flex items-center justify-center space-x-2 bg-red-50 px-4 py-2 rounded-full mb-4">
+            <svg class="w-5 h-5 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
             </svg>
-          </button>
+            <span class="text-red-600 font-semibold text-sm">Testimonials</span>
+          </div>
+          
+          <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900">
+            What <span class="text-red-500">They Say?</span>
+          </h2>
+          
+          <p class="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            Dengarkan pengalaman nyata dari pelanggan kami yang telah mempercayai layanan rental mobil terbaik
+          </p>
+        </div>
+
+        <!-- Testimonials Slider with Drag/Swipe -->
+        <div class="relative mb-12">
+          <!-- Slider Container with Drag/Swipe Support -->
+          <div 
+            class="overflow-visible select-none py-4 sm:py-6 md:py-8" 
+            ref="testimonialSlider"
+            @mousedown="handleMouseDown"
+            @mousemove="handleMouseMove"
+            @mouseup="handleMouseUp"
+            @mouseleave="handleMouseLeave"
+            @touchstart="handleTouchStart"
+            @touchmove="handleTouchMove"
+            @touchend="handleTouchEnd"
+            style="cursor: grab; user-select: none;"
+          >
+            <div 
+              class="flex gap-4 sm:gap-6 md:gap-8"
+              :style="{ 
+                transform: `translateX(-${(currentSlide * slideWidth) + (currentSlide * (windowWidth >= 768 ? 32 : windowWidth >= 640 ? 24 : 16)) + dragOffset}px)`,
+                transition: isDragging ? 'none' : 'transform 0.5s ease-in-out'
+              }"
+            >
+              <div 
+                v-for="testimonial in testimonials"
+                :key="testimonial.id"
+                class="flex-shrink-0"
+                :style="{ width: `${slideWidth}px` }"
+              >
+                <TestimonialCard
+                  :name="testimonial.name"
+                  :location="testimonial.location"
+                  :avatar="testimonial.avatar"
+                  :rating="testimonial.rating"
+                  :comment="testimonial.comment"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slider Indicators with Click Support -->
+        <div class="flex justify-center items-center gap-2 sm:gap-3 mb-8">
+          <button
+            v-for="index in (maxSlide + 1)"
+            :key="index"
+            @click="goToSlide(index - 1)"
+            :class=" [
+              'transition-all duration-300 rounded-full cursor-pointer',
+              currentSlide === (index - 1)
+                ? 'bg-red-500 w-6 sm:w-8 md:w-10 h-2 sm:h-2.5 md:h-3'
+                : 'bg-gray-300 hover:bg-red-300 w-2 sm:w-2.5 md:w-3 h-2 sm:h-2.5 md:h-3'
+            ]"
+            :aria-label="`Go to slide ${index}`"
+          ></button>
+        </div>
+
+        <!-- Drag Instruction (Hidden on touch devices) -->
+        <div class="hidden md:flex justify-center items-center gap-2 text-gray-400 text-sm">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18"/>
+          </svg>
+          <span>Drag untuk navigasi</span>
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+          </svg>
         </div>
       </div>
     </section>
@@ -978,12 +1285,29 @@ const loadMoreRiwayat = () => {
   }
 }
 
+/* Animation keyframes */
+@keyframes blob {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+}
+
 .animate-slide-up {
   animation: slide-up 0.8s ease-out forwards;
 }
 
 .animate-fade-in {
   animation: fade-in 0.8s ease-out forwards;
+}
+
+.animate-blob {
+  animation: blob 7s infinite;
 }
 
 /* Smooth transitions */
@@ -1043,6 +1367,7 @@ body {
 }
 
 /* Custom scrollbar for dropdown */
+
 .max-h-64::-webkit-scrollbar {
   width: 6px;
 }
@@ -1051,6 +1376,8 @@ body {
   background: #f1f1f1;
 }
 
+
+
 .max-h-64::-webkit-scrollbar-thumb {
   background: #d1d5db;
   border-radius: 3px;
@@ -1058,5 +1385,66 @@ body {
 
 .max-h-64::-webkit-scrollbar-thumb:hover {
   background: #9ca3af;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+
+/* Ensure testimonial cards are fully visible */
+@media (max-width: 640px) {
+  /* Mobile: Add extra space for shadow and hover effects */
+  section:has(.testimonials-slider) {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  /* Tablet: More space for better visibility */
+  section:has(.testimonials-slider) {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+@media (min-width: 1025px) {
+  /* Desktop: Maximum space for optimal display */
+  section:has(.testimonials-slider) {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* Prevent card shadows from being cut off */
+.overflow-visible {
+  overflow: visible !important;
+}
+
+/* Prevent text selection while dragging */
+.select-none {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+/* Smooth cursor transition */
+[style*="cursor: grab"] {
+  cursor: grab !important;
+}
+
+[style*="cursor: grabbing"] {
+  cursor: grabbing !important;
+}
+
+/* Disable pointer events on cards while dragging */
+.select-none:active * {
+  pointer-events: none;
 }
 </style>
