@@ -820,45 +820,6 @@ const loadMoreRiwayat = () => {
           </div>
         </div>
 
-        <!-- Stats Section -->
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 mt-16 sm:mt-20">
-          <!-- Stat 1 -->
-          <div class="text-center group">
-            <div class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-2 
-                        group-hover:text-red-400 transition-colors duration-300">
-              1000+
-            </div>
-            <div class="text-sm sm:text-base text-gray-400">Pelanggan Puas</div>
-          </div>
-
-          <!-- Stat 2 -->
-          <div class="text-center group">
-            <div class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-2 
-                        group-hover:text-red-400 transition-colors duration-300">
-              50+
-            </div>
-            <div class="text-sm sm:text-base text-gray-400">Armada Tersedia</div>
-          </div>
-
-          <!-- Stat 3 -->
-          <div class="text-center group">
-            <div class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-2 
-                        group-hover:text-red-400 transition-colors duration-300">
-              10+
-            </div>
-            <div class="text-sm sm:text-base text-gray-400">Tahun Pengalaman</div>
-          </div>
-
-          <!-- Stat 4 -->
-          <div class="text-center group col-span-2 lg:col-span-1">
-            <div class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-2 
-                        group-hover:text-red-400 transition-colors duration-300">
-              24/7
-            </div>
-            <div class="text-sm sm:text-base text-gray-400">Customer Support</div>
-          </div>
-        </div>
-
         <!-- CTA Button -->
         <div class="text-center mt-12 sm:mt-16">
           <button class="group inline-flex items-center gap-3 bg-red-500 hover:bg-red-600 
