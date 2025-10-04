@@ -2,6 +2,7 @@
 import { ref, computed } from 'vue'
 import MainLayout from "@/Layouts/MainLayout.vue"
 import CarCard from '@/Components/CarCard.vue'
+import RiwayatCard from '@/Components/RiwayatCard.vue'
 
 // Set layout
 defineOptions({
@@ -19,7 +20,7 @@ const isDropdownOpen = ref(false)
 const cars = ref([
   {
     id: 1,
-    name: 'Avanza',
+    name: 'Toyota Avanza',
     pricePerDay: 1000000,
     category: 'MPV',
     seats: 5,
@@ -28,7 +29,7 @@ const cars = ref([
   },
   {
     id: 2,
-    name: 'Alphard',
+    name: 'Toyota Alphard',
     pricePerDay: 400000,
     category: 'MPV',
     seats: 7,
@@ -37,7 +38,7 @@ const cars = ref([
   },
   {
     id: 3,
-    name: 'Fortuner',
+    name: 'Toyota Fortuner',
     pricePerDay: 600000,
     category: 'SUV',
     seats: 5,
@@ -46,12 +47,12 @@ const cars = ref([
   },
   {
     id: 4,
-    name: 'Toyota Fortuner',
+    name: 'Toyota Xpander',
     pricePerDay: 750000,
     category: 'SUV',
     seats: 5,
     fuel: 'Solar',
-    imageUrl: 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'images/xpander.png',
   },
   {
     id: 5,
@@ -60,7 +61,7 @@ const cars = ref([
     category: 'Luxury MPV',
     seats: 7,
     fuel: 'Bensin',
-    imageUrl: 'https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'images/vclass.png',
   },
   {
     id: 6,
@@ -149,6 +150,60 @@ const filteredCars = computed(() => {
     return matchCategory && matchSearch
   })
 })
+
+// Data untuk Riwayat Perjalanan
+const riwayatImages = ref([
+  {
+    id: 1,
+    imageUrl: 'https://images.unsplash.com/photo-1468818438311-4bab781ab9b8?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    title: 'Trip di Gunung Bromo'
+  },
+  {
+    id: 2,
+    imageUrl: 'https://plus.unsplash.com/premium_photo-1663047448187-778e10adadf5?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    title: 'Trip di Ladang Bunga Tulip'
+  },
+  {
+    id: 3,
+    imageUrl: 'https://images.unsplash.com/photo-1468818438311-4bab781ab9b8?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    title: 'Trip di Pantai Kuta'
+  },
+  {
+    id: 4,
+    imageUrl: 'https://images.unsplash.com/photo-1468818438311-4bab781ab9b8?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    title: 'Trip di Ubud'
+  },
+  {
+    id: 5,
+    imageUrl: 'https://images.unsplash.com/photo-1468818438311-4bab781ab9b8?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    title: 'Trip di Nusa Penida'
+  },
+  {
+    id: 6,
+    imageUrl: 'https://images.unsplash.com/photo-1468818438311-4bab781ab9b8?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    title: 'Trip di Gili Trawangan'
+  },
+  {
+    id: 7,
+    imageUrl: 'https://images.unsplash.com/photo-1468818438311-4bab781ab9b8?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    title: 'Trip di Raja Ampat'
+  },
+  {
+    id: 8,
+    imageUrl: 'https://images.unsplash.com/photo-1468818438311-4bab781ab9b8?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    title: 'Trip di Labuan Bajo'
+  }
+])
+
+const visibleRiwayatCount = ref(8)
+
+const visibleRiwayat = computed(() => {
+  return riwayatImages.value.slice(0, visibleRiwayatCount.value)
+})
+
+const loadMoreRiwayat = () => {
+  visibleRiwayatCount.value += 4
+}
 </script>
 
 <template>
@@ -590,6 +645,52 @@ const filteredCars = computed(() => {
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RIWAYAT PERJALANAN SECTION -->
+    <section class="bg-white py-12 sm:py-16 md:py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Header -->
+        <div class="text-center mb-12 sm:mb-16">
+          <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            Riwayat Perjalanan
+          </h2>
+          <div class="w-20 h-1 mx-auto bg-red-500 rounded-full"></div>
+          <p class="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto mt-6 leading-relaxed">
+            Lihat momen-momen perjalanan pelanggan kami yang telah mempercayai Santana Cars
+          </p>
+        </div>
+
+        <!-- Grid Gallery -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+          <RiwayatCard
+            v-for="item in visibleRiwayat"
+            :key="item.id"
+            :image-url="item.imageUrl"
+            :title="item.title"
+          />
+        </div>
+
+        <!-- Load More Button -->
+        <div 
+          v-if="visibleRiwayatCount < riwayatImages.length" 
+          class="text-center mt-8 sm:mt-12"
+        >
+          <button
+            @click="loadMoreRiwayat"
+            class="inline-flex items-center gap-2 bg-red-500 hover:bg-red-600 
+                   text-white px-8 py-3 rounded-full font-medium 
+                   shadow-lg hover:shadow-xl transition-all duration-300 
+                   hover:scale-105"
+          >
+            <span>Load More</span>
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                    d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
         </div>
       </div>
     </section>

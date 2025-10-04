@@ -15,11 +15,13 @@ defineProps({
     class="bg-white rounded-lg shadow-lg hover:shadow-red-200 transition-transform duration-300 hover:-translate-y-1 flex flex-col"
   >
     <!-- Car Image -->
-    <img
-      :src="imageUrl"
-      :alt="`Foto ${name}`"
-      class="h-48 w-full object-cover rounded-t-lg"
-    />
+    <div class="w-full aspect-[16/9] relative rounded-t-lg overflow-hidden">
+      <img
+        :src="imageUrl"
+        :alt="`Foto ${name}`"
+        class="absolute inset-0 w-full h-full object-cover"
+      />
+    </div>
 
     <!-- Card Body -->
     <div class="flex-1 flex flex-col px-5 py-4 space-y-2">
