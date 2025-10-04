@@ -192,10 +192,30 @@ const riwayatImages = ref([
     id: 8,
     imageUrl: 'https://images.unsplash.com/photo-1468818438311-4bab781ab9b8?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     title: 'Trip di Labuan Bajo'
+  },
+  {
+    id: 9,
+    imageUrl: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=2070&auto=format&fit=crop',
+    title: 'Trip di Danau Toba'
+  },
+  {
+    id: 10,
+    imageUrl: 'https://images.unsplash.com/photo-1501594907352-04cda38ebc29?q=80&w=2032&auto=format&fit=crop',
+    title: 'Trip di Pulau Komodo'
+  },
+  {
+    id: 11,
+    imageUrl: 'https://images.unsplash.com/photo-1523906630133-f6934a1ab2b9?q=80&w=2070&auto=format&fit=crop',
+    title: 'Trip di Tanjung Lesung'
+  },
+  {
+    id: 12,
+    imageUrl: 'https://images.unsplash.com/photo-1505228395891-9a51e7e86bf6?q=80&w=2033&auto=format&fit=crop',
+    title: 'Trip di Lombok'
   }
 ])
 
-const visibleRiwayatCount = ref(8)
+const visibleRiwayatCount = ref(4) // Ubah dari 8 menjadi 4
 
 const visibleRiwayat = computed(() => {
   return riwayatImages.value.slice(0, visibleRiwayatCount.value)
@@ -538,113 +558,319 @@ const loadMoreRiwayat = () => {
       </div>
     </section>
 
-    <!-- WHY CHOOSE US SECTION -->
-    <section class="bg-gray-100 py-12 sm:py-16 md:py-20">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <!-- Header -->
-        <div class="text-center mb-12 sm:mb-16">
-          <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 mb-4">
-            Santana
-            <br />
-            <span class="text-gray-700">AutoCars</span>
+    <!-- WHY CHOOSE US SECTION - REDESIGNED -->
+    <section class="relative bg-gradient-to-br from-gray-900 via-gray-800 to-black py-16 sm:py-20 md:py-28 overflow-hidden">
+      <!-- Animated Background Elements -->
+      <div class="absolute inset-0 opacity-10">
+        <div class="absolute top-0 left-0 w-96 h-96 bg-red-500 rounded-full filter blur-3xl animate-pulse"></div>
+        <div class="absolute bottom-0 right-0 w-96 h-96 bg-red-600 rounded-full filter blur-3xl animate-pulse" style="animation-delay: 1s;"></div>
+      </div>
+
+      <!-- Decorative Lines -->
+      <div class="absolute inset-0 opacity-5">
+        <div class="absolute top-1/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-white to-transparent"></div>
+        <div class="absolute top-2/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-white to-transparent"></div>
+        <div class="absolute top-3/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-white to-transparent"></div>
+      </div>
+
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Header Section -->
+        <div class="text-center mb-12 sm:mb-16 md:mb-20">
+          <!-- Badge -->
+          <div class="inline-flex items-center gap-2 px-4 py-2 bg-red-500/20 
+                      border border-red-500/30 rounded-full mb-6 backdrop-blur-sm">
+            <svg class="w-5 h-5 text-red-400" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+            </svg>
+            <span class="text-white text-sm font-medium">Dipercaya oleh 1000+ Pelanggan</span>
+          </div>
+
+          <!-- Main Title -->
+          <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+            Kenapa Harus
+            <span class="relative inline-block">
+              <span class="text-red-500">Santana Cars</span>
+              <svg class="absolute -bottom-2 left-0 w-full" height="8" viewBox="0 0 200 12" fill="none">
+                <path d="M2 10C60 2 140 2 198 10" stroke="#EF4444" stroke-width="3" stroke-linecap="round"/>
+              </svg>
+            </span>
+            ?
           </h2>
-          <p class="text-base sm:text-lg md:text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed mt-6">
-            Kami hadir untuk melayani kebutuhan sewa mobil dan wisata dengan armada terawat,
-            <br class="hidden sm:block" />
-            harga bersahabat, serta pelayanan ramah dan profesional.
+
+          <p class="text-base sm:text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            Kami menghadirkan solusi terbaik untuk setiap perjalanan Anda dengan 
+            <span class="text-white font-semibold">armada premium</span> dan 
+            <span class="text-white font-semibold">pelayanan profesional</span>
           </p>
         </div>
 
-        <!-- Content Grid -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-          <!-- Left Side - Title -->
-          <div class="lg:col-span-4 text-center lg:text-left">
-            <h3 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-700 leading-tight">
-              Kenapa
-              <br />
-              Harus
-              <br />
-              Kami ?
-            </h3>
-          </div>
-
-          <!-- Right Side - Features Grid -->
-          <div class="lg:col-span-8 grid grid-cols-1 gap-4">
-            <!-- Best Services Card -->
-            <div class="group bg-gray-900 rounded-2xl p-4 sm:p-6 text-white 
-                        hover:bg-red-500 transition-all duration-300 
-                        hover:shadow-2xl hover:shadow-red-500/30 hover:-translate-y-1">
-              <div class="flex items-center gap-4 sm:gap-6">
-                <!-- Icon Image -->
-                <div class="bg-white/10 p-3 rounded-full group-hover:bg-white/20 transition-colors duration-300 
-                            flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 flex-shrink-0">
+        <!-- Features Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          <!-- Card 1: Best Services -->
+          <div class="group relative bg-white/5 backdrop-blur-sm border border-white/10 
+                      rounded-2xl p-8 hover:bg-gradient-to-br hover:from-red-500 hover:to-red-600 
+                      transition-all duration-500 hover:scale-105 hover:shadow-2xl 
+                      hover:shadow-red-500/50 cursor-pointer overflow-hidden">
+            <!-- Hover Effect Background -->
+            <div class="absolute inset-0 bg-gradient-to-br from-red-500/0 to-red-600/0 
+                        group-hover:from-red-500/20 group-hover:to-red-600/20 
+                        transition-all duration-500"></div>
+            
+            <!-- Content -->
+            <div class="relative z-10">
+              <!-- Icon Container -->
+              <div class="mb-6 relative">
+                <div class="inline-flex items-center justify-center w-20 h-20 
+                            bg-red-500/20 group-hover:bg-white/20 rounded-2xl 
+                            transition-all duration-500 group-hover:rotate-6 
+                            group-hover:scale-110">
                   <img 
                     src="/svg/best-service.svg" 
-                    alt="Best Services Icon" 
-                    class="w-8 h-8 sm:w-10 sm:h-10 object-contain filter brightness-0 invert"
+                    alt="Best Services" 
+                    class="w-10 h-10 filter brightness-0 invert"
                   />
                 </div>
-                
-                <!-- Content -->
-                <div class="flex-1 text-left">
-                  <h4 class="text-lg sm:text-xl font-bold mb-2">Best Services</h4>
-                  <p class="text-xs sm:text-sm text-gray-300 group-hover:text-white leading-relaxed">
-                    Layanan cepat, ramah, dan tersedia 24/7 untuk mendukung setiap perjalanan Anda.
-                  </p>
-                </div>
+                <!-- Decorative Circle -->
+                <div class="absolute -top-2 -right-2 w-4 h-4 bg-red-400 rounded-full 
+                            opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               </div>
-            </div>
 
-            <!-- Best Experience Card -->
-            <div class="group bg-gray-900 rounded-2xl p-4 sm:p-6 text-white 
-                        hover:bg-red-500 transition-all duration-300 
-                        hover:shadow-2xl hover:shadow-red-500/30 hover:-translate-y-1">
-              <div class="flex items-center gap-4 sm:gap-6">
-                <!-- Icon Image -->
-                <div class="bg-white/10 p-3 rounded-full group-hover:bg-white/20 transition-colors duration-300 
-                            flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 flex-shrink-0">
-                  <img 
-                    src="/svg/best-experience.svg" 
-                    alt="Best Experience Icon" 
-                    class="w-8 h-8 sm:w-10 sm:h-10 object-contain filter brightness-0 invert"
-                  />
-                </div>
-                
-                <!-- Content -->
-                <div class="flex-1 text-left">
-                  <h4 class="text-lg sm:text-xl font-bold mb-2">Best Experience</h4>
-                  <p class="text-xs sm:text-sm text-gray-300 group-hover:text-white leading-relaxed">
-                    Pengalaman terbaik untuk perjalanan anda
-                  </p>
-                </div>
-              </div>
-            </div>
+              <!-- Title -->
+              <h3 class="text-2xl font-bold text-white mb-4 group-hover:translate-x-1 
+                         transition-transform duration-300">
+                Pelayanan Terbaik
+              </h3>
 
-            <!-- Best Quality Card -->
-            <div class="group bg-gray-900 rounded-2xl p-4 sm:p-6 text-white 
-                        hover:bg-red-500 transition-all duration-300 
-                        hover:shadow-2xl hover:shadow-red-500/30 hover:-translate-y-1">
-              <div class="flex items-center gap-4 sm:gap-6">
-                <!-- Icon Image -->
-                <div class="bg-white/10 p-3 rounded-full group-hover:bg-white/20 transition-colors duration-300 
-                            flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 flex-shrink-0">
-                  <img 
-                    src="/svg/best-quality.svg" 
-                    alt="Best Quality Icon" 
-                    class="w-8 h-8 sm:w-10 sm:h-10 object-contain filter brightness-0 invert"
-                  />
-                </div>
-                
-                <!-- Content -->
-                <div class="flex-1 text-left">
-                  <h4 class="text-lg sm:text-xl font-bold mb-2">Best Quality</h4>
-                  <p class="text-xs sm:text-sm text-gray-300 group-hover:text-white leading-relaxed">
-                    Armada terawat, bersih, dan selalu siap menemani perjalanan Anda dengan aman.
-                  </p>
-                </div>
-              </div>
+              <!-- Description -->
+              <p class="text-gray-300 group-hover:text-white leading-relaxed mb-6 
+                        transition-colors duration-300">
+                Layanan 24/7 dengan tim profesional siap membantu setiap kebutuhan perjalanan Anda kapan saja
+              </p>
+
+              <!-- Features List -->
+              <ul class="space-y-3">
+                <li class="flex items-center gap-3 text-sm text-gray-400 group-hover:text-white 
+                           transition-colors duration-300">
+                  <svg class="w-5 h-5 text-red-400 group-hover:text-white flex-shrink-0" 
+                       fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                  </svg>
+                  <span>Respon Cepat & Ramah</span>
+                </li>
+                <li class="flex items-center gap-3 text-sm text-gray-400 group-hover:text-white 
+                           transition-colors duration-300">
+                  <svg class="w-5 h-5 text-red-400 group-hover:text-white flex-shrink-0" 
+                       fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                  </svg>
+                  <span>Customer Service 24/7</span>
+                </li>
+                <li class="flex items-center gap-3 text-sm text-gray-400 group-hover:text-white 
+                           transition-colors duration-300">
+                  <svg class="w-5 h-5 text-red-400 group-hover:text-white flex-shrink-0" 
+                       fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                  </svg>
+                  <span>Proses Booking Mudah</span>
+                </li>
+              </ul>
             </div>
           </div>
+
+          <!-- Card 2: Best Quality -->
+          <div class="group relative bg-white/5 backdrop-blur-sm border border-white/10 
+                      rounded-2xl p-8 hover:bg-gradient-to-br hover:from-red-500 hover:to-red-600 
+                      transition-all duration-500 hover:scale-105 hover:shadow-2xl 
+                      hover:shadow-red-500/50 cursor-pointer overflow-hidden">
+            <!-- Hover Effect Background -->
+            <div class="absolute inset-0 bg-gradient-to-br from-red-500/0 to-red-600/0 
+                        group-hover:from-red-500/20 group-hover:to-red-600/20 
+                        transition-all duration-500"></div>
+            
+            <!-- Content -->
+            <div class="relative z-10">
+              <!-- Icon Container -->
+              <div class="mb-6 relative">
+                <div class="inline-flex items-center justify-center w-20 h-20 
+                            bg-red-500/20 group-hover:bg-white/20 rounded-2xl 
+                            transition-all duration-500 group-hover:rotate-6 
+                            group-hover:scale-110">
+                  <img 
+                    src="/svg/best-quality.svg" 
+                    alt="Best Quality" 
+                    class="w-10 h-10 filter brightness-0 invert"
+                  />
+                </div>
+                <!-- Decorative Circle -->
+                <div class="absolute -top-2 -right-2 w-4 h-4 bg-red-400 rounded-full 
+                            opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              </div>
+
+              <!-- Title -->
+              <h3 class="text-2xl font-bold text-white mb-4 group-hover:translate-x-1 
+                         transition-transform duration-300">
+                Kualitas Premium
+              </h3>
+
+              <!-- Description -->
+              <p class="text-gray-300 group-hover:text-white leading-relaxed mb-6 
+                        transition-colors duration-300">
+                Armada terawat dengan standar kualitas tinggi, bersih, dan selalu dalam kondisi prima
+              </p>
+
+              <!-- Features List -->
+              <ul class="space-y-3">
+                <li class="flex items-center gap-3 text-sm text-gray-400 group-hover:text-white 
+                           transition-colors duration-300">
+                  <svg class="w-5 h-5 text-red-400 group-hover:text-white flex-shrink-0" 
+                       fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                  </svg>
+                  <span>Armada Terawat & Bersih</span>
+                </li>
+                <li class="flex items-center gap-3 text-sm text-gray-400 group-hover:text-white 
+                           transition-colors duration-300">
+                  <svg class="w-5 h-5 text-red-400 group-hover:text-white flex-shrink-0" 
+                       fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                  </svg>
+                  <span>Perawatan Berkala</span>
+                </li>
+                <li class="flex items-center gap-3 text-sm text-gray-400 group-hover:text-white 
+                           transition-colors duration-300">
+                  <svg class="w-5 h-5 text-red-400 group-hover:text-white flex-shrink-0" 
+                       fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                  </svg>
+                  <span>Kendaraan Terbaru</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Card 3: Best Experience -->
+          <div class="group relative bg-white/5 backdrop-blur-sm border border-white/10 
+                      rounded-2xl p-8 hover:bg-gradient-to-br hover:from-red-500 hover:to-red-600 
+                      transition-all duration-500 hover:scale-105 hover:shadow-2xl 
+                      hover:shadow-red-500/50 cursor-pointer overflow-hidden md:col-span-2 lg:col-span-1">
+            <!-- Hover Effect Background -->
+            <div class="absolute inset-0 bg-gradient-to-br from-red-500/0 to-red-600/0 
+                        group-hover:from-red-500/20 group-hover:to-red-600/20 
+                        transition-all duration-500"></div>
+            
+            <!-- Content -->
+            <div class="relative z-10">
+              <!-- Icon Container -->
+              <div class="mb-6 relative">
+                <div class="inline-flex items-center justify-center w-20 h-20 
+                            bg-red-500/20 group-hover:bg-white/20 rounded-2xl 
+                            transition-all duration-500 group-hover:rotate-6 
+                            group-hover:scale-110">
+                  <img 
+                    src="/svg/best-experience.svg" 
+                    alt="Best Experience" 
+                    class="w-10 h-10 filter brightness-0 invert"
+                  />
+                </div>
+                <!-- Decorative Circle -->
+                <div class="absolute -top-2 -right-2 w-4 h-4 bg-red-400 rounded-full 
+                            opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              </div>
+
+              <!-- Title -->
+              <h3 class="text-2xl font-bold text-white mb-4 group-hover:translate-x-1 
+                         transition-transform duration-300">
+                Pengalaman Terbaik
+              </h3>
+
+              <!-- Description -->
+              <p class="text-gray-300 group-hover:text-white leading-relaxed mb-6 
+                        transition-colors duration-300">
+                Perjalanan nyaman dan aman dengan driver berpengalaman untuk destinasi wisata Anda
+              </p>
+
+              <!-- Features List -->
+              <ul class="space-y-3">
+                <li class="flex items-center gap-3 text-sm text-gray-400 group-hover:text-white 
+                           transition-colors duration-300">
+                  <svg class="w-5 h-5 text-red-400 group-hover:text-white flex-shrink-0" 
+                       fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                  </svg>
+                  <span>Driver Profesional</span>
+                </li>
+                <li class="flex items-center gap-3 text-sm text-gray-400 group-hover:text-white 
+                           transition-colors duration-300">
+                  <svg class="w-5 h-5 text-red-400 group-hover:text-white flex-shrink-0" 
+                       fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                  </svg>
+                  <span>Harga Transparan</span>
+                </li>
+                <li class="flex items-center gap-3 text-sm text-gray-400 group-hover:text-white 
+                           transition-colors duration-300">
+                  <svg class="w-5 h-5 text-red-400 group-hover:text-white flex-shrink-0" 
+                       fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                  </svg>
+                  <span>Flexible & Reliable</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stats Section -->
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 mt-16 sm:mt-20">
+          <!-- Stat 1 -->
+          <div class="text-center group">
+            <div class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-2 
+                        group-hover:text-red-400 transition-colors duration-300">
+              1000+
+            </div>
+            <div class="text-sm sm:text-base text-gray-400">Pelanggan Puas</div>
+          </div>
+
+          <!-- Stat 2 -->
+          <div class="text-center group">
+            <div class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-2 
+                        group-hover:text-red-400 transition-colors duration-300">
+              50+
+            </div>
+            <div class="text-sm sm:text-base text-gray-400">Armada Tersedia</div>
+          </div>
+
+          <!-- Stat 3 -->
+          <div class="text-center group">
+            <div class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-2 
+                        group-hover:text-red-400 transition-colors duration-300">
+              10+
+            </div>
+            <div class="text-sm sm:text-base text-gray-400">Tahun Pengalaman</div>
+          </div>
+
+          <!-- Stat 4 -->
+          <div class="text-center group col-span-2 lg:col-span-1">
+            <div class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-2 
+                        group-hover:text-red-400 transition-colors duration-300">
+              24/7
+            </div>
+            <div class="text-sm sm:text-base text-gray-400">Customer Support</div>
+          </div>
+        </div>
+
+        <!-- CTA Button -->
+        <div class="text-center mt-12 sm:mt-16">
+          <button class="group inline-flex items-center gap-3 bg-red-500 hover:bg-red-600 
+                         text-white px-8 py-4 rounded-full font-medium text-lg
+                         shadow-2xl hover:shadow-red-500/50 transition-all duration-300 
+                         hover:scale-105">
+            <span>Mulai Perjalanan Anda</span>
+            <svg class="w-6 h-6 group-hover:translate-x-1 transition-transform duration-300" 
+                 fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+          </button>
         </div>
       </div>
     </section>
