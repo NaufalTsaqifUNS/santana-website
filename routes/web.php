@@ -18,6 +18,14 @@ Route::get('/', function () {
     return Inertia::render('Home'); 
 })->name('home');
 
+Route::get('/list-rental', function () {
+    return Inertia::render('list-rental'); 
+})->name('list-rental');
+
+Route::get('/riwayat-rental', function () {
+    return Inertia::render('riwayat-rental'); 
+})->name('riwayat-rental');
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

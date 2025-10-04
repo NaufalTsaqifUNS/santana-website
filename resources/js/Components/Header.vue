@@ -20,46 +20,41 @@
         <!-- Navigation Menu -->
         <div class="hidden md:block">
           <div class="ml-10 flex items-baseline space-x-8">
-            <a
-              href="#"
+            <Link
+              href="/"
               class="text-gray-700 hover:text-red-600 px-3 py-2 text-sm font-medium transition-colors duration-200"
               :class="{ 'text-red-600 border-b-2 border-red-600': activeMenu === 'home' }"
-              @click="setActiveMenu('home')"
             >
               Home
-            </a>
-            <a
-              href="#"
+            </Link>
+            <Link
+              href="/list-rental"
               class="text-gray-700 hover:text-red-600 px-3 py-2 text-sm font-medium transition-colors duration-200"
               :class="{ 'text-red-600 border-b-2 border-red-600': activeMenu === 'daftar-rental' }"
-              @click="setActiveMenu('daftar-rental')"
             >
               Daftar Rental
-            </a>
-            <a
-              href="#"
+            </Link>
+            <Link
+              href="/riwayat-rental"
               class="text-gray-700 hover:text-red-600 px-3 py-2 text-sm font-medium transition-colors duration-200"
               :class="{ 'text-red-600 border-b-2 border-red-600': activeMenu === 'riwayat-rental' }"
-              @click="setActiveMenu('riwayat-rental')"
             >
               Riwayat Rental
-            </a>
-            <a
-              href="#"
+            </Link>
+            <Link
+              href="/tentang-kami"
               class="text-gray-700 hover:text-red-600 px-3 py-2 text-sm font-medium transition-colors duration-200"
               :class="{ 'text-red-600 border-b-2 border-red-600': activeMenu === 'tentang-kami' }"
-              @click="setActiveMenu('tentang-kami')"
             >
               Tentang Kami
-            </a>
-            <a
-              href="#"
+            </Link>
+            <Link
+              href="/contact"
               class="text-gray-700 hover:text-red-600 px-3 py-2 text-sm font-medium transition-colors duration-200"
               :class="{ 'text-red-600 border-b-2 border-red-600': activeMenu === 'contact' }"
-              @click="setActiveMenu('contact')"
             >
               Contact
-            </a>
+            </Link>
           </div>
         </div>
 
@@ -107,46 +102,46 @@
       <!-- Mobile Menu -->
       <div v-if="mobileMenuOpen" class="md:hidden">
         <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t border-gray-200">
-          <a
-            href="#"
+          <Link
+            href="/"
             class="text-gray-700 hover:text-red-600 block px-3 py-2 text-base font-medium transition-colors duration-200"
             :class="{ 'text-red-600 bg-red-50': activeMenu === 'home' }"
-            @click="setActiveMenu('home')"
+            @click="mobileMenuOpen = false"
           >
             Home
-          </a>
-          <a
-            href="#"
+          </Link>
+          <Link
+            href="/list-rental"
             class="text-gray-700 hover:text-red-600 block px-3 py-2 text-base font-medium transition-colors duration-200"
             :class="{ 'text-red-600 bg-red-50': activeMenu === 'daftar-rental' }"
-            @click="setActiveMenu('daftar-rental')"
+            @click="mobileMenuOpen = false"
           >
             Daftar Rental
-          </a>
-          <a
-            href="#"
+          </Link>
+          <Link
+            href="/riwayat-rental"
             class="text-gray-700 hover:text-red-600 block px-3 py-2 text-base font-medium transition-colors duration-200"
             :class="{ 'text-red-600 bg-red-50': activeMenu === 'riwayat-rental' }"
-            @click="setActiveMenu('riwayat-rental')"
+            @click="mobileMenuOpen = false"
           >
             Riwayat Rental
-          </a>
-          <a
-            href="#"
+          </Link>
+          <Link
+            href="/tentang-kami"
             class="text-gray-700 hover:text-red-600 block px-3 py-2 text-base font-medium transition-colors duration-200"
             :class="{ 'text-red-600 bg-red-50': activeMenu === 'tentang-kami' }"
-            @click="setActiveMenu('tentang-kami')"
+            @click="mobileMenuOpen = false"
           >
             Tentang Kami
-          </a>
-          <a
-            href="#"
+          </Link>
+          <Link
+            href="/contact"
             class="text-gray-700 hover:text-red-600 block px-3 py-2 text-base font-medium transition-colors duration-200"
             :class="{ 'text-red-600 bg-red-50': activeMenu === 'contact' }"
-            @click="setActiveMenu('contact')"
+            @click="mobileMenuOpen = false"
           >
             Contact
-          </a>
+          </Link>
           <button
             class="w-full text-left bg-red-500 hover:bg-red-600 text-white px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 mt-4"
             @click="callUs"
@@ -160,11 +155,32 @@
 </template>
 
 <script>
+import { Link, usePage } from '@inertiajs/vue3'
+import { computed } from 'vue'
+
 export default {
   name: 'SantanaNavbar',
+  components: {
+    Link
+  },
+  setup() {
+    const page = usePage()
+    
+    // Computed property untuk menentukan active menu berdasarkan URL
+    const activeMenu = computed(() => {
+      const url = page.url
+      if (url === '/' || url === '/home') return 'home'
+      if (url.includes('/list-rental')) return 'daftar-rental'
+      if (url.includes('/riwayat-rental')) return 'riwayat-rental'
+      if (url.includes('/tentang-kami')) return 'tentang-kami'
+      if (url.includes('/contact')) return 'contact'
+      return 'home'
+    })
+    
+    return { activeMenu }
+  },
   data() {
     return {
-      activeMenu: 'home',
       mobileMenuOpen: false,
       showHeader: true,
       lastScrollPosition: 0,
@@ -173,7 +189,7 @@ export default {
   },
   methods: {
     setActiveMenu(menu) {
-      this.activeMenu = menu;
+      // Tidak perlu lagi karena activeMenu sekarang computed
       this.mobileMenuOpen = false;
     },
     toggleMobileMenu() {
