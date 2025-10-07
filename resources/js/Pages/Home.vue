@@ -1,5 +1,6 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { Link } from '@inertiajs/vue3'
 import MainLayout from "@/Layouts/MainLayout.vue"
 import CarCard from '@/Components/CarCard.vue'
 import RiwayatCard from '@/Components/RiwayatCard.vue'
@@ -221,10 +222,6 @@ const visibleRiwayatCount = ref(4) // Ubah dari 8 menjadi 4
 const visibleRiwayat = computed(() => {
   return riwayatImages.value.slice(0, visibleRiwayatCount.value)
 })
-
-const loadMoreRiwayat = () => {
-  visibleRiwayatCount.value += 4
-}
 
 // Data untuk Testimonials
 const testimonials = ref([
@@ -769,14 +766,17 @@ onUnmounted(() => {
           <p class="text-gray-400 text-sm mt-2">Coba ubah kata kunci pencarian atau kategori</p>
         </div>
 
-        <!-- Load More -->
+        <!-- Link to List Rental Page -->
         <div v-if="filteredCars.length > 0" class="text-center pt-4">
-          <button
-            @click="loadMore"
-            class="bg-red-500 text-white px-8 py-3 rounded-full font-medium shadow-md transition-opacity duration-300 hover:opacity-90 cursor-pointer"
+          <Link
+            href="/list-rental"
+            class="inline-flex items-center gap-2 bg-red-500 text-white px-8 py-3 rounded-full font-medium shadow-md transition-all duration-300 hover:bg-red-600 hover:shadow-lg hover:scale-105"
           >
-            Load More
-          </button>
+            <span>Read More</span>
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+          </Link>
         </div>
       </div>
     </section>
@@ -1042,24 +1042,10 @@ onUnmounted(() => {
             </div>
           </div>
         </div>
-
-        <!-- CTA Button -->
-        <div class="text-center mt-12 sm:mt-16">
-          <button class="group inline-flex items-center gap-3 bg-red-500 hover:bg-red-600 
-                         text-white px-8 py-4 rounded-full font-medium text-lg
-                         shadow-2xl hover:shadow-red-500/50 transition-all duration-300 
-                         hover:scale-105">
-            <span>Mulai Perjalanan Anda</span>
-            <svg class="w-6 h-6 group-hover:translate-x-1 transition-transform duration-300" 
-                 fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-            </svg>
-          </button>
-        </div>
       </div>
     </section>
 
-    <!-- RIWAYAT PERJALANAN SECTION -->
+    <!-- RIWAYAT RENTAL SECTION -->
     <section class="relative bg-gradient-to-br from-gray-100 via-white to-gray-50 py-16 sm:py-20 md:py-28 overflow-hidden">
       <!-- Decorative Background Elements -->
       <div class="absolute inset-0 opacity-5">
@@ -1093,7 +1079,7 @@ onUnmounted(() => {
           <h2 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight">
             <span class="block">Riwayat</span>
             <span class="relative inline-block">
-              <span class="text-red-500">Perjalanan</span>
+              <span class="text-red-500">Rental</span>
               <svg class="absolute -bottom-2 sm:-bottom-4 left-0 w-full" height="12" viewBox="0 0 300 16" fill="none">
                 <path d="M3 13C90 3 210 3 297 13" stroke="#EF4444" stroke-width="4" stroke-linecap="round"/>
               </svg>
@@ -1130,12 +1116,12 @@ onUnmounted(() => {
           <div class="absolute -bottom-4 -right-4 w-8 h-8 border-r-4 border-b-4 border-red-500 opacity-30"></div>
         </div>
 
-        <!-- Enhanced Load More Section -->
-        <div v-if="visibleRiwayatCount < riwayatImages.length" 
+        <!-- Enhanced Link to Riwayat Rental Page -->
+        <div v-if="riwayatImages.length > visibleRiwayatCount" 
              class="text-center mt-16 sm:mt-20">
-          <!-- Load More Button -->
-          <button
-            @click="loadMoreRiwayat"
+          <!-- Link Button -->
+          <Link
+            href="/riwayat-rental"
             class="group relative inline-flex items-center gap-3 
                    bg-gradient-to-r from-red-500 to-red-600 
                    hover:from-red-600 hover:to-red-700 
@@ -1146,13 +1132,13 @@ onUnmounted(() => {
                    before:bg-white/20 before:opacity-0 
                    hover:before:opacity-100 before:transition-opacity before:duration-300"
           >
-            <span class="relative z-10">Lihat Lebih Banyak</span>
+            <span class="relative z-10">Read More</span>
             <svg class="relative z-10 w-6 h-6 group-hover:translate-x-1 transition-transform duration-300" 
                  fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
                     d="M19 9l-7 7-7-7"/>
             </svg>
-          </button>
+          </Link>
         </div>
       </div>
     </section>
@@ -1345,7 +1331,7 @@ onUnmounted(() => {
   background: #f1f1f1;
 }
 
-::-webkit-scrollbar-thumb {
+::-webkitscrollbar-thumb {
   background: #ef4444;
   border-radius: 4px;
 }
