@@ -86,17 +86,17 @@
             <h4 class="text-red-500 font-semibold mb-3 sm:mb-4 text-sm sm:text-base">Navigation</h4>
             <ul class="space-y-1.5 sm:space-y-2">
               <li>
-                <a href="#" class="text-gray-600 hover:text-red-500 text-xs sm:text-sm transition-colors inline-block">
+                <a href="/" class="text-gray-600 hover:text-red-500 text-xs sm:text-sm transition-colors inline-block">
                   Home
                 </a>
               </li>
               <li>
-                <a href="#" class="text-gray-600 hover:text-red-500 text-xs sm:text-sm transition-colors inline-block">
+                <a href="/list-rental" class="text-gray-600 hover:text-red-500 text-xs sm:text-sm transition-colors inline-block">
                   Daftar Rental
                 </a>
               </li>
               <li>
-                <a href="#" class="text-gray-600 hover:text-red-500 text-xs sm:text-sm transition-colors inline-block">
+                <a href="/riwayat-rental" class="text-gray-600 hover:text-red-500 text-xs sm:text-sm transition-colors inline-block">
                   Riwayat
                 </a>
               </li>

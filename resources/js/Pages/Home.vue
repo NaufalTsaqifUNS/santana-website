@@ -289,6 +289,14 @@ const startX = ref(0)
 const currentX = ref(0)
 const dragOffset = ref(0)
 const startSlide = ref(0)
+const dragThreshold = 50 // Minimum drag distance to trigger slide change
+
+// Infinite scroll
+const isTransitioning = ref(true)
+const clonedTestimonials = computed(() => {
+  // Clone testimonials for infinite effect
+  return [...testimonials.value, ...testimonials.value, ...testimonials.value]
+})
 
 const slidesToShow = computed(() => {
   if (windowWidth.value >= 1280) return 3 // xl screens
@@ -298,21 +306,48 @@ const slidesToShow = computed(() => {
 
 const maxSlide = computed(() => {
   if (!testimonials.value.length) return 0
-  return Math.max(0, testimonials.value.length - slidesToShow.value)
+  return testimonials.value.length - 1
 })
 
 const nextSlide = () => {
-  const newSlide = currentSlide.value + 1
-  currentSlide.value = newSlide > maxSlide.value ? 0 : newSlide
+  currentSlide.value++
+  isTransitioning.value = true
+  
+  // Reset to start when reaching the end of first set
+  if (currentSlide.value >= testimonials.value.length) {
+    setTimeout(() => {
+      isTransitioning.value = false
+      currentSlide.value = 0
+      // Force reflow
+      if (testimonialSlider.value) {
+        testimonialSlider.value.offsetHeight
+      }
+      setTimeout(() => {
+        isTransitioning.value = true
+      }, 50)
+    }, 500) // Match transition duration
+  }
 }
 
 const prevSlide = () => {
-  const newSlide = currentSlide.value - 1
-  currentSlide.value = newSlide < 0 ? maxSlide.value : newSlide
+  if (currentSlide.value > 0) {
+    currentSlide.value--
+    isTransitioning.value = true
+  } else {
+    // Jump to end
+    isTransitioning.value = false
+    currentSlide.value = testimonials.value.length - 1
+    setTimeout(() => {
+      isTransitioning.value = true
+    }, 50)
+  }
 }
 
 const goToSlide = (index) => {
-  currentSlide.value = Math.max(0, Math.min(index, maxSlide.value))
+  currentSlide.value = index
+  isTransitioning.value = true
+  stopAutoPlay()
+  startAutoPlay()
 }
 
 const startAutoPlay = () => {
@@ -320,7 +355,7 @@ const startAutoPlay = () => {
   if (isAutoPlay.value) {
     autoPlayInterval = setInterval(() => {
       nextSlide()
-    }, 3000)
+    }, 3000) // Auto-scroll every 3 seconds
   }
 }
 
@@ -336,29 +371,32 @@ const handleMouseDown = (e) => {
   isDragging.value = true
   startX.value = e.pageX
   currentX.value = e.pageX
-  startSlide.value = currentSlide.value
+  dragOffset.value = 0
   stopAutoPlay()
   
   if (testimonialSlider.value) {
     testimonialSlider.value.style.cursor = 'grabbing'
   }
+  
+  e.preventDefault()
 }
 
 const handleMouseMove = (e) => {
   if (!isDragging.value) return
   
+  e.preventDefault()
   currentX.value = e.pageX
   const diff = startX.value - currentX.value
   dragOffset.value = diff
 }
 
-const handleMouseUp = () => {
+const handleMouseUp = (e) => {
   if (!isDragging.value) return
   
-  const threshold = slideWidth.value / 4
   const diff = startX.value - currentX.value
   
-  if (Math.abs(diff) > threshold) {
+  // Check if drag distance exceeds threshold
+  if (Math.abs(diff) > dragThreshold) {
     if (diff > 0) {
       nextSlide()
     } else {
@@ -368,11 +406,12 @@ const handleMouseUp = () => {
   
   isDragging.value = false
   dragOffset.value = 0
-  startAutoPlay()
   
   if (testimonialSlider.value) {
     testimonialSlider.value.style.cursor = 'grab'
   }
+  
+  startAutoPlay()
 }
 
 const handleMouseLeave = () => {
@@ -386,7 +425,7 @@ const handleTouchStart = (e) => {
   isDragging.value = true
   startX.value = e.touches[0].pageX
   currentX.value = e.touches[0].pageX
-  startSlide.value = currentSlide.value
+  dragOffset.value = 0
   stopAutoPlay()
 }
 
@@ -396,15 +435,20 @@ const handleTouchMove = (e) => {
   currentX.value = e.touches[0].pageX
   const diff = startX.value - currentX.value
   dragOffset.value = diff
+  
+  // Prevent page scroll while swiping horizontally
+  if (Math.abs(diff) > 10) {
+    e.preventDefault()
+  }
 }
 
 const handleTouchEnd = () => {
   if (!isDragging.value) return
   
-  const threshold = slideWidth.value / 4
   const diff = startX.value - currentX.value
   
-  if (Math.abs(diff) > threshold) {
+  // Check if swipe distance exceeds threshold
+  if (Math.abs(diff) > dragThreshold) {
     if (diff > 0) {
       nextSlide()
     } else {
@@ -423,14 +467,10 @@ const updateDimensions = () => {
   }
   if (testimonialSlider.value) {
     const container = testimonialSlider.value
-    // Calculate the width of one slide including gap
     const containerWidth = container.offsetWidth
-    const gap = windowWidth.value >= 768 ? 32 : windowWidth.value >= 640 ? 24 : 16 // md:32px, sm:24px, mobile:16px
+    const gap = windowWidth.value >= 768 ? 32 : windowWidth.value >= 640 ? 24 : 16
     const totalGapWidth = gap * (slidesToShow.value - 1)
     slideWidth.value = (containerWidth - totalGapWidth) / slidesToShow.value
-  }
-  if (currentSlide.value > maxSlide.value) {
-    currentSlide.value = maxSlide.value
   }
 }
 
@@ -1178,31 +1218,33 @@ onUnmounted(() => {
           </p>
         </div>
 
-        <!-- Testimonials Slider with Drag/Swipe -->
+        <!-- Testimonials Slider with Infinite Loop -->
         <div class="relative mb-12">
-          <!-- Slider Container with Drag/Swipe Support -->
+          <!-- Slider Container -->
           <div 
-            class="overflow-visible select-none py-4 sm:py-6 md:py-8" 
+            class="overflow-hidden select-none py-4 sm:py-6 md:py-8 touch-pan-y" 
             ref="testimonialSlider"
             @mousedown="handleMouseDown"
             @mousemove="handleMouseMove"
             @mouseup="handleMouseUp"
             @mouseleave="handleMouseLeave"
-            @touchstart="handleTouchStart"
+            @touchstart.passive="handleTouchStart"
             @touchmove="handleTouchMove"
             @touchend="handleTouchEnd"
-            style="cursor: grab; user-select: none;"
+            @mouseenter="stopAutoPlay"
+            style="cursor: grab; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none;"
           >
             <div 
               class="flex gap-4 sm:gap-6 md:gap-8"
               :style="{ 
-                transform: `translateX(-${(currentSlide * slideWidth) + (currentSlide * (windowWidth >= 768 ? 32 : windowWidth >= 640 ? 24 : 16)) + dragOffset}px)`,
-                transition: isDragging ? 'none' : 'transform 0.5s ease-in-out'
+                transform: `translateX(-${(currentSlide * slideWidth) + (currentSlide * (windowWidth >= 768 ? 32 : windowWidth >= 640 ? 24 : 16)) - dragOffset}px)`,
+                transition: isDragging ? 'none' : isTransitioning ? 'transform 0.5s ease-in-out' : 'none',
+                willChange: 'transform'
               }"
             >
               <div 
-                v-for="testimonial in testimonials"
-                :key="testimonial.id"
+                v-for="(testimonial, index) in clonedTestimonials"
+                :key="`testimonial-${testimonial.id}-${index}`"
                 class="flex-shrink-0"
                 :style="{ width: `${slideWidth}px` }"
               >
@@ -1216,17 +1258,48 @@ onUnmounted(() => {
               </div>
             </div>
           </div>
+
+          <!-- Navigation Arrows (Optional) -->
+          <button
+            @click="prevSlide"
+            class="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 
+                   z-20 items-center justify-center w-12 h-12 rounded-full
+                   bg-white shadow-lg border border-gray-200
+                   hover:bg-red-500 hover:text-white hover:border-red-500
+                   transition-all duration-300 hover:scale-110
+                   focus:outline-none focus:ring-2 focus:ring-red-500"
+            aria-label="Previous slide"
+          >
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+            </svg>
+          </button>
+
+          <button
+            @click="nextSlide"
+            class="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 
+                   z-20 items-center justify-center w-12 h-12 rounded-full
+                   bg-white shadow-lg border border-gray-200
+                   hover:bg-red-500 hover:text-white hover:border-red-500
+                   transition-all duration-300 hover:scale-110
+                   focus:outline-none focus:ring-2 focus:ring-red-500"
+            aria-label="Next slide"
+          >
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+          </button>
         </div>
 
-        <!-- Slider Indicators with Click Support -->
+        <!-- Slider Indicators -->
         <div class="flex justify-center items-center gap-2 sm:gap-3 mb-8">
           <button
-            v-for="index in (maxSlide + 1)"
+            v-for="index in testimonials.length"
             :key="index"
             @click="goToSlide(index - 1)"
             :class=" [
               'transition-all duration-300 rounded-full cursor-pointer',
-              currentSlide === (index - 1)
+              (currentSlide % testimonials.length) === (index - 1)
                 ? 'bg-red-500 w-6 sm:w-8 md:w-10 h-2 sm:h-2.5 md:h-3'
                 : 'bg-gray-300 hover:bg-red-300 w-2 sm:w-2.5 md:w-3 h-2 sm:h-2.5 md:h-3'
             ]"
@@ -1234,15 +1307,18 @@ onUnmounted(() => {
           ></button>
         </div>
 
-        <!-- Drag Instruction (Hidden on touch devices) -->
-        <div class="hidden md:flex justify-center items-center gap-2 text-gray-400 text-sm">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18"/>
-          </svg>
-          <span>Drag untuk navigasi</span>
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-          </svg>
+        <!-- Instructions -->
+        <div class="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-6 text-gray-400 text-sm">
+          <!-- Mobile Swipe Instruction -->
+          <div class="flex md:hidden items-center gap-2">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18"/>
+            </svg>
+            <span>Swipe untuk navigasi</span>
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+          </div>
         </div>
       </div>
     </section>
@@ -1432,5 +1508,61 @@ body {
 /* Disable pointer events on cards while dragging */
 .select-none:active * {
   pointer-events: none;
+}
+
+/* Ensure smooth infinite scroll */
+.select-none {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+/* Enhanced pulse animation for indicator */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes ping {
+  75%, 100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.animate-ping {
+  animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+/* Improve touch handling */
+.touch-pan-y {
+  touch-action: pan-y;
+}
+
+/* Prevent text selection and touch callout */
+.select-none {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Hardware acceleration for smooth animations */
+[style*="will-change"] {
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 </style>
