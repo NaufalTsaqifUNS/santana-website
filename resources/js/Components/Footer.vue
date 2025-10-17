@@ -24,7 +24,9 @@
           <div class="flex justify-center sm:justify-start space-x-2 sm:space-x-3">
             <!-- Instagram -->
             <a 
-              href="#" 
+              href="https://instagram.com" 
+              target="_blank"
+              rel="noopener noreferrer"
               class="bg-red-500 hover:bg-red-600 text-white p-2 sm:p-2.5 rounded-full transition-all duration-300 hover:scale-110 hover:shadow-lg"
               aria-label="Instagram"
             >
@@ -35,7 +37,9 @@
             
             <!-- YouTube -->
             <a 
-              href="#" 
+              href="https://youtube.com" 
+              target="_blank"
+              rel="noopener noreferrer"
               class="bg-red-500 hover:bg-red-600 text-white p-2 sm:p-2.5 rounded-full transition-all duration-300 hover:scale-110 hover:shadow-lg"
               aria-label="YouTube"
             >
@@ -46,7 +50,9 @@
             
             <!-- Twitter -->
             <a 
-              href="#" 
+              href="https://twitter.com" 
+              target="_blank"
+              rel="noopener noreferrer"
               class="bg-red-500 hover:bg-red-600 text-white p-2 sm:p-2.5 rounded-full transition-all duration-300 hover:scale-110 hover:shadow-lg"
               aria-label="Twitter"
             >
@@ -57,7 +63,9 @@
             
             <!-- Facebook -->
             <a 
-              href="#" 
+              href="https://facebook.com" 
+              target="_blank"
+              rel="noopener noreferrer"
               class="bg-red-500 hover:bg-red-600 text-white p-2 sm:p-2.5 rounded-full transition-all duration-300 hover:scale-110 hover:shadow-lg"
               aria-label="Facebook"
             >
@@ -68,7 +76,9 @@
             
             <!-- LinkedIn -->
             <a 
-              href="#" 
+              href="https://linkedin.com" 
+              target="_blank"
+              rel="noopener noreferrer"
               class="bg-red-500 hover:bg-red-600 text-white p-2 sm:p-2.5 rounded-full transition-all duration-300 hover:scale-110 hover:shadow-lg"
               aria-label="LinkedIn"
             >
@@ -86,19 +96,19 @@
             <h4 class="text-red-500 font-semibold mb-3 sm:mb-4 text-sm sm:text-base">Navigation</h4>
             <ul class="space-y-1.5 sm:space-y-2">
               <li>
-                <a href="/" class="text-gray-600 hover:text-red-500 text-xs sm:text-sm transition-colors inline-block">
+                <Link href="/" class="text-gray-600 hover:text-red-500 text-xs sm:text-sm transition-colors inline-block">
                   Home
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/list-rental" class="text-gray-600 hover:text-red-500 text-xs sm:text-sm transition-colors inline-block">
+                <Link href="/list-rental" class="text-gray-600 hover:text-red-500 text-xs sm:text-sm transition-colors inline-block">
                   Daftar Rental
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/riwayat-rental" class="text-gray-600 hover:text-red-500 text-xs sm:text-sm transition-colors inline-block">
+                <Link href="/riwayat-rental" class="text-gray-600 hover:text-red-500 text-xs sm:text-sm transition-colors inline-block">
                   Riwayat
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -108,14 +118,14 @@
             <h4 class="text-red-500 font-semibold mb-3 sm:mb-4 text-sm sm:text-base">General Information</h4>
             <ul class="space-y-1.5 sm:space-y-2">
               <li>
-                <a href="#" class="text-gray-600 hover:text-red-500 text-xs sm:text-sm transition-colors inline-block">
+                <Link href="/about" class="text-gray-600 hover:text-red-500 text-xs sm:text-sm transition-colors inline-block">
                   Tentang Kami
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" class="text-gray-600 hover:text-red-500 text-xs sm:text-sm transition-colors inline-block">
+                <Link href="/contact" class="text-gray-600 hover:text-red-500 text-xs sm:text-sm transition-colors inline-block">
                   Contact Us
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -163,6 +173,7 @@
 
 <script setup>
 import { ref } from 'vue'
+import { Link } from '@inertiajs/vue3'
 
 // Reactive data
 const email = ref('')

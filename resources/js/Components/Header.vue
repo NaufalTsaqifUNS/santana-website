@@ -35,11 +35,11 @@
               Daftar Rental
             </Link>
             <Link
-              href="/riwayat-rental"
+              href="/riwayat-perjalanan"
               class="text-gray-700 hover:text-red-600 px-3 py-2 text-sm font-medium transition-colors duration-200"
-              :class="{ 'text-red-600 border-b-2 border-red-600': activeMenu === 'riwayat-rental' }"
+              :class="{ 'text-red-600 border-b-2 border-red-600': activeMenu === 'riwayat-perjalanan' }"
             >
-              Riwayat Rental
+              Riwayat Perjalanan
             </Link>
             <Link
               href="/tentang-kami"
@@ -119,12 +119,12 @@
             Daftar Rental
           </Link>
           <Link
-            href="/riwayat-rental"
+            href="/riwayat-perjalanan"
             class="text-gray-700 hover:text-red-600 block px-3 py-2 text-base font-medium transition-colors duration-200"
-            :class="{ 'text-red-600 bg-red-50': activeMenu === 'riwayat-rental' }"
+            :class="{ 'text-red-600 bg-red-50': activeMenu === 'riwayat-perjalanan' }"
             @click="mobileMenuOpen = false"
           >
-            Riwayat Rental
+            Riwayat Perjalanan
           </Link>
           <Link
             href="/tentang-kami"
@@ -171,7 +171,7 @@ export default {
       const url = page.url
       if (url === '/' || url === '/home') return 'home'
       if (url.includes('/list-rental')) return 'daftar-rental'
-      if (url.includes('/riwayat-rental')) return 'riwayat-rental'
+      if (url.includes('/riwayat-perjalanan')) return 'riwayat-perjalanan'
       if (url.includes('/tentang-kami')) return 'tentang-kami'
       if (url.includes('/contact')) return 'contact'
       return 'home'
@@ -188,17 +188,12 @@ export default {
     }
   },
   methods: {
-    setActiveMenu(menu) {
-      // Tidak perlu lagi karena activeMenu sekarang computed
-      this.mobileMenuOpen = false;
-    },
     toggleMobileMenu() {
       this.mobileMenuOpen = !this.mobileMenuOpen;
     },
     callUs() {
       // Add your phone call logic here
       window.open('tel:+62812345678', '_self');
-      // or show a modal with contact information
       console.log('Call Us clicked');
     },
     handleScroll() {
@@ -228,13 +223,6 @@ export default {
   mounted() {
     // Add scroll event listener
     window.addEventListener('scroll', this.handleScroll);
-    
-    // Close mobile menu when clicking outside
-    document.addEventListener('click', (e) => {
-      if (!this.$el.contains(e.target)) {
-        this.mobileMenuOpen = false;
-      }
-    });
   },
   beforeUnmount() {
     // Remove scroll event listener

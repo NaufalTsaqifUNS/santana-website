@@ -10,6 +10,17 @@ use Illuminate\Support\Facades\Storage;
 
 class RiwayatPerjalananController extends Controller
 {
+      public function publicIndex()
+    {
+        $riwayat = RiwayatPerjalanan::with('mobil')
+            ->latest('tanggal_perjalanan')
+            ->paginate(9);
+        
+        return Inertia::render('riwayat-perjalanan', [
+            'riwayat' => $riwayat
+        ]);
+    }
+
     public function index()
     {
         $riwayat = RiwayatPerjalanan::with('mobil')->latest()->paginate(10);
@@ -31,7 +42,7 @@ class RiwayatPerjalananController extends Controller
         $request->validate([
             'mobil_id' => 'required|exists:daftar_rental,id',
             'namaLokasi' => 'required|string|max:255',
-            'fotoPerjalanan' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'fotoPerjalanan' => 'required|image|mimes:jpeg,png,jpg,gif|max:10240',
             'deskripsi_perjalanan' => 'nullable|string',
             'tanggal_perjalanan' => 'required|date',
         ]);
@@ -66,7 +77,7 @@ class RiwayatPerjalananController extends Controller
         $request->validate([
             'mobil_id' => 'required|exists:daftar_rental,id',
             'namaLokasi' => 'required|string|max:255',
-            'fotoPerjalanan' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'fotoPerjalanan' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:10240',
             'deskripsi_perjalanan' => 'nullable|string',
             'tanggal_perjalanan' => 'required|date',
         ]);

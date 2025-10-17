@@ -28,10 +28,8 @@ Route::get('/', [DaftarRentalController::class, 'home'])->name('home');
 // Public Rental List
 Route::get('/list-rental', [DaftarRentalController::class, 'publicIndex'])->name('rentals.index');
 
-// Riwayat Rental (Public)
-Route::get('/riwayat-rental', function () {
-    return Inertia::render('riwayat-rental'); 
-})->name('riwayat-rental');
+// Riwayat Rental
+Route::get('/riwayat-perjalanan', [RiwayatPerjalananController::class, 'publicIndex'])->name('riwayat-perjalanan.index');
 
 // ============================================================================
 // AUTHENTICATION ROUTES
