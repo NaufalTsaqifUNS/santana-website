@@ -110,7 +110,7 @@
                 >
                   <option value="">Pilih Bahan Bakar</option>
                   <option value="Bensin">Bensin</option>
-                  <option value="Diesel">Diesel</option>
+                  <option value="Solar">Solar</option>
                   <option value="Listrik">Listrik</option>
                   <option value="Hybrid">Hybrid</option>
                 </select>

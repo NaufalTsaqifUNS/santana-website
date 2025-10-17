@@ -27,7 +27,7 @@ defineProps({
     <div class="flex-1 flex flex-col px-5 py-4 space-y-2">
       <!-- Price -->
       <p class="text-red-500 font-semibold">
-        Rp. {{ pricePerDay.toLocaleString('id-ID') }}
+        Rp. {{ Number(pricePerDay).toLocaleString('id-ID') }}
         <span class="text-gray-500 font-normal">/ Day</span>
       </p>
 

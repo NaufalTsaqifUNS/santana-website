@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue'
-import { Link } from '@inertiajs/vue3'
+import { Link, router } from '@inertiajs/vue3'
 import MainLayout from "@/Layouts/MainLayout.vue"
 import CarCard from '@/Components/CarCard.vue'
 import RiwayatCard from '@/Components/RiwayatCard.vue'
@@ -11,6 +11,14 @@ defineOptions({
   layout: MainLayout,
 })
 
+// Props dari backend
+const props = defineProps({
+  cars: {
+    type: Array,
+    default: () => []
+  }
+})
+
 // Reactive data untuk hero section
 const heroSearchQuery = ref('')
 
@@ -19,67 +27,14 @@ const searchQuery = ref('')
 const activeCategory = ref('All')
 const isDropdownOpen = ref(false) 
 
-const cars = ref([
-  {
-    id: 1,
-    name: 'Toyota Avanza',
-    pricePerDay: 1000000,
-    category: 'MPV',
-    seats: 5,
-    fuel: 'Bensin',
-    imageUrl: 'images/avanza.png',
-  },
-  {
-    id: 2,
-    name: 'Toyota Alphard',
-    pricePerDay: 400000,
-    category: 'MPV',
-    seats: 7,
-    fuel: 'Solar',
-    imageUrl: 'images/alphard.png',
-  },
-  {
-    id: 3,
-    name: 'Toyota Fortuner',
-    pricePerDay: 600000,
-    category: 'SUV',
-    seats: 5,
-    fuel: 'Bensin',
-    imageUrl: 'images/fortuner.png',
-  },
-  {
-    id: 4,
-    name: 'Toyota Xpander',
-    pricePerDay: 750000,
-    category: 'SUV',
-    seats: 5,
-    fuel: 'Solar',
-    imageUrl: 'images/xpander.png',
-  },
-  {
-    id: 5,
-    name: 'Mercedes-Benz V-Class',
-    pricePerDay: 1500000,
-    category: 'Luxury MPV',
-    seats: 7,
-    fuel: 'Bensin',
-    imageUrl: 'images/vclass.png',
-  },
-  {
-    id: 6,
-    name: 'Toyota Hiace',
-    pricePerDay: 800000,
-    category: 'Van',
-    seats: 14,
-    fuel: 'Solar',
-    imageUrl: 'https://images.unsplash.com/photo-1527786356703-4b100091cd2c?auto=format&fit=crop&w=800&q=80',
-  },
-])
-
 // Computed categories - Automatically generated from cars data
 const categories = computed(() => {
+  if (!props.cars || props.cars.length === 0) {
+    return [{ label: 'All', count: 0 }]
+  }
+
   // Count cars by category
-  const categoryCounts = cars.value.reduce((acc, car) => {
+  const categoryCounts = props.cars.reduce((acc, car) => {
     acc[car.category] = (acc[car.category] || 0) + 1
     return acc
   }, {})
@@ -95,7 +50,7 @@ const categories = computed(() => {
 
   // Add "All" category at the beginning
   return [
-    { label: 'All', count: cars.value.length },
+    { label: 'All', count: props.cars.length },
     ...categoryList
   ]
 })
@@ -119,17 +74,11 @@ const scrollToRentalSection = () => {
 }
 
 const searchRentalCars = () => {
-  console.log('Searching rental cars:', searchQuery.value)
-  // Add your search logic here
-}
-
-const loadMore = () => {
-  // Contoh penambahan data dummy
-  const newCars = Array.from({ length: 3 }).map((_, i) => ({
-    ...cars.value[i % cars.value.length],
-    id: cars.value.length + i + 1,
-  }))
-  cars.value = [...cars.value, ...newCars]
+  // Redirect ke halaman list-rental dengan parameter pencarian
+  router.get('/list-rental', {
+    search: searchQuery.value,
+    category: activeCategory.value !== 'All' ? activeCategory.value : null
+  })
 }
 
 const selectCategory = (category) => {
@@ -143,7 +92,9 @@ const activeCategoryData = computed(() => {
 
 // Computed list sesuai kategori + pencarian
 const filteredCars = computed(() => {
-  return cars.value.filter((car) => {
+  if (!props.cars) return []
+  
+  const filtered = props.cars.filter((car) => {
     const matchCategory =
       activeCategory.value === 'All' || car.category === activeCategory.value
     const matchSearch = car.name
@@ -151,6 +102,9 @@ const filteredCars = computed(() => {
       .includes(searchQuery.value.toLowerCase())
     return matchCategory && matchSearch
   })
+  
+  // Batasi hanya menampilkan 3 kendaraan di halaman Home
+  return filtered.slice(0, 3)
 })
 
 // Data untuk Riwayat Perjalanan
@@ -217,7 +171,7 @@ const riwayatImages = ref([
   }
 ])
 
-const visibleRiwayatCount = ref(4) // Ubah dari 8 menjadi 4
+const visibleRiwayatCount = ref(4)
 
 const visibleRiwayat = computed(() => {
   return riwayatImages.value.slice(0, visibleRiwayatCount.value)
@@ -289,19 +243,18 @@ const startX = ref(0)
 const currentX = ref(0)
 const dragOffset = ref(0)
 const startSlide = ref(0)
-const dragThreshold = 50 // Minimum drag distance to trigger slide change
+const dragThreshold = 50
 
 // Infinite scroll
 const isTransitioning = ref(true)
 const clonedTestimonials = computed(() => {
-  // Clone testimonials for infinite effect
   return [...testimonials.value, ...testimonials.value, ...testimonials.value]
 })
 
 const slidesToShow = computed(() => {
-  if (windowWidth.value >= 1280) return 3 // xl screens
-  if (windowWidth.value >= 768) return 2   // md screens and up
-  return 1 // sm screens
+  if (windowWidth.value >= 1280) return 3
+  if (windowWidth.value >= 768) return 2
+  return 1
 })
 
 const maxSlide = computed(() => {
@@ -313,19 +266,17 @@ const nextSlide = () => {
   currentSlide.value++
   isTransitioning.value = true
   
-  // Reset to start when reaching the end of first set
   if (currentSlide.value >= testimonials.value.length) {
     setTimeout(() => {
       isTransitioning.value = false
       currentSlide.value = 0
-      // Force reflow
       if (testimonialSlider.value) {
         testimonialSlider.value.offsetHeight
       }
       setTimeout(() => {
         isTransitioning.value = true
       }, 50)
-    }, 500) // Match transition duration
+    }, 500)
   }
 }
 
@@ -334,7 +285,6 @@ const prevSlide = () => {
     currentSlide.value--
     isTransitioning.value = true
   } else {
-    // Jump to end
     isTransitioning.value = false
     currentSlide.value = testimonials.value.length - 1
     setTimeout(() => {
@@ -355,7 +305,7 @@ const startAutoPlay = () => {
   if (isAutoPlay.value) {
     autoPlayInterval = setInterval(() => {
       nextSlide()
-    }, 3000) // Auto-scroll every 3 seconds
+    }, 3000)
   }
 }
 
@@ -395,7 +345,6 @@ const handleMouseUp = (e) => {
   
   const diff = startX.value - currentX.value
   
-  // Check if drag distance exceeds threshold
   if (Math.abs(diff) > dragThreshold) {
     if (diff > 0) {
       nextSlide()
@@ -436,7 +385,6 @@ const handleTouchMove = (e) => {
   const diff = startX.value - currentX.value
   dragOffset.value = diff
   
-  // Prevent page scroll while swiping horizontally
   if (Math.abs(diff) > 10) {
     e.preventDefault()
   }
@@ -447,7 +395,6 @@ const handleTouchEnd = () => {
   
   const diff = startX.value - currentX.value
   
-  // Check if swipe distance exceeds threshold
   if (Math.abs(diff) > dragThreshold) {
     if (diff > 0) {
       nextSlide()
