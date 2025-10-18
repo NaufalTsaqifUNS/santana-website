@@ -4,7 +4,6 @@ import { Link, router } from '@inertiajs/vue3'
 import MainLayout from "@/Layouts/MainLayout.vue"
 import CarCard from '@/Components/CarCard.vue'
 import RiwayatCard from '@/Components/RiwayatCard.vue'
-import TestimonialCard from '@/Components/TestimonialCard.vue'
 
 // Set layout
 defineOptions({
@@ -16,6 +15,10 @@ const props = defineProps({
   cars: {
     type: Array,
     default: () => []
+  },
+  riwayat: {
+    type: Object,
+    default: () => ({ data: [] })
   }
 })
 
@@ -107,328 +110,49 @@ const filteredCars = computed(() => {
   return filtered.slice(0, 3)
 })
 
-// Data untuk Riwayat Perjalanan
-const riwayatImages = ref([
-  {
-    id: 1,
-    imageUrl: 'https://images.unsplash.com/photo-1468818438311-4bab781ab9b8?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    title: 'Trip di Gunung Bromo'
-  },
-  {
-    id: 2,
-    imageUrl: 'https://plus.unsplash.com/premium_photo-1663047448187-778e10adadf5?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    title: 'Trip di Ladang Bunga Tulip'
-  },
-  {
-    id: 3,
-    imageUrl: 'https://images.unsplash.com/photo-1468818438311-4bab781ab9b8?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    title: 'Trip di Pantai Kuta'
-  },
-  {
-    id: 4,
-    imageUrl: 'https://images.unsplash.com/photo-1468818438311-4bab781ab9b8?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    title: 'Trip di Ubud'
-  },
-  {
-    id: 5,
-    imageUrl: 'https://images.unsplash.com/photo-1468818438311-4bab781ab9b8?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    title: 'Trip di Nusa Penida'
-  },
-  {
-    id: 6,
-    imageUrl: 'https://images.unsplash.com/photo-1468818438311-4bab781ab9b8?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    title: 'Trip di Gili Trawangan'
-  },
-  {
-    id: 7,
-    imageUrl: 'https://images.unsplash.com/photo-1468818438311-4bab781ab9b8?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    title: 'Trip di Raja Ampat'
-  },
-  {
-    id: 8,
-    imageUrl: 'https://images.unsplash.com/photo-1468818438311-4bab781ab9b8?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    title: 'Trip di Labuan Bajo'
-  },
-  {
-    id: 9,
-    imageUrl: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=2070&auto=format&fit=crop',
-    title: 'Trip di Danau Toba'
-  },
-  {
-    id: 10,
-    imageUrl: 'https://images.unsplash.com/photo-1501594907352-04cda38ebc29?q=80&w=2032&auto=format&fit=crop',
-    title: 'Trip di Pulau Komodo'
-  },
-  {
-    id: 11,
-    imageUrl: 'https://images.unsplash.com/photo-1523906630133-f6934a1ab2b9?q=80&w=2070&auto=format&fit=crop',
-    title: 'Trip di Tanjung Lesung'
-  },
-  {
-    id: 12,
-    imageUrl: 'https://images.unsplash.com/photo-1505228395891-9a51e7e86bf6?q=80&w=2033&auto=format&fit=crop',
-    title: 'Trip di Lombok'
-  }
-])
-
-const visibleRiwayatCount = ref(4)
+// Data untuk Riwayat Perjalanan - dari props backend
+const visibleRiwayatCount = ref(8)
 
 const visibleRiwayat = computed(() => {
-  return riwayatImages.value.slice(0, visibleRiwayatCount.value)
+  return props.riwayat.data ? props.riwayat.data.slice(0, visibleRiwayatCount.value) : []
 })
 
-// Data untuk Testimonials
-const testimonials = ref([
-  {
-    id: 1,
-    name: 'Melinda Lenny',
-    location: 'Medan',
-    avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face',
-    rating: 3,
-    comment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque nam suscipit amet nec eget fermentum, elementum purus aliquet. Porttitor elementum a felis, tempus erat orci.',
-  },
-  {
-    id: 2,
-    name: 'Jacob Stevan',
-    location: 'Bandung',
-    avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face',
-    rating: 5,
-    comment: 'Pelayanan sangat memuaskan dan mobil selalu dalam kondisi prima. Tim Santana Cars sangat profesional dan responsif terhadap kebutuhan customer.',
-  },
-  {
-    id: 3,
-    name: 'Sarah Johnson',
-    location: 'Jakarta',
-    avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face',
-    rating: 5,
-    comment: 'Booking mudah, harga transparan, dan kualitas kendaraan sangat baik. Recommended banget untuk yang butuh rental mobil berkualitas!',
-  },
-  {
-    id: 4,
-    name: 'Michael Chen',
-    location: 'Surabaya',
-    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
-    rating: 5,
-    comment: 'Sudah beberapa kali sewa di Santana Cars dan selalu puas. Customer service 24/7 membantu banget, terutama saat perjalanan jauh.',
-  },
-  {
-    id: 5,
-    name: 'Roben Musstar',
-    location: 'Bali',
-    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face',
-    rating: 5,
-    comment: 'Pengalaman terbaik rental mobil di Bali. Mobil bersih, terawat, dan driver sangat ramah. Pasti akan sewa lagi di masa depan.',
-  },
-  {
-    id: 6,
-    name: 'Diana Putri',
-    location: 'Yogyakarta',
-    avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face',
-    rating: 5,
-    comment: 'Pelayanan cepat dan efisien. Proses booking online sangat mudah dan tidak ribet. Kualitas mobil sesuai dengan ekspektasi, bahkan lebih baik.',
-  }
-])
-
-// Testimonials Slider
-const testimonialSlider = ref(null)
-const currentSlide = ref(0)
-const isAutoPlay = ref(true)
-const slideWidth = ref(0)
-let autoPlayInterval = null
-const windowWidth = ref(typeof window !== 'undefined' ? window.innerWidth : 0)
-
-// Drag/Swipe functionality
-const isDragging = ref(false)
-const startX = ref(0)
-const currentX = ref(0)
-const dragOffset = ref(0)
-const startSlide = ref(0)
-const dragThreshold = 50
-
-// Infinite scroll
-const isTransitioning = ref(true)
-const clonedTestimonials = computed(() => {
-  return [...testimonials.value, ...testimonials.value, ...testimonials.value]
-})
-
-const slidesToShow = computed(() => {
-  if (windowWidth.value >= 1280) return 3
-  if (windowWidth.value >= 768) return 2
-  return 1
-})
-
-const maxSlide = computed(() => {
-  if (!testimonials.value.length) return 0
-  return testimonials.value.length - 1
-})
-
-const nextSlide = () => {
-  currentSlide.value++
-  isTransitioning.value = true
-  
-  if (currentSlide.value >= testimonials.value.length) {
-    setTimeout(() => {
-      isTransitioning.value = false
-      currentSlide.value = 0
-      if (testimonialSlider.value) {
-        testimonialSlider.value.offsetHeight
-      }
-      setTimeout(() => {
-        isTransitioning.value = true
-      }, 50)
-    }, 500)
-  }
-}
-
-const prevSlide = () => {
-  if (currentSlide.value > 0) {
-    currentSlide.value--
-    isTransitioning.value = true
-  } else {
-    isTransitioning.value = false
-    currentSlide.value = testimonials.value.length - 1
-    setTimeout(() => {
-      isTransitioning.value = true
-    }, 50)
-  }
-}
-
-const goToSlide = (index) => {
-  currentSlide.value = index
-  isTransitioning.value = true
-  stopAutoPlay()
-  startAutoPlay()
-}
-
-const startAutoPlay = () => {
-  stopAutoPlay()
-  if (isAutoPlay.value) {
-    autoPlayInterval = setInterval(() => {
-      nextSlide()
-    }, 3000)
-  }
-}
-
-const stopAutoPlay = () => {
-  if (autoPlayInterval) {
-    clearInterval(autoPlayInterval)
-    autoPlayInterval = null
-  }
-}
-
-// Mouse drag handlers
-const handleMouseDown = (e) => {
-  isDragging.value = true
-  startX.value = e.pageX
-  currentX.value = e.pageX
-  dragOffset.value = 0
-  stopAutoPlay()
-  
-  if (testimonialSlider.value) {
-    testimonialSlider.value.style.cursor = 'grabbing'
-  }
-  
-  e.preventDefault()
-}
-
-const handleMouseMove = (e) => {
-  if (!isDragging.value) return
-  
-  e.preventDefault()
-  currentX.value = e.pageX
-  const diff = startX.value - currentX.value
-  dragOffset.value = diff
-}
-
-const handleMouseUp = (e) => {
-  if (!isDragging.value) return
-  
-  const diff = startX.value - currentX.value
-  
-  if (Math.abs(diff) > dragThreshold) {
-    if (diff > 0) {
-      nextSlide()
-    } else {
-      prevSlide()
-    }
-  }
-  
-  isDragging.value = false
-  dragOffset.value = 0
-  
-  if (testimonialSlider.value) {
-    testimonialSlider.value.style.cursor = 'grab'
-  }
-  
-  startAutoPlay()
-}
-
-const handleMouseLeave = () => {
-  if (isDragging.value) {
-    handleMouseUp()
-  }
-}
-
-// Touch handlers for mobile/tablet
-const handleTouchStart = (e) => {
-  isDragging.value = true
-  startX.value = e.touches[0].pageX
-  currentX.value = e.touches[0].pageX
-  dragOffset.value = 0
-  stopAutoPlay()
-}
-
-const handleTouchMove = (e) => {
-  if (!isDragging.value) return
-  
-  currentX.value = e.touches[0].pageX
-  const diff = startX.value - currentX.value
-  dragOffset.value = diff
-  
-  if (Math.abs(diff) > 10) {
-    e.preventDefault()
-  }
-}
-
-const handleTouchEnd = () => {
-  if (!isDragging.value) return
-  
-  const diff = startX.value - currentX.value
-  
-  if (Math.abs(diff) > dragThreshold) {
-    if (diff > 0) {
-      nextSlide()
-    } else {
-      prevSlide()
-    }
-  }
-  
-  isDragging.value = false
-  dragOffset.value = 0
-  startAutoPlay()
-}
-
+// Function untuk update dimensions
 const updateDimensions = () => {
-  if (typeof window !== 'undefined') {
-    windowWidth.value = window.innerWidth
-  }
-  if (testimonialSlider.value) {
-    const container = testimonialSlider.value
-    const containerWidth = container.offsetWidth
-    const gap = windowWidth.value >= 768 ? 32 : windowWidth.value >= 640 ? 24 : 16
-    const totalGapWidth = gap * (slidesToShow.value - 1)
-    slideWidth.value = (containerWidth - totalGapWidth) / slidesToShow.value
-  }
+  // Your dimension update logic here
 }
 
+// Load Elfsight script untuk Google Reviews widget
 onMounted(() => {
+  // Load Elfsight script jika belum ada
+  if (!document.querySelector('script[src="https://elfsightcdn.com/platform.js"]')) {
+    const script = document.createElement('script')
+    script.src = 'https://elfsightcdn.com/platform.js'
+    script.async = true
+    document.head.appendChild(script)
+    
+    // Trigger reload widget after script loads
+    script.onload = () => {
+      if (window.eapps && window.eapps.reloadWidgets) {
+        setTimeout(() => {
+          window.eapps.reloadWidgets()
+        }, 100)
+      }
+    }
+  } else {
+    // Script already exists, just reload widgets
+    if (window.eapps && window.eapps.reloadWidgets) {
+      setTimeout(() => {
+        window.eapps.reloadWidgets()
+      }, 100)
+    }
+  }
+  
   updateDimensions()
-  startAutoPlay()
   window.addEventListener('resize', updateDimensions)
 })
 
 onUnmounted(() => {
-  stopAutoPlay()
   window.removeEventListener('resize', updateDimensions)
 })
 </script>
@@ -1032,105 +756,99 @@ onUnmounted(() => {
       </div>
     </section>
 
-    <!-- RIWAYAT RENTAL SECTION -->
-    <section class="relative bg-gradient-to-br from-gray-100 via-white to-gray-50 py-16 sm:py-20 md:py-28 overflow-hidden">
-      <!-- Decorative Background Elements -->
-      <div class="absolute inset-0 opacity-5">
-        <div class="absolute top-10 left-10 w-72 h-72 bg-red-500 rounded-full filter blur-3xl"></div>
-        <div class="absolute bottom-10 right-10 w-96 h-96 bg-red-600 rounded-full filter blur-3xl"></div>
-        <div class="absolute top-1/2 left-1/3 w-64 h-64 bg-red-400 rounded-full filter blur-3xl"></div>
+    <!-- RIWAYAT PERJALANAN SECTION - REDESIGNED -->
+    <section class="relative bg-white py-16 sm:py-20 md:py-28 overflow-hidden">
+      <!-- Background Pattern -->
+      <div class="absolute inset-0 opacity-[0.03]">
+        <div class="absolute inset-0" style="background-image: radial-gradient(circle at 1px 1px, rgb(239 68 68) 1px, transparent 0); background-size: 40px 40px;"></div>
       </div>
 
-      <!-- Floating Geometric Shapes -->
-      <div class="absolute inset-0 opacity-10">
-        <div class="absolute top-20 right-20 w-8 h-8 border-2 border-red-400 rotate-45 animate-pulse"></div>
-        <div class="absolute bottom-32 left-16 w-6 h-6 bg-red-500 rounded-full animate-bounce" style="animation-delay: 0.5s;"></div>
-        <div class="absolute top-1/3 right-1/4 w-4 h-4 bg-red-600 rotate-45 animate-pulse" style="animation-delay: 1s;"></div>
-        <div class="absolute bottom-20 right-1/3 w-10 h-10 border border-red-300 rounded-full animate-bounce" style="animation-delay: 1.5s;"></div>
-      </div>
+      <!-- Decorative Blobs -->
+      <div class="absolute top-0 left-0 w-96 h-96 bg-red-50 rounded-full filter blur-3xl opacity-50 -translate-x-1/2 -translate-y-1/2"></div>
+      <div class="absolute bottom-0 right-0 w-96 h-96 bg-red-50 rounded-full filter blur-3xl opacity-50 translate-x-1/2 translate-y-1/2"></div>
 
       <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <!-- Enhanced Header -->
-        <div class="text-center mb-16 sm:mb-20">
-          <!-- Badge -->
+        <!-- Section Header -->
+        <div class="text-center mb-12 sm:mb-16">
+          <!-- Small Badge -->
           <div class="inline-flex items-center gap-2 px-4 py-2 bg-red-50 
-                      border border-red-200 rounded-full mb-6 shadow-sm">
-            <svg class="w-5 h-5 text-red-500" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z"/>
-              <path fill-rule="evenodd" d="M3 8h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm5 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" clip-rule="evenodd"/>
+                      border border-red-100 rounded-full mb-4 shadow-sm">
+            <svg class="w-4 h-4 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"/>
             </svg>
             <span class="text-red-600 text-sm font-semibold">Galeri Perjalanan</span>
           </div>
 
-          <!-- Main Title with Animation -->
-          <h2 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight">
-            <span class="block">Riwayat</span>
+          <!-- Main Title -->
+          <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4">
+            Riwayat
             <span class="relative inline-block">
-              <span class="text-red-500">Rental</span>
-              <svg class="absolute -bottom-2 sm:-bottom-4 left-0 w-full" height="12" viewBox="0 0 300 16" fill="none">
-                <path d="M3 13C90 3 210 3 297 13" stroke="#EF4444" stroke-width="4" stroke-linecap="round"/>
+              <span class="text-red-500">Perjalanan</span>
+              <svg class="absolute -bottom-2 left-0 w-full h-3" viewBox="0 0 200 12" fill="none">
+                <path d="M2 10C60 3 140 3 198 10" stroke="#EF4444" stroke-width="3" stroke-linecap="round"/>
               </svg>
             </span>
           </h2>
 
-          <!-- Enhanced Description -->
-          <div class="max-w-4xl mx-auto">
-            <p class="text-lg sm:text-xl md:text-2xl text-gray-600 mb-6 leading-relaxed">
-              Saksikan momen-momen indah perjalanan pelanggan kami yang telah 
-              <span class="text-gray-900 font-semibold">mempercayai Santana Cars</span> 
-              untuk menghadirkan pengalaman tak terlupakan
-            </p>
-          </div>
+          <!-- Subtitle -->
+          <p class="text-base sm:text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
+            Momen indah pelanggan kami yang telah mempercayai 
+            <span class="font-semibold text-gray-900">Santana Cars</span>
+          </p>
         </div>
 
-        <!-- Enhanced Gallery with Masonry Layout -->
-        <div class="relative">
-          <!-- Gallery Grid with Different Sizes -->
+        <!-- Gallery Grid -->
+        <div v-if="visibleRiwayat.length > 0" class="mb-12">
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-            <!-- Featured Card and Regular Cards -->
             <RiwayatCard
               v-for="(item, index) in visibleRiwayat"
               :key="item.id"
-              :image-url="item.imageUrl"
-              :title="item.title"
+              :image-url="`/storage/${item.fotoPerjalanan}`"
+              :title="item.namaLokasi"
+              :car-name="item.namaMobil"
+              :date="item.tanggal_perjalanan"
               :is-featured="index === 0"
               :index="index - 1"
             />
           </div>
-
-          <!-- Decorative Elements -->
-          <div class="absolute -top-4 -left-4 w-8 h-8 border-l-4 border-t-4 border-red-500 opacity-30"></div>
-          <div class="absolute -bottom-4 -right-4 w-8 h-8 border-r-4 border-b-4 border-red-500 opacity-30"></div>
         </div>
 
-        <!-- Enhanced Link to Riwayat Rental Page -->
-        <div v-if="riwayatImages.length > visibleRiwayatCount" 
-             class="text-center mt-16 sm:mt-20">
-          <!-- Link Button -->
+        <!-- Empty State -->
+        <div v-else class="text-center py-20">
+          <div class="inline-flex items-center justify-center w-20 h-20 bg-gray-100 rounded-full mb-6">
+            <svg class="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">Belum Ada Riwayat Perjalanan</h3>
+          <p class="text-gray-500">Galeri perjalanan akan segera ditampilkan di sini</p>
+        </div>
+
+        <!-- CTA Button -->
+        <div v-if="props.riwayat.data && props.riwayat.data.length > visibleRiwayatCount" 
+             class="text-center">
           <Link
-            href="/riwayat-rental"
-            class="group relative inline-flex items-center gap-3 
+            href="/riwayat-perjalanan"
+            class="group inline-flex items-center gap-3 
                    bg-gradient-to-r from-red-500 to-red-600 
                    hover:from-red-600 hover:to-red-700 
-                   text-white px-10 py-4 rounded-full font-semibold text-lg
-                   shadow-2xl hover:shadow-red-500/50 
+                   text-white px-8 py-4 rounded-full font-semibold text-base
+                   shadow-lg hover:shadow-xl hover:shadow-red-500/30 
                    transition-all duration-300 hover:scale-105
-                   before:absolute before:inset-0 before:rounded-full 
-                   before:bg-white/20 before:opacity-0 
-                   hover:before:opacity-100 before:transition-opacity before:duration-300"
+                   focus:outline-none focus:ring-4 focus:ring-red-500/50"
           >
-            <span class="relative z-10">Read More</span>
-            <svg class="relative z-10 w-6 h-6 group-hover:translate-x-1 transition-transform duration-300" 
+            <span>Lihat Semua Perjalanan</span>
+            <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" 
                  fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                    d="M19 9l-7 7-7-7"/>
+                    d="M17 8l4 4m0 0l-4 4m4-4H3"/>
             </svg>
           </Link>
         </div>
       </div>
     </section>
 
-    <!-- TESTIMONIALS SECTION - What They Say? -->
+    <!-- TESTIMONIALS SECTION - Google Reviews Widget -->
     <section class="relative bg-white py-16 sm:py-20 md:py-28 overflow-hidden">
       <!-- Background Decorations -->
       <div class="absolute inset-0 opacity-5">
@@ -1165,108 +883,8 @@ onUnmounted(() => {
           </p>
         </div>
 
-        <!-- Testimonials Slider with Infinite Loop -->
-        <div class="relative mb-12">
-          <!-- Slider Container -->
-          <div 
-            class="overflow-hidden select-none py-4 sm:py-6 md:py-8 touch-pan-y" 
-            ref="testimonialSlider"
-            @mousedown="handleMouseDown"
-            @mousemove="handleMouseMove"
-            @mouseup="handleMouseUp"
-            @mouseleave="handleMouseLeave"
-            @touchstart.passive="handleTouchStart"
-            @touchmove="handleTouchMove"
-            @touchend="handleTouchEnd"
-            @mouseenter="stopAutoPlay"
-            style="cursor: grab; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none;"
-          >
-            <div 
-              class="flex gap-4 sm:gap-6 md:gap-8"
-              :style="{ 
-                transform: `translateX(-${(currentSlide * slideWidth) + (currentSlide * (windowWidth >= 768 ? 32 : windowWidth >= 640 ? 24 : 16)) - dragOffset}px)`,
-                transition: isDragging ? 'none' : isTransitioning ? 'transform 0.5s ease-in-out' : 'none',
-                willChange: 'transform'
-              }"
-            >
-              <div 
-                v-for="(testimonial, index) in clonedTestimonials"
-                :key="`testimonial-${testimonial.id}-${index}`"
-                class="flex-shrink-0"
-                :style="{ width: `${slideWidth}px` }"
-              >
-                <TestimonialCard
-                  :name="testimonial.name"
-                  :location="testimonial.location"
-                  :avatar="testimonial.avatar"
-                  :rating="testimonial.rating"
-                  :comment="testimonial.comment"
-                />
-              </div>
-            </div>
-          </div>
-
-          <!-- Navigation Arrows (Optional) -->
-          <button
-            @click="prevSlide"
-            class="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 
-                   z-20 items-center justify-center w-12 h-12 rounded-full
-                   bg-white shadow-lg border border-gray-200
-                   hover:bg-red-500 hover:text-white hover:border-red-500
-                   transition-all duration-300 hover:scale-110
-                   focus:outline-none focus:ring-2 focus:ring-red-500"
-            aria-label="Previous slide"
-          >
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-            </svg>
-          </button>
-
-          <button
-            @click="nextSlide"
-            class="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 
-                   z-20 items-center justify-center w-12 h-12 rounded-full
-                   bg-white shadow-lg border border-gray-200
-                   hover:bg-red-500 hover:text-white hover:border-red-500
-                   transition-all duration-300 hover:scale-110
-                   focus:outline-none focus:ring-2 focus:ring-red-500"
-            aria-label="Next slide"
-          >
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-            </svg>
-          </button>
-        </div>
-
-        <!-- Slider Indicators -->
-        <div class="flex justify-center items-center gap-2 sm:gap-3 mb-8">
-          <button
-            v-for="index in testimonials.length"
-            :key="index"
-            @click="goToSlide(index - 1)"
-            :class=" [
-              'transition-all duration-300 rounded-full cursor-pointer',
-              (currentSlide % testimonials.length) === (index - 1)
-                ? 'bg-red-500 w-6 sm:w-8 md:w-10 h-2 sm:h-2.5 md:h-3'
-                : 'bg-gray-300 hover:bg-red-300 w-2 sm:w-2.5 md:w-3 h-2 sm:h-2.5 md:h-3'
-            ]"
-            :aria-label="`Go to slide ${index}`"
-          ></button>
-        </div>
-
-        <!-- Instructions -->
-        <div class="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-6 text-gray-400 text-sm">
-          <!-- Mobile Swipe Instruction -->
-          <div class="flex md:hidden items-center gap-2">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18"/>
-            </svg>
-            <span>Swipe untuk navigasi</span>
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-            </svg>
-          </div>
-        </div>
+        <!-- Elfsight Google Reviews Widget -->
+        <div class="elfsight-app-6c044ccd-9178-475a-b491-c03d05fa4501" data-elfsight-app-lazy></div>
       </div>
     </section>
   </div>
@@ -1511,5 +1129,18 @@ body {
   will-change: transform;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+}
+
+/* Style for Elfsight widget container */
+.elfsight-app-6c044ccd-9178-475a-b491-c03d05fa4501 {
+  width: 100%;
+  min-height: 400px;
+}
+
+/* Ensure widget is responsive */
+@media (max-width: 640px) {
+  .elfsight-app-6c044ccd-9178-475a-b491-c03d05fa4501 {
+    min-height: 300px;
+  }
 }
 </style>

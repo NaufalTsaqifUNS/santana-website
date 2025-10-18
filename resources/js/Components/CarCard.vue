@@ -1,12 +1,14 @@
 <!-- components/CarCard.vue -->
 <script setup>
 defineProps({
+  id: Number,
   imageUrl: String,
   name: String,
   pricePerDay: Number,
   category: String,
   seats: Number,
   fuel: String,
+  description: String,
 })
 </script>
 

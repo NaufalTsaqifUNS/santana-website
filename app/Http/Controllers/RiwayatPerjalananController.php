@@ -42,7 +42,7 @@ class RiwayatPerjalananController extends Controller
         $request->validate([
             'mobil_id' => 'required|exists:daftar_rental,id',
             'namaLokasi' => 'required|string|max:255',
-            'fotoPerjalanan' => 'required|image|mimes:jpeg,png,jpg,gif|max:10240',
+            'fotoPerjalanan' => 'required|image|mimes:jpeg,png,jpg,gif|max:50240',
             'deskripsi_perjalanan' => 'nullable|string',
             'tanggal_perjalanan' => 'required|date',
         ]);
@@ -77,7 +77,7 @@ class RiwayatPerjalananController extends Controller
         $request->validate([
             'mobil_id' => 'required|exists:daftar_rental,id',
             'namaLokasi' => 'required|string|max:255',
-            'fotoPerjalanan' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:10240',
+            'fotoPerjalanan' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:50240',
             'deskripsi_perjalanan' => 'nullable|string',
             'tanggal_perjalanan' => 'required|date',
         ]);
@@ -115,5 +115,17 @@ class RiwayatPerjalananController extends Controller
 
         return redirect()->route('riwayat-perjalanan.index')
             ->with('success', 'Riwayat perjalanan berhasil dihapus');
+    }
+
+    public function homeIndex()
+    {
+        $riwayat = RiwayatPerjalanan::with('mobil')
+            ->latest('tanggal_perjalanan')
+            ->take(8)
+            ->get();
+        
+        return [
+            'data' => $riwayat
+        ];
     }
 }

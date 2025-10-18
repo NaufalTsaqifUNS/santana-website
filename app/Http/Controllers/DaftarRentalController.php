@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\DaftarRental;
+use App\Models\RiwayatPerjalanan;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Storage;
@@ -12,28 +13,33 @@ class DaftarRentalController extends Controller
     // Method untuk home page
     public function home()
     {
-        // Ambil hanya mobil yang aktif (status = true) dan limit 6 untuk homepage
-        $mobil = DaftarRental::where('status', true)
+        $cars = DaftarRental::where('status', true)
             ->latest()
             ->take(6)
+            ->get()
+            ->map(function ($car) {
+                return [
+                    'id' => $car->id,
+                    'name' => $car->namaMobil,
+                    'category' => $car->jenisMobil,
+                    'pricePerDay' => $car->hargaMobil,
+                    'imageUrl' => $car->fotoMobil ? asset('storage/' . $car->fotoMobil) : null,
+                    'seats' => $car->seat,
+                    'fuel' => $car->jenisBahanBakar,
+                    'description' => $car->deskripsiMobil,
+                ];
+            });
+
+        $riwayat = RiwayatPerjalanan::with('mobil')
+            ->latest('tanggal_perjalanan')
+            ->take(8)
             ->get();
 
-        // Transform data
-        $cars = $mobil->map(function ($car) {
-            return [
-                'id' => $car->id,
-                'name' => $car->namaMobil,
-                'pricePerDay' => $car->hargaMobil,
-                'category' => $car->jenisMobil,
-                'seats' => $car->seat,
-                'fuel' => $car->jenisBahanBakar,
-                'imageUrl' => $car->fotoMobil ? asset('storage/' . $car->fotoMobil) : null,
-                'description' => $car->deskripsiMobil,
-            ];
-        });
-
         return Inertia::render('Home', [
-            'cars' => $cars
+            'cars' => $cars,
+            'riwayat' => [
+                'data' => $riwayat
+            ]
         ]);
     }
 
@@ -49,22 +55,18 @@ class DaftarRentalController extends Controller
     // Method untuk public rental list
     public function publicIndex(Request $request)
     {
-        $query = DaftarRental::where('status', true); // Hanya tampilkan mobil yang aktif
+        $query = DaftarRental::where('status', true);
 
-        // Filter berdasarkan pencarian
         if ($request->filled('search')) {
             $query->where('namaMobil', 'like', '%' . $request->search . '%');
         }
 
-        // Filter berdasarkan kategori
         if ($request->filled('category') && $request->category !== 'All') {
             $query->where('jenisMobil', $request->category);
         }
 
-        // Get all cars (tidak pakai pagination untuk tampilan public)
         $mobil = $query->get();
 
-        // Transform data ke format yang sesuai dengan frontend
         $cars = $mobil->map(function ($car) {
             return [
                 'id' => $car->id,
