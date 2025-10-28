@@ -23,57 +23,109 @@ use Inertia\Inertia;
 // ============================================================================
 
 // Homepage
-Route::get('/', [DaftarRentalController::class, 'home'])->name('home');
+Route::get("/", [DaftarRentalController::class, "home"])->name("home");
 
 // Public Rental List
-Route::get('/list-rental', [DaftarRentalController::class, 'publicIndex'])->name('rentals.index');
+Route::get("/list-rental", [
+    DaftarRentalController::class,
+    "publicIndex",
+])->name("rentals.index");
+
+// Car Detail
+Route::get("/car/{id}", [DaftarRentalController::class, "show"])->name(
+    "car.show",
+);
 
 // Riwayat Rental
-Route::get('/riwayat-perjalanan', [RiwayatPerjalananController::class, 'publicIndex'])->name('riwayat-perjalanan.index');
+Route::get("/riwayat-perjalanan", [
+    RiwayatPerjalananController::class,
+    "publicIndex",
+])->name("riwayat-perjalanan.index");
 
 // ============================================================================
 // AUTHENTICATION ROUTES
 // ============================================================================
 
-Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
-Route::post('/login', [AuthController::class, 'login']);
+Route::get("/login", [AuthController::class, "showLogin"])->name("login");
+Route::post("/login", [AuthController::class, "login"]);
 
 // ============================================================================
 // PROTECTED ADMIN ROUTES - Require Authentication
 // ============================================================================
 
-Route::middleware('auth')->group(function () {
+Route::middleware("auth")->group(function () {
     // Logout
-    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-    
+    Route::post("/logout", [AuthController::class, "logout"])->name("logout");
+
     // Dashboard
-    Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+    Route::get("/admin/dashboard", [DashboardController::class, "index"])->name(
+        "admin.dashboard",
+    );
 
     // Daftar Rental Routes - CRUD (Admin)
-    Route::prefix('admin')->name('daftar-rental.')->group(function () {
-        Route::get('/daftar-rental', [DaftarRentalController::class, 'index'])->name('index');
-        Route::get('/daftar-rental/create', [DaftarRentalController::class, 'create'])->name('create');
-        Route::post('/daftar-rental', [DaftarRentalController::class, 'store'])->name('store');
-        Route::get('/daftar-rental/{daftarRental}/edit', [DaftarRentalController::class, 'edit'])->name('edit');
-        Route::put('/daftar-rental/{daftarRental}', [DaftarRentalController::class, 'update'])->name('update');
-        Route::delete('/daftar-rental/{daftarRental}', [DaftarRentalController::class, 'destroy'])->name('destroy');
-    });
+    Route::prefix("admin")
+        ->name("daftar-rental.")
+        ->group(function () {
+            Route::get("/daftar-rental", [
+                DaftarRentalController::class,
+                "index",
+            ])->name("index");
+            Route::get("/daftar-rental/create", [
+                DaftarRentalController::class,
+                "create",
+            ])->name("create");
+            Route::post("/daftar-rental", [
+                DaftarRentalController::class,
+                "store",
+            ])->name("store");
+            Route::get("/daftar-rental/{daftarRental}/edit", [
+                DaftarRentalController::class,
+                "edit",
+            ])->name("edit");
+            Route::put("/daftar-rental/{daftarRental}", [
+                DaftarRentalController::class,
+                "update",
+            ])->name("update");
+            Route::delete("/daftar-rental/{daftarRental}", [
+                DaftarRentalController::class,
+                "destroy",
+            ])->name("destroy");
+        });
 
     // Riwayat Perjalanan Routes - CRUD (Admin)
-    Route::prefix('admin')->name('riwayat-perjalanan.')->group(function () {
-        Route::get('/riwayat-perjalanan', [RiwayatPerjalananController::class, 'index'])->name('index');
-        Route::get('/riwayat-perjalanan/create', [RiwayatPerjalananController::class, 'create'])->name('create');
-        Route::post('/riwayat-perjalanan', [RiwayatPerjalananController::class, 'store'])->name('store');
-        Route::get('/riwayat-perjalanan/{riwayatPerjalanan}/edit', [RiwayatPerjalananController::class, 'edit'])->name('edit');
-        Route::put('/riwayat-perjalanan/{riwayatPerjalanan}', [RiwayatPerjalananController::class, 'update'])->name('update');
-        Route::delete('/riwayat-perjalanan/{riwayatPerjalanan}', [RiwayatPerjalananController::class, 'destroy'])->name('destroy');
-    });
+    Route::prefix("admin")
+        ->name("riwayat-perjalanan.")
+        ->group(function () {
+            Route::get("/riwayat-perjalanan", [
+                RiwayatPerjalananController::class,
+                "index",
+            ])->name("index");
+            Route::get("/riwayat-perjalanan/create", [
+                RiwayatPerjalananController::class,
+                "create",
+            ])->name("create");
+            Route::post("/riwayat-perjalanan", [
+                RiwayatPerjalananController::class,
+                "store",
+            ])->name("store");
+            Route::get("/riwayat-perjalanan/{riwayatPerjalanan}/edit", [
+                RiwayatPerjalananController::class,
+                "edit",
+            ])->name("edit");
+            Route::put("/riwayat-perjalanan/{riwayatPerjalanan}", [
+                RiwayatPerjalananController::class,
+                "update",
+            ])->name("update");
+            Route::delete("/riwayat-perjalanan/{riwayatPerjalanan}", [
+                RiwayatPerjalananController::class,
+                "destroy",
+            ])->name("destroy");
+        });
 });
 
 // ============================================================================
 // FALLBACK ROUTE
 // ============================================================================
 Route::fallback(function () {
-    return Inertia::render('NotFound');
-})->name('notfound');
-
+    return Inertia::render("NotFound");
+})->name("notfound");

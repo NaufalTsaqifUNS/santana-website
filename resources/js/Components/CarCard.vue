@@ -1,5 +1,7 @@
 <!-- components/CarCard.vue -->
 <script setup>
+import { Link } from "@inertiajs/vue3";
+
 const props = defineProps({
     id: Number,
     imageUrl: String,
@@ -105,11 +107,12 @@ const handleRentNow = () => {
                 </svg>
                 Rent Now
             </button>
-            <button
-                class="flex-1 border border-red-500 text-red-500 hover:bg-red-50 py-2 rounded-md text-sm font-medium transition-colors duration-200"
+            <Link
+                :href="`/car/${id}`"
+                class="flex-1 border border-red-500 text-red-500 hover:bg-red-50 py-2 rounded-md text-sm font-medium transition-colors duration-200 flex items-center justify-center"
             >
                 View More
-            </button>
+            </Link>
         </div>
     </div>
 </template>
