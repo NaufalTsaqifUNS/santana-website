@@ -50,18 +50,9 @@
                         >
                             Riwayat Perjalanan
                         </Link>
+
                         <Link
-                            href="/tentang-kami"
-                            class="text-gray-700 hover:text-red-600 px-3 py-2 text-sm font-medium transition-colors duration-200"
-                            :class="{
-                                'text-red-600 border-b-2 border-red-600':
-                                    activeMenu === 'tentang-kami',
-                            }"
-                        >
-                            Tentang Kami
-                        </Link>
-                        <Link
-                            href="/contact"
+                            href="/Contact"
                             class="text-gray-700 hover:text-red-600 px-3 py-2 text-sm font-medium transition-colors duration-200"
                             :class="{
                                 'text-red-600 border-b-2 border-red-600':
@@ -226,8 +217,8 @@ export default {
             if (url.includes("/list-rental")) return "daftar-rental";
             if (url.includes("/riwayat-perjalanan"))
                 return "riwayat-perjalanan";
-            if (url.includes("/tentang-kami")) return "tentang-kami";
-            if (url.includes("/contact")) return "contact";
+            if (url.includes("/Contact") || url.includes("/contact"))
+                return "contact";
             return "home";
         });
 

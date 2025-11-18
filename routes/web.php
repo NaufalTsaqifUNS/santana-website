@@ -42,6 +42,11 @@ Route::get("/riwayat-perjalanan", [
     "publicIndex",
 ])->name("riwayat-perjalanan.index");
 
+//Contact
+Route::get("/Contact", function () {
+    return Inertia::render("Contact");
+})->name("Contact");
+
 // ============================================================================
 // AUTHENTICATION ROUTES
 // ============================================================================

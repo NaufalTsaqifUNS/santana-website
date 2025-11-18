@@ -173,7 +173,7 @@ onUnmounted(() => {
                 <div
                     class="absolute inset-0 bg-center bg-no-repeat bg-cover sm:bg-cover md:bg-cover transition-all duration-300"
                     style="
-                        background-image: url(/images/herosection-image.jpg);
+                        background-image: url(/images/herosection-img.webp);
                         background-position: center center;
                     "
                 ></div>
@@ -610,7 +610,6 @@ onUnmounted(() => {
                         Coba ubah kata kunci pencarian atau kategori
                     </p>
                 </div>
-
                 <!-- Link to List Rental Page -->
                 <div v-if="filteredCars.length > 0" class="text-center pt-4">
                     <Link
