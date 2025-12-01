@@ -1,14 +1,17 @@
 <template>
     <AdminLayout>
-        <div class="container mx-auto px-4 py-8">
-            <div class="max-w-4xl mx-auto">
-                <div class="flex items-center mb-6">
+        <div
+            class="min-h-screen bg-gradient-to-br from-gray-50 via-gray-100 to-gray-50 py-8"
+        >
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Header with Back Button -->
+                <div class="mb-8">
                     <Link
                         :href="route('daftar-rental.index')"
-                        class="text-blue-500 hover:text-blue-700 mr-4 flex items-center"
+                        class="group inline-flex items-center text-gray-600 hover:text-red-500 transition-all duration-300 mb-4"
                     >
                         <svg
-                            class="w-6 h-6"
+                            class="w-5 h-5 mr-2 transform group-hover:-translate-x-1 transition-transform duration-300"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
@@ -20,104 +23,337 @@
                                 d="M10 19l-7-7m0 0l7-7m-7 7h18"
                             ></path>
                         </svg>
-                        <span class="ml-2">Kembali</span>
+                        <span class="font-medium">Kembali ke Daftar</span>
                     </Link>
-                    <h1 class="text-3xl font-bold text-gray-800">
-                        Edit Mobil: {{ mobil.namaMobil }}
-                    </h1>
+
+                    <div class="flex items-center gap-4">
+                        <div
+                            class="w-12 h-12 bg-gradient-to-br from-red-500 to-red-600 rounded-xl flex items-center justify-center shadow-lg"
+                        >
+                            <svg
+                                class="w-6 h-6 text-white"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                                ></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h1
+                                class="text-3xl md:text-4xl font-bold text-gray-900"
+                            >
+                                Edit Mobil
+                            </h1>
+                            <p class="text-gray-600 mt-1">
+                                {{ mobil.namaMobil }}
+                            </p>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Success Message -->
-                <div
-                    v-if="flash.success"
-                    class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4"
+                <transition
+                    enter-active-class="transition ease-out duration-300"
+                    enter-from-class="opacity-0 transform translate-y-2"
+                    enter-to-class="opacity-100 transform translate-y-0"
+                    leave-active-class="transition ease-in duration-200"
+                    leave-from-class="opacity-100"
+                    leave-to-class="opacity-0"
                 >
-                    {{ flash.success }}
-                </div>
+                    <div
+                        v-if="flash.success"
+                        class="mb-6 bg-gradient-to-r from-green-50 to-emerald-50 border-l-4 border-green-500 rounded-lg shadow-md p-4 flex items-center"
+                    >
+                        <svg
+                            class="w-6 h-6 text-green-500 mr-3 flex-shrink-0"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                        >
+                            <path
+                                fill-rule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                clip-rule="evenodd"
+                            />
+                        </svg>
+                        <p class="text-green-800 font-medium">
+                            {{ flash.success }}
+                        </p>
+                    </div>
+                </transition>
 
-                <div class="bg-white shadow-md rounded-lg p-6">
-                    <form @submit.prevent="submit" class="space-y-6">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Form Card -->
+                <div
+                    class="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100"
+                >
+                    <!-- Progress Indicator -->
+                    <div
+                        class="bg-gradient-to-r from-gray-50 to-gray-100 px-6 py-4 border-b border-gray-200"
+                    >
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm font-semibold text-gray-700"
+                                >Formulir Edit Data Mobil</span
+                            >
+                            <span
+                                class="px-3 py-1 bg-gradient-to-r from-red-100 to-red-200 text-red-800 text-xs font-semibold rounded-full border border-red-200"
+                            >
+                                Mode Edit
+                            </span>
+                        </div>
+                    </div>
+
+                    <form @submit.prevent="submit" class="p-6 md:p-8">
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                             <!-- Nama Mobil -->
-                            <div class="md:col-span-2">
+                            <div class="lg:col-span-2">
                                 <label
-                                    class="block text-sm font-medium text-gray-700 mb-2"
-                                    >Nama Mobil *</label
+                                    class="flex items-center text-sm font-semibold text-gray-700 mb-2"
                                 >
+                                    <svg
+                                        class="w-4 h-4 mr-2 text-red-500"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"
+                                        ></path>
+                                    </svg>
+                                    Nama Mobil
+                                    <span class="text-red-500 ml-1">*</span>
+                                </label>
                                 <input
                                     v-model="form.namaMobil"
                                     type="text"
-                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                    placeholder="Contoh: Toyota Avanza 2023"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300 hover:border-red-300"
                                     required
                                 />
                                 <div
                                     v-if="errors.namaMobil"
-                                    class="text-red-500 text-sm mt-1"
+                                    class="mt-2 text-red-600 text-sm flex items-center"
                                 >
+                                    <svg
+                                        class="w-4 h-4 mr-1"
+                                        fill="currentColor"
+                                        viewBox="0 0 20 20"
+                                    >
+                                        <path
+                                            fill-rule="evenodd"
+                                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                                            clip-rule="evenodd"
+                                        />
+                                    </svg>
                                     {{ errors.namaMobil }}
                                 </div>
                             </div>
 
-                            <!-- Current Photo -->
-                            <div class="md:col-span-2">
+                            <!-- Current Photo Preview -->
+                            <div class="lg:col-span-2">
                                 <label
-                                    class="block text-sm font-medium text-gray-700 mb-2"
-                                    >Foto Saat Ini</label
+                                    class="flex items-center text-sm font-semibold text-gray-700 mb-2"
                                 >
-                                <div class="flex items-center space-x-4">
-                                    <img
-                                        :src="`/storage/${mobil.fotoMobil}`"
-                                        :alt="mobil.namaMobil"
-                                        class="h-32 w-auto object-cover rounded-lg border shadow-sm"
-                                    />
-                                    <div class="text-sm text-gray-600">
-                                        <p>Foto saat ini</p>
-                                        <p class="text-xs text-gray-500">
-                                            Ukuran: 400x300 px
+                                    <svg
+                                        class="w-4 h-4 mr-2 text-red-500"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                                        ></path>
+                                    </svg>
+                                    Foto Saat Ini
+                                </label>
+                                <div
+                                    class="bg-gradient-to-br from-gray-50 to-white border-2 border-gray-200 rounded-xl p-6 flex items-center gap-6"
+                                >
+                                    <div class="relative group">
+                                        <img
+                                            :src="`/storage/${mobil.fotoMobil}`"
+                                            :alt="mobil.namaMobil"
+                                            class="h-32 w-48 object-cover rounded-lg shadow-md group-hover:shadow-xl transition-all duration-300 transform group-hover:scale-105"
+                                        />
+                                        <div
+                                            class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 rounded-lg transition-all duration-300 flex items-center justify-center"
+                                        >
+                                            <svg
+                                                class="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                viewBox="0 0 24 24"
+                                            >
+                                                <path
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    stroke-width="2"
+                                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                                                ></path>
+                                                <path
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    stroke-width="2"
+                                                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                                                ></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <p
+                                            class="text-sm font-medium text-gray-900"
+                                        >
+                                            {{ mobil.namaMobil }}
                                         </p>
+                                        <p class="text-xs text-gray-500 mt-1">
+                                            Upload foto baru untuk mengganti
+                                            gambar ini
+                                        </p>
+                                        <div
+                                            class="mt-2 flex items-center gap-2"
+                                        >
+                                            <span
+                                                class="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded-md"
+                                            >
+                                                Format: JPG/PNG
+                                            </span>
+                                            <span
+                                                class="px-2 py-1 bg-red-100 text-red-500 text-xs font-medium rounded-md"
+                                            >
+                                                Max: 10MB
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- New Photo -->
-                            <div class="md:col-span-2">
+                            <!-- New Photo Upload -->
+                            <div class="lg:col-span-2">
                                 <label
-                                    class="block text-sm font-medium text-gray-700 mb-2"
-                                    >Ganti Foto Mobil</label
+                                    class="flex items-center text-sm font-semibold text-gray-700 mb-2"
                                 >
-                                <input
-                                    type="file"
-                                    @change="handleFileUpload"
-                                    accept="image/*"
-                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
-                                />
-                                <p class="text-sm text-gray-500 mt-1">
-                                    Format: JPG, PNG, GIF. Maksimal 2MB
-                                </p>
+                                    <svg
+                                        class="w-4 h-4 mr-2 text-red-500"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
+                                        ></path>
+                                    </svg>
+                                    Upload Foto Baru (Opsional)
+                                </label>
+                                <div
+                                    class="relative border-2 border-dashed border-gray-300 rounded-xl p-6 hover:border-red-400 transition-all duration-300 bg-gradient-to-br from-gray-50 to-white"
+                                >
+                                    <input
+                                        type="file"
+                                        @change="handleFileUpload"
+                                        accept="image/*"
+                                        class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
+                                    />
+                                    <div class="text-center">
+                                        <svg
+                                            class="mx-auto h-12 w-12 text-gray-400"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                                            ></path>
+                                        </svg>
+                                        <p class="mt-2 text-sm text-gray-600">
+                                            <span
+                                                class="font-semibold text-red-500"
+                                                >Klik untuk upload</span
+                                            >
+                                            atau drag and drop
+                                        </p>
+                                        <p class="text-xs text-gray-500 mt-1">
+                                            PNG, JPG, WEBP hingga 10MB
+                                        </p>
+                                    </div>
+                                </div>
                                 <div
                                     v-if="errors.fotoMobil"
-                                    class="text-red-500 text-sm mt-1"
+                                    class="mt-2 text-red-600 text-sm flex items-center"
                                 >
+                                    <svg
+                                        class="w-4 h-4 mr-1"
+                                        fill="currentColor"
+                                        viewBox="0 0 20 20"
+                                    >
+                                        <path
+                                            fill-rule="evenodd"
+                                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                                            clip-rule="evenodd"
+                                        />
+                                    </svg>
                                     {{ errors.fotoMobil }}
                                 </div>
                             </div>
 
                             <!-- Deskripsi -->
-                            <div class="md:col-span-2">
+                            <div class="lg:col-span-2">
                                 <label
-                                    class="block text-sm font-medium text-gray-700 mb-2"
-                                    >Deskripsi Mobil *</label
+                                    class="flex items-center text-sm font-semibold text-gray-700 mb-2"
                                 >
+                                    <svg
+                                        class="w-4 h-4 mr-2 text-red-500"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M4 6h16M4 12h16M4 18h7"
+                                        ></path>
+                                    </svg>
+                                    Deskripsi Mobil
+                                    <span class="text-red-500 ml-1">*</span>
+                                </label>
                                 <textarea
                                     v-model="form.deskripsiMobil"
                                     rows="4"
-                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                    placeholder="Masukkan deskripsi detail tentang mobil ini..."
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300 hover:border-red-300 resize-none"
                                     required
                                 ></textarea>
                                 <div
                                     v-if="errors.deskripsiMobil"
-                                    class="text-red-500 text-sm mt-1"
+                                    class="mt-2 text-red-600 text-sm flex items-center"
                                 >
+                                    <svg
+                                        class="w-4 h-4 mr-1"
+                                        fill="currentColor"
+                                        viewBox="0 0 20 20"
+                                    >
+                                        <path
+                                            fill-rule="evenodd"
+                                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                                            clip-rule="evenodd"
+                                        />
+                                    </svg>
                                     {{ errors.deskripsiMobil }}
                                 </div>
                             </div>
@@ -125,21 +361,54 @@
                             <!-- Harga -->
                             <div>
                                 <label
-                                    class="block text-sm font-medium text-gray-700 mb-2"
-                                    >Harga Mobil (Rp) *</label
+                                    class="flex items-center text-sm font-semibold text-gray-700 mb-2"
                                 >
-                                <input
-                                    v-model="form.hargaMobil"
-                                    type="number"
-                                    min="0"
-                                    step="1000"
-                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                    required
-                                />
+                                    <svg
+                                        class="w-4 h-4 mr-2 text-red-500"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                                        ></path>
+                                    </svg>
+                                    Harga Mobil (Rp)
+                                    <span class="text-red-500 ml-1">*</span>
+                                </label>
+                                <div class="relative">
+                                    <span
+                                        class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 font-medium"
+                                        >Rp</span
+                                    >
+                                    <input
+                                        v-model="form.hargaMobil"
+                                        type="number"
+                                        min="0"
+                                        step="1000"
+                                        placeholder="500000"
+                                        class="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300 hover:border-red-300"
+                                        required
+                                    />
+                                </div>
                                 <div
                                     v-if="errors.hargaMobil"
-                                    class="text-red-500 text-sm mt-1"
+                                    class="mt-2 text-red-600 text-sm flex items-center"
                                 >
+                                    <svg
+                                        class="w-4 h-4 mr-1"
+                                        fill="currentColor"
+                                        viewBox="0 0 20 20"
+                                    >
+                                        <path
+                                            fill-rule="evenodd"
+                                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                                            clip-rule="evenodd"
+                                        />
+                                    </svg>
                                     {{ errors.hargaMobil }}
                                 </div>
                             </div>
@@ -147,12 +416,27 @@
                             <!-- Jenis Mobil -->
                             <div>
                                 <label
-                                    class="block text-sm font-medium text-gray-700 mb-2"
-                                    >Jenis Mobil *</label
+                                    class="flex items-center text-sm font-semibold text-gray-700 mb-2"
                                 >
+                                    <svg
+                                        class="w-4 h-4 mr-2 text-red-500"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+                                        ></path>
+                                    </svg>
+                                    Jenis Mobil
+                                    <span class="text-red-500 ml-1">*</span>
+                                </label>
                                 <select
                                     v-model="form.jenisMobil"
-                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300 hover:border-red-300 bg-white"
                                     required
                                 >
                                     <option value="MPV">MPV</option>
@@ -167,8 +451,19 @@
                                 </select>
                                 <div
                                     v-if="errors.jenisMobil"
-                                    class="text-red-500 text-sm mt-1"
+                                    class="mt-2 text-red-600 text-sm flex items-center"
                                 >
+                                    <svg
+                                        class="w-4 h-4 mr-1"
+                                        fill="currentColor"
+                                        viewBox="0 0 20 20"
+                                    >
+                                        <path
+                                            fill-rule="evenodd"
+                                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                                            clip-rule="evenodd"
+                                        />
+                                    </svg>
                                     {{ errors.jenisMobil }}
                                 </div>
                             </div>
@@ -176,21 +471,48 @@
                             <!-- Seat -->
                             <div>
                                 <label
-                                    class="block text-sm font-medium text-gray-700 mb-2"
-                                    >Jumlah Seat *</label
+                                    class="flex items-center text-sm font-semibold text-gray-700 mb-2"
                                 >
+                                    <svg
+                                        class="w-4 h-4 mr-2 text-red-500"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                                        ></path>
+                                    </svg>
+                                    Jumlah Seat
+                                    <span class="text-red-500 ml-1">*</span>
+                                </label>
                                 <input
                                     v-model="form.seat"
                                     type="number"
                                     min="1"
                                     max="50"
-                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                    placeholder="7"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300 hover:border-red-300"
                                     required
                                 />
                                 <div
                                     v-if="errors.seat"
-                                    class="text-red-500 text-sm mt-1"
+                                    class="mt-2 text-red-600 text-sm flex items-center"
                                 >
+                                    <svg
+                                        class="w-4 h-4 mr-1"
+                                        fill="currentColor"
+                                        viewBox="0 0 20 20"
+                                    >
+                                        <path
+                                            fill-rule="evenodd"
+                                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                                            clip-rule="evenodd"
+                                        />
+                                    </svg>
                                     {{ errors.seat }}
                                 </div>
                             </div>
@@ -198,12 +520,27 @@
                             <!-- Bahan Bakar -->
                             <div>
                                 <label
-                                    class="block text-sm font-medium text-gray-700 mb-2"
-                                    >Jenis Bahan Bakar *</label
+                                    class="flex items-center text-sm font-semibold text-gray-700 mb-2"
                                 >
+                                    <svg
+                                        class="w-4 h-4 mr-2 text-red-500"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M13 10V3L4 14h7v7l9-11h-7z"
+                                        ></path>
+                                    </svg>
+                                    Jenis Bahan Bakar
+                                    <span class="text-red-500 ml-1">*</span>
+                                </label>
                                 <select
                                     v-model="form.jenisBahanBakar"
-                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300 hover:border-red-300 bg-white"
                                     required
                                 >
                                     <option value="Bensin">Bensin</option>
@@ -213,103 +550,318 @@
                                 </select>
                                 <div
                                     v-if="errors.jenisBahanBakar"
-                                    class="text-red-500 text-sm mt-1"
+                                    class="mt-2 text-red-600 text-sm flex items-center"
                                 >
+                                    <svg
+                                        class="w-4 h-4 mr-1"
+                                        fill="currentColor"
+                                        viewBox="0 0 20 20"
+                                    >
+                                        <path
+                                            fill-rule="evenodd"
+                                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                                            clip-rule="evenodd"
+                                        />
+                                    </svg>
                                     {{ errors.jenisBahanBakar }}
                                 </div>
                             </div>
 
                             <!-- Status -->
-                            <div class="md:col-span-2">
-                                <label class="flex items-center">
-                                    <input
-                                        v-model="form.status"
-                                        type="checkbox"
-                                        class="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                                    />
-                                    <span class="ml-2 text-sm text-gray-700"
-                                        >Mobil Tersedia</span
+                            <div class="lg:col-span-2">
+                                <div
+                                    class="bg-gradient-to-r from-red-50 to-red-50 border-2 border-red-500 rounded-xl p-4"
+                                >
+                                    <label
+                                        class="flex items-center cursor-pointer group"
                                     >
-                                </label>
+                                        <div class="relative">
+                                            <input
+                                                v-model="form.status"
+                                                type="checkbox"
+                                                class="sr-only peer"
+                                            />
+                                            <div
+                                                class="w-14 h-8 bg-gray-300 rounded-full peer peer-checked:bg-gradient-to-r peer-checked:from-green-500 peer-checked:to-green-600 transition-all duration-300 shadow-inner"
+                                            ></div>
+                                            <div
+                                                class="absolute left-1 top-1 w-6 h-6 bg-white rounded-full transition-all duration-300 shadow-md peer-checked:translate-x-6"
+                                            ></div>
+                                        </div>
+                                        <div class="ml-4">
+                                            <span
+                                                class="text-sm font-semibold text-gray-900 flex items-center"
+                                            >
+                                                <svg
+                                                    class="w-5 h-5 mr-2"
+                                                    :class="
+                                                        form.status
+                                                            ? 'text-green-600'
+                                                            : 'text-gray-400'
+                                                    "
+                                                    fill="currentColor"
+                                                    viewBox="0 0 20 20"
+                                                >
+                                                    <path
+                                                        v-if="form.status"
+                                                        fill-rule="evenodd"
+                                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                                        clip-rule="evenodd"
+                                                    />
+                                                    <path
+                                                        v-else
+                                                        fill-rule="evenodd"
+                                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                                                        clip-rule="evenodd"
+                                                    />
+                                                </svg>
+                                                Status Ketersediaan Mobil
+                                            </span>
+                                            <p
+                                                class="text-xs text-gray-600 mt-1"
+                                            >
+                                                {{
+                                                    form.status
+                                                        ? "Mobil saat ini tersedia untuk disewa"
+                                                        : "Mobil saat ini tidak tersedia"
+                                                }}
+                                            </p>
+                                        </div>
+                                    </label>
+                                </div>
                                 <div
                                     v-if="errors.status"
-                                    class="text-red-500 text-sm mt-1"
+                                    class="mt-2 text-red-600 text-sm flex items-center"
                                 >
+                                    <svg
+                                        class="w-4 h-4 mr-1"
+                                        fill="currentColor"
+                                        viewBox="0 0 20 20"
+                                    >
+                                        <path
+                                            fill-rule="evenodd"
+                                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                                            clip-rule="evenodd"
+                                        />
+                                    </svg>
                                     {{ errors.status }}
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Error Messages -->
-                        <div
-                            v-if="Object.keys(errors).length > 0"
-                            class="bg-red-50 border border-red-200 rounded-md p-4"
+                        <!-- Error Messages Summary -->
+                        <transition
+                            enter-active-class="transition ease-out duration-300"
+                            enter-from-class="opacity-0 transform translate-y-2"
+                            enter-to-class="opacity-100 transform translate-y-0"
                         >
-                            <h3 class="text-sm font-medium text-red-800">
-                                Terjadi kesalahan:
-                            </h3>
-                            <ul
-                                class="mt-2 text-sm text-red-700 list-disc list-inside"
+                            <div
+                                v-if="Object.keys(errors).length > 0"
+                                class="mt-6 bg-gradient-to-r from-red-50 to-red-100 border-l-4 border-red-500 rounded-lg p-4"
                             >
-                                <li
-                                    v-for="error in Object.values(errors)"
-                                    :key="error"
-                                >
-                                    {{ error }}
-                                </li>
-                            </ul>
-                        </div>
+                                <div class="flex items-start">
+                                    <svg
+                                        class="w-6 h-6 text-red-600 mr-3 flex-shrink-0 mt-0.5"
+                                        fill="currentColor"
+                                        viewBox="0 0 20 20"
+                                    >
+                                        <path
+                                            fill-rule="evenodd"
+                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                                            clip-rule="evenodd"
+                                        />
+                                    </svg>
+                                    <div>
+                                        <h3
+                                            class="text-sm font-semibold text-red-800"
+                                        >
+                                            Terjadi kesalahan pada form:
+                                        </h3>
+                                        <ul
+                                            class="mt-2 text-sm text-red-700 space-y-1"
+                                        >
+                                            <li
+                                                v-for="(error, key) in errors"
+                                                :key="key"
+                                                class="flex items-center"
+                                            >
+                                                <span
+                                                    class="w-1.5 h-1.5 bg-red-600 rounded-full mr-2"
+                                                ></span>
+                                                {{ error }}
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </transition>
 
-                        <!-- Submit Button -->
+                        <!-- Submit Buttons -->
                         <div
-                            class="mt-8 flex justify-end space-x-3 border-t pt-6"
+                            class="mt-8 flex flex-col sm:flex-row justify-end gap-3 pt-6 border-t border-gray-200"
                         >
                             <Link
                                 :href="route('daftar-rental.index')"
-                                class="px-6 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition duration-200 font-medium"
+                                class="group inline-flex items-center justify-center px-6 py-3 border-2 border-gray-300 rounded-xl text-gray-700 font-semibold hover:bg-gray-50 hover:border-gray-400 transition-all duration-300 transform hover:scale-105"
                             >
+                                <svg
+                                    class="w-5 h-5 mr-2"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M6 18L18 6M6 6l12 12"
+                                    ></path>
+                                </svg>
                                 Batal
                             </Link>
                             <button
                                 type="submit"
                                 :disabled="processing"
-                                :class="[
-                                    'px-6 py-2 bg-blue-500 text-white rounded-md font-medium transition duration-200',
-                                    processing
-                                        ? 'opacity-50 cursor-not-allowed'
-                                        : 'hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2',
-                                ]"
+                                class="group relative inline-flex items-center justify-center px-8 py-3 bg-gradient-to-r from-red-500 to-red-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl hover:shadow-red-500/50 transform hover:scale-105 transition-all duration-300 overflow-hidden disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
                             >
                                 <span
-                                    v-if="processing"
-                                    class="flex items-center"
+                                    class="absolute inset-0 bg-gradient-to-r from-red-600 to-red-700 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"
+                                ></span>
+                                <svg
+                                    v-if="!processing"
+                                    class="w-5 h-5 mr-2 relative z-10"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
                                 >
-                                    <svg
-                                        class="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                    >
-                                        <circle
-                                            class="opacity-25"
-                                            cx="12"
-                                            cy="12"
-                                            r="10"
-                                            stroke="currentColor"
-                                            stroke-width="4"
-                                        ></circle>
-                                        <path
-                                            class="opacity-75"
-                                            fill="currentColor"
-                                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                                        ></path>
-                                    </svg>
-                                    Menyimpan...
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M5 13l4 4L19 7"
+                                    ></path>
+                                </svg>
+                                <svg
+                                    v-else
+                                    class="animate-spin w-5 h-5 mr-2 relative z-10"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <circle
+                                        class="opacity-25"
+                                        cx="12"
+                                        cy="12"
+                                        r="10"
+                                        stroke="currentColor"
+                                        stroke-width="4"
+                                    ></circle>
+                                    <path
+                                        class="opacity-75"
+                                        fill="currentColor"
+                                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                                    ></path>
+                                </svg>
+                                <span class="relative z-10">
+                                    {{
+                                        processing
+                                            ? "Memperbarui..."
+                                            : "Update Mobil"
+                                    }}
                                 </span>
-                                <span v-else> Update Mobil </span>
                             </button>
                         </div>
                     </form>
+                </div>
+
+                <!-- Info Cards -->
+                <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div
+                        class="bg-gradient-to-br from-amber-50 to-amber-100 rounded-xl p-4 border border-amber-200"
+                    >
+                        <div class="flex items-start">
+                            <svg
+                                class="w-6 h-6 text-amber-600 mr-3 flex-shrink-0 mt-0.5"
+                                fill="currentColor"
+                                viewBox="0 0 20 20"
+                            >
+                                <path
+                                    fill-rule="evenodd"
+                                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-
+4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                                    clip-rule="evenodd"
+                                />
+                            </svg>
+                            <div>
+                                <h3
+                                    class="font-semibold text-amber-900 text-sm mb-1"
+                                >
+                                    Mode Edit
+                                </h3>
+                                <p class="text-amber-700 text-xs">
+                                    Anda sedang mengedit data mobil yang sudah
+                                    ada. Perubahan akan langsung disimpan.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div
+                        class="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-4 border border-green-200"
+                    >
+                        <div class="flex items-start">
+                            <svg
+                                class="w-6 h-6 text-green-600 mr-3 flex-shrink-0 mt-0.5"
+                                fill="currentColor"
+                                viewBox="0 0 20 20"
+                            >
+                                <path
+                                    fill-rule="evenodd"
+                                    d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
+                                    clip-rule="evenodd"
+                                />
+                            </svg>
+                            <div>
+                                <h3
+                                    class="font-semibold text-green-900 text-sm mb-1"
+                                >
+                                    Foto Opsional
+                                </h3>
+                                <p class="text-green-700 text-xs">
+                                    Foto saat ini akan tetap digunakan jika
+                                    tidak ada foto baru yang diupload.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div
+                        class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-4 border border-purple-200"
+                    >
+                        <div class="flex items-start">
+                            <svg
+                                class="w-6 h-6 text-purple-600 mr-3 flex-shrink-0 mt-0.5"
+                                fill="currentColor"
+                                viewBox="0 0 20 20"
+                            >
+                                <path
+                                    fill-rule="evenodd"
+                                    d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                                    clip-rule="evenodd"
+                                />
+                            </svg>
+                            <div>
+                                <h3
+                                    class="font-semibold text-purple-900 text-sm mb-1"
+                                >
+                                    Status Ketersediaan
+                                </h3>
+                                <p class="text-purple-700 text-xs">
+                                    Toggle status untuk mengatur ketersediaan
+                                    mobil untuk disewa.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -340,7 +892,7 @@ const form = reactive({
     seat: props.mobil.seat || "",
     jenisBahanBakar: props.mobil.jenisBahanBakar || "Bensin",
     status: props.mobil.status ?? true,
-    _method: "PUT", // Important for Laravel to recognize as PUT request
+    _method: "PUT",
 });
 
 const handleFileUpload = (event) => {
@@ -354,13 +906,10 @@ const submit = async () => {
     processing.value = true;
 
     try {
-        // Create FormData for file upload
         const formData = new FormData();
 
-        // Append all form fields
         Object.keys(form).forEach((key) => {
             if (form[key] !== null && form[key] !== undefined) {
-                // Handle boolean values
                 if (key === "status") {
                     formData.append(key, form[key] ? "1" : "0");
                 } else {
@@ -369,7 +918,6 @@ const submit = async () => {
             }
         });
 
-        // Make the request
         await router.post(
             route("daftar-rental.update", props.mobil.id),
             formData,

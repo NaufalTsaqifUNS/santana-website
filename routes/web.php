@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DaftarRentalController;
 use App\Http\Controllers\RiwayatPerjalananController;
@@ -43,9 +44,10 @@ Route::get("/riwayat-perjalanan", [
 ])->name("riwayat-perjalanan.index");
 
 //Contact
-Route::get("/Contact", function () {
-    return Inertia::render("Contact");
-})->name("Contact");
+Route::get("/Contact", [ContactController::class, "index"])->name("Contact");
+Route::post("/contact", [ContactController::class, "store"])->name(
+    "contact.store",
+);
 
 // ============================================================================
 // AUTHENTICATION ROUTES

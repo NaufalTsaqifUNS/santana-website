@@ -99,10 +99,10 @@
                             </li>
                             <li>
                                 <Link
-                                    href="/riwayat-rental"
+                                    href="/riwayat-perjalanan"
                                     class="text-gray-600 hover:text-red-500 text-xs sm:text-sm transition-colors inline-block"
                                 >
-                                    Riwayat
+                                    Riwayat Perjalanan
                                 </Link>
                             </li>
                         </ul>
@@ -170,7 +170,7 @@
                 <p
                     class="text-center text-gray-500 text-xs sm:text-sm leading-relaxed px-4"
                 >
-                    © Copyright 2025. Designed and Developed by Amba Studio 🥀
+                    © Copyright 2025. Designed and Developed by Santana Cars.
                 </p>
             </div>
         </div>

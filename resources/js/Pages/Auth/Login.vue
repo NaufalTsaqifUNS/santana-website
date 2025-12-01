@@ -1,4 +1,6 @@
 <template>
+    <Head title="Login Admin - Santana Rental Mobil Solo" />
+
     <div
         class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
     >
@@ -244,7 +246,7 @@
 
 <script>
 import { ref } from "vue";
-import { router } from "@inertiajs/vue3";
+import { Head, router } from "@inertiajs/vue3";
 
 export default {
     setup() {

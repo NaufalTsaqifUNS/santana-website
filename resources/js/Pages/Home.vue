@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from "vue";
-import { Link, router } from "@inertiajs/vue3";
+import { Head, Link, router } from "@inertiajs/vue3";
 import MainLayout from "@/Layouts/MainLayout.vue";
 import CarCard from "@/Components/CarCard.vue";
 import RiwayatCard from "@/Components/RiwayatCard.vue";
@@ -164,6 +164,8 @@ onUnmounted(() => {
 </script>
 
 <template>
+    <Head title="Beranda - Santana Rental Mobil Solo" />
+
     <div class="min-h-screen bg-gray-50">
         <!-- HERO SECTION - Enhanced & Responsive Background -->
         <section class="relative min-h-[100svh] overflow-hidden">

@@ -1,6 +1,6 @@
 <script setup>
 import MainLayout from "@/Layouts/MainLayout.vue";
-import { useForm } from "@inertiajs/vue3";
+import { Head, useForm } from "@inertiajs/vue3";
 import { ref } from "vue";
 
 // Set layout
@@ -21,16 +21,18 @@ const submitForm = () => {
     form.post("/contact", {
         onSuccess: () => {
             form.reset();
-            alert("Message sent successfully!");
+            alert("Pesan berhasil dikirim!");
         },
         onError: () => {
-            alert("Failed to send message. Please try again.");
+            alert("Gagal mengirim pesan. Silakan coba lagi.");
         },
     });
 };
 </script>
 
 <template>
+    <Head title="Hubungi Kami - Santana Rental Mobil Solo" />
+
     <div class="min-h-screen bg-gray-50">
         <!-- Hero Section -->
         <section
@@ -103,9 +105,9 @@ const submitForm = () => {
                     <p
                         class="text-base sm:text-lg md:text-xl text-gray-300 leading-relaxed"
                     >
-                        Have questions about our car rental services? We're here
-                        to help. Reach out to us through any of the channels
-                        below.
+                        Punya pertanyaan tentang layanan rental mobil kami? Kami
+                        siap membantu Anda. Hubungi kami melalui salah satu
+                        saluran di bawah ini.
                     </p>
                 </div>
             </div>
@@ -579,7 +581,7 @@ const submitForm = () => {
                     <div class="relative">
                         <div class="w-full h-96 lg:h-[500px]">
                             <iframe
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3955.2744707890835!2d110.76385397499694!3d-7.545885992444448!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a16f0a8c7f0a9%3A0x5e0b0b0b0b0b0b0b!2sSingopuran%2C%20Kartasura%2C%20Sukoharjo%20Regency%2C%20Central%20Java!5e0!3m2!1sen!2sid!4v1234567890123!5m2!1sen!2sid"
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3955.3177574668344!2d110.7494935!3d-7.5485221!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a148b7f185907%3A0xf9b7742139c4c8b3!2sSantana%20Rental%20Mobil%20Solo!5e0!3m2!1sen!2sid!4v1234567890123!5m2!1sen!2sid"
                                 class="w-full h-full border-0"
                                 allowfullscreen=""
                                 loading="lazy"
@@ -592,7 +594,7 @@ const submitForm = () => {
                             class="p-6 text-center bg-gray-50 border-t border-gray-200"
                         >
                             <a
-                                href="https://www.google.com/maps/search/?api=1&query=Santana+Rental+Mobil+Solo+Dusun+I+Singopuran+Kartasura+Sukoharjo+Jawa+Tengah+57164"
+                                href="https://www.google.com/maps/place/Santana+Rental+Mobil+Solo/@-7.5485221,110.7494935,840m/data=!3m2!1e3!4b1!4m6!3m5!1s0x2e7a148b7f185907:0xf9b7742139c4c8b3!8m2!3d-7.5485221!4d110.7543644!16s%2Fg%2F11c5_3dv_r?hl=en&entry=ttu&g_ep=EgoyMDI1MTExNi4wIKXMDSoASAFQAw%3D%3D"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 class="inline-flex items-center space-x-2 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-semibold py-3 px-8 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-red-500/50 hover:scale-105"

@@ -1,4 +1,6 @@
 <template>
+    <Head title="Dashboard Admin - Santana Rental Mobil Solo" />
+
     <AdminLayout>
         <div class="min-h-screen bg-gray-50">
             <!-- Header -->
@@ -537,7 +539,7 @@
 
 <script setup>
 import AdminLayout from "@/Layouts/AdminLayout.vue";
-import { Link } from "@inertiajs/vue3";
+import { Head, Link } from "@inertiajs/vue3";
 
 defineProps({
     stats: Object,

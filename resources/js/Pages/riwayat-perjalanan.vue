@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from "vue";
+import { Head } from "@inertiajs/vue3";
 import MainLayout from "@/Layouts/MainLayout.vue";
 
 const props = defineProps({
@@ -20,6 +21,8 @@ const getImageUrl = (path) => {
 </script>
 
 <template>
+    <Head title="Riwayat Perjalanan - Santana Rental Mobil Solo" />
+
     <MainLayout>
         <div class="min-h-screen bg-gray-50">
             <!-- Hero Section -->

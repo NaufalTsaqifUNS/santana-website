@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed, watch } from "vue";
-import { router } from "@inertiajs/vue3";
+import { Head, router } from "@inertiajs/vue3";
 import MainLayout from "@/Layouts/MainLayout.vue";
 import CarCard from "@/Components/CarCard.vue";
 
@@ -106,6 +106,8 @@ watch(
 </script>
 
 <template>
+    <Head title="Daftar Mobil - Santana Rental Mobil Solo" />
+
     <MainLayout>
         <!-- Hero Section - Full Screen -->
         <section class="relative h-screen w-full overflow-hidden">
