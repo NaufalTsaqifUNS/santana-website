@@ -7,6 +7,7 @@ use App\Http\Controllers\DaftarRentalController;
 use App\Http\Controllers\RiwayatPerjalananController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\ArticleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -130,9 +131,49 @@ Route::middleware("auth")->group(function () {
         });
 });
 
+
+
 // ============================================================================
-// FALLBACK ROUTE
+// PUBLIC ARTICLE ROUTES
 // ============================================================================
-Route::fallback(function () {
-    return Inertia::render("NotFound");
-})->name("notfound");
+
+Route::get('/artikel', [ArticleController::class, 'publicIndex'])
+    ->name('artikel.index');
+
+Route::get('/artikel/{slug}', [ArticleController::class, 'show'])
+    ->name('artikel.show');
+
+Route::get('/tag/{tag}', [ArticleController::class, 'byTag'])
+    ->name('artikel.tag');
+
+// ============================================================================
+// ADMIN ARTICLE ROUTES
+// ============================================================================
+
+Route::middleware('auth')
+    ->prefix('admin')
+    ->name('admin.articles.')
+    ->group(function () {
+        Route::get('/articles', [ArticleController::class, 'index'])->name('index');
+        Route::get('/articles/create', [ArticleController::class, 'create'])->name('create');
+        Route::post('/articles', [ArticleController::class, 'store'])->name('store');
+
+        // 🔽 TAMBAHAN
+        Route::get('/articles/{article}/edit', [ArticleController::class, 'edit'])
+            ->name('edit');
+        Route::put('/articles/{article}', [ArticleController::class, 'update'])
+            ->name('update');
+
+        Route::delete('/articles/{article}', [ArticleController::class, 'destroy'])
+            ->name('destroy');
+    });
+
+    // ============================================================================
+    // FALLBACK ROUTE
+    // ============================================================================
+    Route::fallback(function () {
+        return Inertia::render("NotFound");
+    })->name("notfound");
+
+
+
