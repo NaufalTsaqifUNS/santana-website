@@ -164,7 +164,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-    <Head title="Beranda - Santana Rental Mobil Solo" />
+    <Head title="Beranda - Santana Rental Mobil Indonesia" />
 
     <div class="min-h-screen bg-gray-50">
         <!-- HERO SECTION - Enhanced & Responsive Background -->
@@ -227,7 +227,7 @@ onUnmounted(() => {
                             </svg>
                             <span
                                 class="text-white text-xs sm:text-sm font-medium"
-                                >#1 Rental Mobil di Solo</span
+                                >#1 Rental Mobil di Indonesia</span
                             >
                         </div>
 
@@ -1162,6 +1162,364 @@ onUnmounted(() => {
                         class="group inline-flex items-center gap-3 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white px-8 py-4 rounded-full font-semibold text-base shadow-lg hover:shadow-xl hover:shadow-red-500/30 transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-red-500/50"
                     >
                         <span>Lihat Semua Perjalanan</span>
+                        <svg
+                            class="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M17 8l4 4m0 0l-4 4m4-4H3"
+                            />
+                        </svg>
+                    </Link>
+                </div>
+            </div>
+        </section>
+
+        <!-- ARTIKEL SECTION -->
+        <section
+            class="relative bg-gray-50 py-16 sm:py-20 md:py-28 overflow-hidden"
+        >
+            <!-- Background Pattern -->
+            <div class="absolute inset-0 opacity-[0.03]">
+                <div
+                    class="absolute inset-0"
+                    style="
+                        background-image: radial-gradient(
+                            circle at 1px 1px,
+                            rgb(239 68 68) 1px,
+                            transparent 0
+                        );
+                        background-size: 40px 40px;
+                    "
+                ></div>
+            </div>
+
+            <!-- Decorative Elements -->
+            <div
+                class="absolute top-20 right-10 w-72 h-72 bg-red-100 rounded-full filter blur-3xl opacity-30"
+            ></div>
+            <div
+                class="absolute bottom-20 left-10 w-72 h-72 bg-red-100 rounded-full filter blur-3xl opacity-30"
+            ></div>
+
+            <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Section Header -->
+                <div class="text-center mb-12 sm:mb-16">
+                    <!-- Badge -->
+                    <div
+                        class="inline-flex items-center gap-2 px-4 py-2 bg-red-50 border border-red-100 rounded-full mb-4 shadow-sm"
+                    >
+                        <svg
+                            class="w-4 h-4 text-red-500"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                        >
+                            <path
+                                d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"
+                            />
+                        </svg>
+                        <span class="text-red-600 text-sm font-semibold"
+                            >Tips & Informasi</span
+                        >
+                    </div>
+
+                    <!-- Main Title -->
+                    <h2
+                        class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4"
+                    >
+                        Artikel
+                        <span class="relative inline-block">
+                            <span class="text-red-500">Terbaru</span>
+                            <svg
+                                class="absolute -bottom-2 left-0 w-full h-3"
+                                viewBox="0 0 200 12"
+                                fill="none"
+                            >
+                                <path
+                                    d="M2 10C60 3 140 3 198 10"
+                                    stroke="#EF4444"
+                                    stroke-width="3"
+                                    stroke-linecap="round"
+                                />
+                            </svg>
+                        </span>
+                    </h2>
+
+                    <!-- Subtitle -->
+                    <p
+                        class="text-base sm:text-lg md:text-xl text-gray-600 max-w-2xl mx-auto"
+                    >
+                        Tips perjalanan, panduan wisata, dan berbagai informasi
+                        menarik untuk
+                        <span class="font-semibold text-gray-900">Anda</span>
+                    </p>
+                </div>
+
+                <!-- Articles Grid -->
+                <div
+                    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-12"
+                >
+                    <!-- Article Card 1 -->
+                    <div
+                        class="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden hover:-translate-y-2"
+                    >
+                        <div
+                            class="relative h-48 sm:h-56 overflow-hidden bg-gray-200"
+                        >
+                            <div
+                                class="absolute inset-0 bg-gradient-to-br from-red-500/20 to-red-600/20 flex items-center justify-center"
+                            >
+                                <svg
+                                    class="w-16 h-16 text-gray-400"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                                    />
+                                </svg>
+                            </div>
+                            <div
+                                class="absolute top-4 left-4 px-3 py-1 bg-red-500 text-white text-xs font-semibold rounded-full"
+                            >
+                                Tips & Trik
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div
+                                class="flex items-center gap-3 text-sm text-gray-500 mb-3"
+                            >
+                                <span class="flex items-center gap-1">
+                                    <svg
+                                        class="w-4 h-4"
+                                        fill="currentColor"
+                                        viewBox="0 0 20 20"
+                                    >
+                                        <path
+                                            fill-rule="evenodd"
+                                            d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                                            clip-rule="evenodd"
+                                        />
+                                    </svg>
+                                    12 Jan 2024
+                                </span>
+                                <span>•</span>
+                                <span>5 min read</span>
+                            </div>
+                            <h3
+                                class="text-xl font-bold text-gray-900 mb-2 group-hover:text-red-600 transition-colors"
+                            >
+                                Tips Memilih Mobil Rental yang Tepat untuk
+                                Perjalanan Anda
+                            </h3>
+                            <p class="text-gray-600 text-sm mb-4 line-clamp-3">
+                                Panduan lengkap memilih mobil rental yang sesuai
+                                dengan kebutuhan perjalanan Anda. Mulai dari
+                                kapasitas penumpang hingga fitur keamanan.
+                            </p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-red-600 font-semibold text-sm"
+                                    >Baca Selengkapnya</span
+                                >
+                                <svg
+                                    class="w-5 h-5 text-red-600 group-hover:translate-x-2 transition-transform duration-300"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M17 8l4 4m0 0l-4 4m4-4H3"
+                                    />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Article Card 2 -->
+                    <div
+                        class="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden hover:-translate-y-2"
+                    >
+                        <div
+                            class="relative h-48 sm:h-56 overflow-hidden bg-gray-200"
+                        >
+                            <div
+                                class="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-blue-600/20 flex items-center justify-center"
+                            >
+                                <svg
+                                    class="w-16 h-16 text-gray-400"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                                    />
+                                </svg>
+                            </div>
+                            <div
+                                class="absolute top-4 left-4 px-3 py-1 bg-blue-500 text-white text-xs font-semibold rounded-full"
+                            >
+                                Panduan
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div
+                                class="flex items-center gap-3 text-sm text-gray-500 mb-3"
+                            >
+                                <span class="flex items-center gap-1">
+                                    <svg
+                                        class="w-4 h-4"
+                                        fill="currentColor"
+                                        viewBox="0 0 20 20"
+                                    >
+                                        <path
+                                            fill-rule="evenodd"
+                                            d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                                            clip-rule="evenodd"
+                                        />
+                                    </svg>
+                                    10 Jan 2024
+                                </span>
+                                <span>•</span>
+                                <span>7 min read</span>
+                            </div>
+                            <h3
+                                class="text-xl font-bold text-gray-900 mb-2 group-hover:text-red-600 transition-colors"
+                            >
+                                Persiapan Sebelum Melakukan Road Trip Jarak Jauh
+                            </h3>
+                            <p class="text-gray-600 text-sm mb-4 line-clamp-3">
+                                Checklist lengkap yang perlu Anda persiapkan
+                                sebelum melakukan perjalanan jauh menggunakan
+                                mobil rental.
+                            </p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-red-600 font-semibold text-sm"
+                                    >Baca Selengkapnya</span
+                                >
+                                <svg
+                                    class="w-5 h-5 text-red-600 group-hover:translate-x-2 transition-transform duration-300"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M17 8l4 4m0 0l-4 4m4-4H3"
+                                    />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Article Card 3 -->
+                    <div
+                        class="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden hover:-translate-y-2"
+                    >
+                        <div
+                            class="relative h-48 sm:h-56 overflow-hidden bg-gray-200"
+                        >
+                            <div
+                                class="absolute inset-0 bg-gradient-to-br from-green-500/20 to-green-600/20 flex items-center justify-center"
+                            >
+                                <svg
+                                    class="w-16 h-16 text-gray-400"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                                    />
+                                </svg>
+                            </div>
+                            <div
+                                class="absolute top-4 left-4 px-3 py-1 bg-green-500 text-white text-xs font-semibold rounded-full"
+                            >
+                                Destinasi
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div
+                                class="flex items-center gap-3 text-sm text-gray-500 mb-3"
+                            >
+                                <span class="flex items-center gap-1">
+                                    <svg
+                                        class="w-4 h-4"
+                                        fill="currentColor"
+                                        viewBox="0 0 20 20"
+                                    >
+                                        <path
+                                            fill-rule="evenodd"
+                                            d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                                            clip-rule="evenodd"
+                                        />
+                                    </svg>
+                                    8 Jan 2024
+                                </span>
+                                <span>•</span>
+                                <span>6 min read</span>
+                            </div>
+                            <h3
+                                class="text-xl font-bold text-gray-900 mb-2 group-hover:text-red-600 transition-colors"
+                            >
+                                Destinasi Wisata Terbaik di Jawa Timur yang
+                                Wajib Dikunjungi
+                            </h3>
+                            <p class="text-gray-600 text-sm mb-4 line-clamp-3">
+                                Rekomendasi tempat wisata menarik di Jawa Timur
+                                yang bisa Anda kunjungi dengan mobil rental
+                                kami.
+                            </p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-red-600 font-semibold text-sm"
+                                    >Baca Selengkapnya</span
+                                >
+                                <svg
+                                    class="w-5 h-5 text-red-600 group-hover:translate-x-2 transition-transform duration-300"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M17 8l4 4m0 0l-4 4m4-4H3"
+                                    />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CTA Button -->
+                <div class="text-center">
+                    <Link
+                        href="/artikel"
+                        class="group inline-flex items-center gap-3 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white px-8 py-4 rounded-full font-semibold text-base shadow-lg hover:shadow-xl hover:shadow-red-500/30 transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-red-500/50"
+                    >
+                        <span>Lihat Semua Artikel</span>
                         <svg
                             class="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300"
                             fill="none"
