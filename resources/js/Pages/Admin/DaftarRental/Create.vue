@@ -157,7 +157,46 @@
                                         class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
                                         required
                                     />
-                                    <div class="text-center">
+                                    <!-- Preview Image -->
+                                    <div
+                                        v-if="imagePreview"
+                                        class="text-center"
+                                    >
+                                        <div class="relative inline-block">
+                                            <img
+                                                :src="imagePreview"
+                                                alt="Preview"
+                                                class="max-h-48 rounded-lg shadow-md"
+                                            />
+                                            <button
+                                                type="button"
+                                                @click.stop="
+                                                    imagePreview = null;
+                                                    form.fotoMobil = null;
+                                                "
+                                                class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600 transition-colors z-20"
+                                            >
+                                                <svg
+                                                    class="w-4 h-4"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    viewBox="0 0 24 24"
+                                                >
+                                                    <path
+                                                        stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M6 18L18 6M6 6l12 12"
+                                                    ></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                        <p class="mt-2 text-sm text-gray-600">
+                                            Klik untuk mengubah gambar
+                                        </p>
+                                    </div>
+                                    <!-- Upload Prompt -->
+                                    <div v-else class="text-center">
                                         <svg
                                             class="mx-auto h-12 w-12 text-gray-400"
                                             fill="none"
@@ -642,6 +681,7 @@ import { reactive, ref } from "vue";
 
 const processing = ref(false);
 const errors = ref({});
+const imagePreview = ref(null);
 
 const form = reactive({
     namaMobil: "",
@@ -654,7 +694,12 @@ const form = reactive({
 });
 
 const handleFileUpload = (event) => {
-    form.fotoMobil = event.target.files[0];
+    const file = event.target.files[0];
+    if (file) {
+        form.fotoMobil = file;
+        // Buat preview URL dari file yang dipilih
+        imagePreview.value = URL.createObjectURL(file);
+    }
 };
 
 const submit = () => {
