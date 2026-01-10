@@ -1,136 +1,565 @@
 <template>
-  <AdminLayout>
-    <div class="container mx-auto px-4 py-8">
-      <div class="flex justify-between items-center mb-6">
-        <h1 class="text-3xl font-bold text-gray-800">Daftar Rental Mobil</h1>
-        <Link 
-          :href="route('daftar-rental.create')" 
-          class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition duration-200 flex items-center"
-        >
-          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-          </svg>
-          Tambah Mobil
-        </Link>
-      </div>
-
-      <!-- Success Message -->
-      <div v-if="flash.success" class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
-        {{ flash.success }}
-      </div>
-
-      <div class="bg-white shadow-md rounded-lg overflow-hidden">
-        <div class="overflow-x-auto">
-          <table class="min-w-full divide-y divide-gray-200">
-            <thead class="bg-gray-50">
-              <tr>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Gambar</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama Mobil</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Jenis</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Harga</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Seat</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Bahan Bakar</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
-              </tr>
-            </thead>
-            <tbody class="bg-white divide-y divide-gray-200">
-              <tr v-for="mobil in mobil.data" :key="mobil.id">
-                <td class="px-6 py-4 whitespace-nowrap">
-                  <img 
-                    :src="`/storage/${mobil.fotoMobil}`" 
-                    :alt="mobil.namaMobil"
-                    class="h-12 w-12 object-cover rounded"
-                  >
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                  <div class="text-sm font-medium text-gray-900">{{ mobil.namaMobil }}</div>
-                  <div class="text-sm text-gray-500 truncate max-w-xs">{{ mobil.deskripsiMobil }}</div>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                  <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
-                    {{ mobil.jenisMobil }}
-                  </span>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                  Rp {{ Number(mobil.hargaMobil).toLocaleString('id-ID') }}
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                  {{ mobil.seat }} seat
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                  {{ mobil.jenisBahanBakar }}
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                  <span :class="[
-                    'px-2 inline-flex text-xs leading-5 font-semibold rounded-full',
-                    mobil.status ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
-                  ]">
-                    {{ mobil.status ? 'Tersedia' : 'Tidak Tersedia' }}
-                  </span>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                  <div class="flex space-x-2">
-                    <Link 
-                      :href="route('daftar-rental.edit', mobil.id)"
-                      class="text-indigo-600 hover:text-indigo-900 transition duration-200"
+    <AdminLayout>
+        <div class="min-h-screen bg-gray-50">
+            <!-- Header -->
+            <div class="bg-white border-b border-gray-200">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+                    <div
+                        class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
                     >
-                      Edit
-                    </Link>
-                    <button 
-                      @click="deleteMobil(mobil)"
-                      class="text-red-600 hover:text-red-900 transition duration-200"
+                        <div>
+                            <h1
+                                class="text-2xl sm:text-3xl font-bold text-gray-900"
+                            >
+                                Daftar Rental Mobil
+                            </h1>
+                            <p class="text-sm text-gray-500 mt-1">
+                                Kelola semua kendaraan rental Anda
+                            </p>
+                        </div>
+                        <Link
+                            :href="route('daftar-rental.create')"
+                            class="inline-flex items-center justify-center px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-lg transition-colors"
+                        >
+                            <svg
+                                class="w-4 h-4 mr-2"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M12 4v16m8-8H4"
+                                ></path>
+                            </svg>
+                            Tambah Mobil
+                        </Link>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                <!-- Success Message -->
+                <transition
+                    enter-active-class="transition ease-out duration-300"
+                    enter-from-class="opacity-0 transform translate-y-2"
+                    enter-to-class="opacity-100 transform translate-y-0"
+                    leave-active-class="transition ease-in duration-200"
+                    leave-from-class="opacity-100"
+                    leave-to-class="opacity-0"
+                >
+                    <div
+                        v-if="flash.success"
+                        class="mb-6 bg-green-50 border border-green-200 rounded-lg p-4 flex items-center"
                     >
-                      Hapus
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        
-        <!-- Pagination -->
-        <div class="bg-white px-4 py-3 border-t border-gray-200 sm:px-6">
-          <div class="flex justify-between items-center">
-            <div class="text-sm text-gray-700">
-              Menampilkan {{ mobil.from }} hingga {{ mobil.to }} dari {{ mobil.total }} hasil
+                        <svg
+                            class="w-5 h-5 text-green-600 mr-3 flex-shrink-0"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                        >
+                            <path
+                                fill-rule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                clip-rule="evenodd"
+                            />
+                        </svg>
+                        <p class="text-sm text-green-800 font-medium">
+                            {{ flash.success }}
+                        </p>
+                    </div>
+                </transition>
+
+                <!-- Stats Grid -->
+                <div
+                    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8"
+                >
+                    <!-- Total Mobil -->
+                    <div
+                        class="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-md transition-shadow"
+                    >
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="p-3 bg-blue-50 rounded-lg">
+                                <svg
+                                    class="w-6 h-6 text-blue-600"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0
+ 011 1v5m-4 0h4"
+                                    ></path>
+                                </svg>
+                            </div>
+                            <span
+                                class="text-xs font-semibold text-gray-500 uppercase"
+                                >Total</span
+                            >
+                        </div>
+                        <div>
+                            <p class="text-3xl font-bold text-gray-900 mb-1">
+                                {{ mobil.total }}
+                            </p>
+                            <p class="text-sm text-gray-500">Total Mobil</p>
+                        </div>
+                    </div>
+
+                    <!-- Tersedia -->
+                    <div
+                        class="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-md transition-shadow"
+                    >
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="p-3 bg-green-50 rounded-lg">
+                                <svg
+                                    class="w-6 h-6 text-green-600"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                                    ></path>
+                                </svg>
+                            </div>
+                            <span
+                                class="text-xs font-semibold text-green-600 uppercase"
+                                >Available</span
+                            >
+                        </div>
+                        <div>
+                            <p class="text-3xl font-bold text-gray-900 mb-1">
+                                {{ mobil.data.filter((m) => m.status).length }}
+                            </p>
+                            <p class="text-sm text-gray-500">Tersedia</p>
+                        </div>
+                    </div>
+
+                    <!-- Tidak Tersedia -->
+                    <div
+                        class="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-md transition-shadow"
+                    >
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="p-3 bg-red-50 rounded-lg">
+                                <svg
+                                    class="w-6 h-6 text-red-600"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                                    ></path>
+                                </svg>
+                            </div>
+                            <span
+                                class="text-xs font-semibold text-red-600 uppercase"
+                                >Unavailable</span
+                            >
+                        </div>
+                        <div>
+                            <p class="text-3xl font-bold text-gray-900 mb-1">
+                                {{ mobil.data.filter((m) => !m.status).length }}
+                            </p>
+                            <p class="text-sm text-gray-500">Tidak Tersedia</p>
+                        </div>
+                    </div>
+
+                    <!-- Halaman -->
+                    <div
+                        class="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-md transition-shadow"
+                    >
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="p-3 bg-purple-50 rounded-lg">
+                                <svg
+                                    class="w-6 h-6 text-purple-600"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"
+                                    ></path>
+                                </svg>
+                            </div>
+                            <span
+                                class="text-xs font-semibold text-gray-500 uppercase"
+                                >Page</span
+                            >
+                        </div>
+                        <div>
+                            <p class="text-3xl font-bold text-gray-900 mb-1">
+                                {{ mobil.current_page }}
+                            </p>
+                            <p class="text-sm text-gray-500">Halaman</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Table Card -->
+                <div
+                    class="bg-white rounded-xl border border-gray-200 overflow-hidden"
+                >
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th
+                                        scope="col"
+                                        class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+                                    >
+                                        Mobil
+                                    </th>
+                                    <th
+                                        scope="col"
+                                        class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+                                    >
+                                        Harga/Hari
+                                    </th>
+                                    <th
+                                        scope="col"
+                                        class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+                                    >
+                                        Jenis
+                                    </th>
+                                    <th
+                                        scope="col"
+                                        class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+                                    >
+                                        Kursi
+                                    </th>
+                                    <th
+                                        scope="col"
+                                        class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+                                    >
+                                        Bahan Bakar
+                                    </th>
+                                    <th
+                                        scope="col"
+                                        class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+                                    >
+                                        Status
+                                    </th>
+                                    <th
+                                        scope="col"
+                                        class="px-6 py-3 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider"
+                                    >
+                                        Aksi
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                <tr
+                                    v-for="m in mobil.data"
+                                    :key="m.id"
+                                    class="hover:bg-gray-50 transition-colors"
+                                >
+                                    <td class="px-6 py-4">
+                                        <div class="flex items-center">
+                                            <img
+                                                :src="`/storage/${m.fotoMobil}`"
+                                                :alt="m.namaMobil"
+                                                class="h-12 w-12 rounded-lg object-cover mr-3"
+                                            />
+                                            <div>
+                                                <div
+                                                    class="text-sm font-semibold text-gray-900"
+                                                >
+                                                    {{ m.namaMobil }}
+                                                </div>
+                                                <div
+                                                    class="text-xs text-gray-500"
+                                                >
+                                                    ID: {{ m.id }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div
+                                            class="text-sm font-semibold text-gray-900"
+                                        >
+                                            Rp
+                                            {{
+                                                Number(
+                                                    m.hargaMobil,
+                                                ).toLocaleString("id-ID")
+                                            }}
+                                        </div>
+                                        <div class="text-xs text-gray-500">
+                                            per hari
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span
+                                            class="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200"
+                                        >
+                                            {{ m.jenisMobil }}
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div
+                                            class="flex items-center text-sm text-gray-700"
+                                        >
+                                            <svg
+                                                class="w-4 h-4 text-gray-400 mr-1.5"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                viewBox="0 0 24 24"
+                                            >
+                                                <path
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    stroke-width="2"
+                                                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                                                ></path>
+                                            </svg>
+                                            <span>{{ m.seat }} kursi</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div
+                                            class="flex items-center text-sm text-gray-700"
+                                        >
+                                            <svg
+                                                class="w-4 h-4 text-gray-400 mr-1.5"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                viewBox="0 0 24 24"
+                                            >
+                                                <path
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    stroke-width="2"
+                                                    d="M13 10V3L4 14h7v7l9-11h-7z"
+                                                ></path>
+                                            </svg>
+                                            <span>{{ m.jenisBahanBakar }}</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span
+                                            :class="[
+                                                'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold',
+                                                m.status
+                                                    ? 'bg-green-50 text-green-700 border border-green-200'
+                                                    : 'bg-red-50 text-red-700 border border-red-200',
+                                            ]"
+                                        >
+                                            <svg
+                                                class="w-3 h-3 mr-1"
+                                                :class="
+                                                    m.status
+                                                        ? 'text-green-500'
+                                                        : 'text-red-500'
+                                                "
+                                                fill="currentColor"
+                                                viewBox="0 0 8 8"
+                                            >
+                                                <circle cx="4" cy="4" r="3" />
+                                            </svg>
+                                            {{
+                                                m.status
+                                                    ? "Tersedia"
+                                                    : "Tidak Tersedia"
+                                            }}
+                                        </span>
+                                    </td>
+                                    <td
+                                        class="px-6 py-4 whitespace-nowrap text-center"
+                                    >
+                                        <div
+                                            class="flex items-center justify-center space-x-2"
+                                        >
+                                            <Link
+                                                :href="
+                                                    route(
+                                                        'daftar-rental.edit',
+                                                        m.id,
+                                                    )
+                                                "
+                                                class="inline-flex items-center px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-medium rounded-lg transition-colors"
+                                            >
+                                                <svg
+                                                    class="w-3.5 h-3.5 mr-1"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    viewBox="0 0 24 24"
+                                                >
+                                                    <path
+                                                        stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                                                    ></path>
+                                                </svg>
+                                                Edit
+                                            </Link>
+
+                                            <button
+                                                @click="deleteMobil(m)"
+                                                class="inline-flex items-center px-3 py-1.5 bg-red-600 hover:bg-red-700 text-white text-xs font-medium rounded-lg transition-colors"
+                                            >
+                                                <svg
+                                                    class="w-3.5 h-3.5 mr-1"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    viewBox="0 0 24 24"
+                                                >
+                                                    <path
+                                                        stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                                                    ></path>
+                                                </svg>
+                                                Hapus
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <!-- Empty State -->
+                                <tr v-if="mobil.data.length === 0">
+                                    <td
+                                        colspan="7"
+                                        class="px-6 py-12 text-center"
+                                    >
+                                        <div
+                                            class="flex flex-col items-center justify-center"
+                                        >
+                                            <svg
+                                                class="w-16 h-16 text-gray-300 mb-4"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                viewBox="0 0 24 24"
+                                            >
+                                                <path
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    stroke-width="2"
+                                                    d="M9 13h6m-3-3v6m-9 1V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z"
+                                                ></path>
+                                            </svg>
+                                            <h3
+                                                class="text-lg font-semibold text-gray-900 mb-2"
+                                            >
+                                                Belum Ada Data
+                                            </h3>
+                                            <p
+                                                class="text-sm text-gray-500 mb-4"
+                                            >
+                                                Tidak ada mobil yang tersedia
+                                            </p>
+                                            <Link
+                                                :href="
+                                                    route(
+                                                        'daftar-rental.create',
+                                                    )
+                                                "
+                                                class="inline-flex items-center px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-lg transition-colors"
+                                            >
+                                                <svg
+                                                    class="w-4 h-4 mr-2"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    viewBox="0 0 24 24"
+                                                >
+                                                    <path
+                                                        stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M12 4v16m8-8H4"
+                                                    ></path>
+                                                </svg>
+                                                Tambah Mobil Pertama
+                                            </Link>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="bg-gray-50 px-6 py-4 border-t border-gray-200">
+                        <div
+                            class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
+                        >
+                            <div class="text-sm text-gray-600">
+                                Menampilkan
+                                <span class="font-semibold text-gray-900">{{
+                                    mobil.from || 0
+                                }}</span>
+                                hingga
+                                <span class="font-semibold text-gray-900">{{
+                                    mobil.to || 0
+                                }}</span>
+                                dari
+                                <span class="font-semibold text-gray-900">{{
+                                    mobil.total
+                                }}</span>
+                                hasil
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <Link
+                                    v-for="link in mobil.links"
+                                    :key="link.label"
+                                    :href="link.url || '#'"
+                                    :class="[
+                                        'inline-flex items-center px-3 py-1.5 text-sm font-medium rounded-lg transition-colors',
+                                        link.active
+                                            ? 'bg-red-600 text-white'
+                                            : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-300',
+                                        !link.url
+                                            ? 'opacity-50 cursor-not-allowed'
+                                            : '',
+                                    ]"
+                                    :disabled="!link.url"
+                                    v-html="link.label"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="flex space-x-2">
-              <Link 
-                v-for="link in mobil.links"
-                :key="link.label"
-                :href="link.url || '#'"
-                :class="[
-                  'px-3 py-1 rounded-md text-sm font-medium',
-                  link.active ? 'bg-blue-500 text-white' : 'text-gray-500 hover:text-gray-700',
-                  !link.url ? 'opacity-50 cursor-not-allowed' : ''
-                ]"
-                v-html="link.label"
-              />
-            </div>
-          </div>
         </div>
-      </div>
-    </div>
-  </AdminLayout>
+    </AdminLayout>
 </template>
 
 <script setup>
-import AdminLayout from '@/Layouts/AdminLayout.vue'
-import { Link, router, usePage } from '@inertiajs/vue3'
-import { computed } from 'vue'
+import AdminLayout from "@/Layouts/AdminLayout.vue";
+import { Link, router, usePage } from "@inertiajs/vue3";
+import { computed } from "vue";
 
 const props = defineProps({
-  mobil: Object
-})
+    mobil: Object,
+});
 
-const page = usePage()
-const flash = computed(() => page.props.flash)
+const page = usePage();
+const flash = computed(() => page.props.flash);
 
 const deleteMobil = (mobil) => {
-  if (confirm(`Apakah Anda yakin ingin menghapus ${mobil.namaMobil}?`)) {
-    router.delete(route('daftar-rental.destroy', mobil.id))
-  }
-}
+    if (
+        confirm(
+            `Apakah Anda yakin ingin menghapus ${mobil.namaMobil} dari daftar?`,
+        )
+    ) {
+        router.delete(route("daftar-rental.destroy", mobil.id));
+    }
+};
 </script>

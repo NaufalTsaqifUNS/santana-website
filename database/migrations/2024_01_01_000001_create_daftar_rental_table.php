@@ -16,7 +16,7 @@ return new class extends Migration
             $table->decimal('hargaMobil', 12, 2);
             $table->enum('jenisMobil', ['MPV', 'Luxury MPV', 'SUV', 'Van', 'Sedan', 'Minibus', 'Bus']);
             $table->integer('seat');
-            $table->enum('jenisBahanBakar', ['Bensin', 'Diesel', 'Listrik', 'Hybrid']);
+            $table->enum('jenisBahanBakar', ['Bensin', 'Solar', 'Listrik', 'Hybrid']);
             $table->boolean('status')->default(true);
             $table->timestamps();
         });
