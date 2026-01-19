@@ -3,7 +3,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Main Footer Content -->
             <div
-                class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
+                class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 sm:gap-8"
             >
                 <!-- Left Column - Company Info -->
                 <div class="space-y-3 sm:space-y-4 text-center sm:text-left">
@@ -105,6 +105,14 @@
                                     Riwayat Perjalanan
                                 </Link>
                             </li>
+                            <li>
+                                <Link
+                                    href="/artikel"
+                                    class="text-gray-600 hover:text-red-500 text-xs sm:text-sm transition-colors inline-block"
+                                >
+                                    Artikel
+                                </Link>
+                            </li>
                         </ul>
                     </div>
 
@@ -127,40 +135,6 @@
                         </ul>
                     </div>
                 </div>
-
-                <!-- Right Column - Newsletter (Full Width on Mobile) -->
-                <div
-                    class="sm:col-span-2 lg:col-span-1 text-center sm:text-left"
-                >
-                    <h4
-                        class="text-red-500 font-semibold mb-3 sm:mb-4 text-sm sm:text-base"
-                    >
-                        Subscribe to Our Newsletter
-                    </h4>
-                    <p
-                        class="text-gray-600 text-xs sm:text-sm mb-3 sm:mb-4 leading-relaxed px-4 sm:px-0"
-                    >
-                        Stay updated with the latest listings and rental tips.
-                    </p>
-
-                    <!-- Email Form - Responsive Layout -->
-                    <div
-                        class="flex flex-col sm:flex-row lg:flex-col gap-2 sm:gap-3 max-w-md mx-auto sm:mx-0"
-                    >
-                        <input
-                            v-model="email"
-                            type="email"
-                            placeholder="Email Address"
-                            class="flex-1 px-3 sm:px-4 py-2 sm:py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none text-xs sm:text-sm transition-all"
-                        />
-                        <button
-                            @click="subscribeNewsletter"
-                            class="bg-red-500 hover:bg-red-600 text-white px-4 sm:px-6 py-2 sm:py-2.5 rounded-lg transition-all duration-300 text-xs sm:text-sm font-medium hover:shadow-lg hover:scale-105 whitespace-nowrap"
-                        >
-                            Subscribe
-                        </button>
-                    </div>
-                </div>
             </div>
 
             <!-- Bottom Copyright -->
@@ -178,23 +152,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
 import { Link } from "@inertiajs/vue3";
-
-// Reactive data
-const email = ref("");
-
-// Methods
-const subscribeNewsletter = () => {
-    if (email.value) {
-        // Handle newsletter subscription logic here
-        console.log("Subscribing email:", email.value);
-        alert("Thank you for subscribing to our newsletter!");
-        email.value = "";
-    } else {
-        alert("Please enter a valid email address");
-    }
-};
 </script>
 
 <style scoped>

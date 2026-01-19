@@ -111,7 +111,7 @@ const filteredCars = computed(() => {
 });
 
 // Data untuk Riwayat Perjalanan - dari props backend
-const visibleRiwayatCount = ref(8);
+const visibleRiwayatCount = ref(4);
 
 const visibleRiwayat = computed(() => {
     return props.riwayat.data
@@ -731,13 +731,8 @@ onUnmounted(() => {
                 >
                     <!-- Card 1: Best Services -->
                     <div
-                        class="group relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:bg-gradient-to-br hover:from-red-500 hover:to-red-600 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-red-500/50 cursor-pointer overflow-hidden"
+                        class="group relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 cursor-pointer overflow-hidden"
                     >
-                        <!-- Hover Effect Background -->
-                        <div
-                            class="absolute inset-0 bg-gradient-to-br from-red-500/0 to-red-600/0 group-hover:from-red-500/20 group-hover:to-red-600/20 transition-all duration-500"
-                        ></div>
-
                         <!-- Content -->
                         <div class="relative z-10">
                             <!-- Icon Container -->
@@ -829,13 +824,8 @@ onUnmounted(() => {
 
                     <!-- Card 2: Best Quality -->
                     <div
-                        class="group relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:bg-gradient-to-br hover:from-red-500 hover:to-red-600 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-red-500/50 cursor-pointer overflow-hidden"
+                        class="group relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 cursor-pointer overflow-hidden"
                     >
-                        <!-- Hover Effect Background -->
-                        <div
-                            class="absolute inset-0 bg-gradient-to-br from-red-500/0 to-red-600/0 group-hover:from-red-500/20 group-hover:to-red-600/20 transition-all duration-500"
-                        ></div>
-
                         <!-- Content -->
                         <div class="relative z-10">
                             <!-- Icon Container -->
@@ -926,13 +916,8 @@ onUnmounted(() => {
 
                     <!-- Card 3: Best Experience -->
                     <div
-                        class="group relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:bg-gradient-to-br hover:from-red-500 hover:to-red-600 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-red-500/50 cursor-pointer overflow-hidden md:col-span-2 lg:col-span-1"
+                        class="group relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 cursor-pointer overflow-hidden md:col-span-2 lg:col-span-1"
                     >
-                        <!-- Hover Effect Background -->
-                        <div
-                            class="absolute inset-0 bg-gradient-to-br from-red-500/0 to-red-600/0 group-hover:from-red-500/20 group-hover:to-red-600/20 transition-all duration-500"
-                        ></div>
-
                         <!-- Content -->
                         <div class="relative z-10">
                             <!-- Icon Container -->
@@ -1017,6 +1002,197 @@ onUnmounted(() => {
                                     <span>Flexible & Reliable</span>
                                 </li>
                             </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Paket Lengkap Card - Separated Below -->
+                <div class="mt-8 lg:mt-12 flex justify-center">
+                    <div
+                        class="group relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm border-2 border-red-500/30 rounded-3xl p-10 cursor-pointer overflow-hidden w-full max-w-2xl"
+                    >
+                        <!-- Content -->
+                        <div class="relative z-10">
+                            <!-- Icon Container -->
+                            <div class="mb-6 relative flex justify-center">
+                                <div
+                                    class="inline-flex items-center justify-center w-24 h-24 bg-red-500/30 group-hover:bg-white/20 rounded-3xl transition-all duration-500 group-hover:rotate-6 group-hover:scale-110 shadow-lg"
+                                >
+                                    <svg
+                                        class="w-12 h-12 text-white"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                                        />
+                                    </svg>
+                                </div>
+                                <!-- Decorative Circle -->
+                                <div
+                                    class="absolute -top-2 -right-2 w-4 h-4 bg-red-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                                ></div>
+                            </div>
+
+                            <!-- Title -->
+                            <h3
+                                class="text-3xl md:text-4xl font-bold text-white mb-6 text-center group-hover:scale-105 transition-transform duration-300"
+                            >
+                                Paket Lengkap
+                            </h3>
+
+                            <!-- Two Column Layout for Include/Exclude -->
+                            <div class="grid md:grid-cols-2 gap-8">
+                                <!-- Include Section -->
+                                <div
+                                    class="bg-white/5 rounded-2xl p-6 border border-green-500/20"
+                                >
+                                    <p
+                                        class="text-gray-300 group-hover:text-white leading-relaxed mb-4 transition-colors duration-300 font-bold text-lg flex items-center gap-2"
+                                    >
+                                        <svg
+                                            class="w-6 h-6 text-green-400"
+                                            fill="currentColor"
+                                            viewBox="0 0 20 20"
+                                        >
+                                            <path
+                                                fill-rule="evenodd"
+                                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                                clip-rule="evenodd"
+                                            />
+                                        </svg>
+                                        Sewa Termasuk:
+                                    </p>
+
+                                    <ul class="space-y-3">
+                                        <li
+                                            class="flex items-center gap-3 text-base text-gray-300 group-hover:text-white transition-colors duration-300 font-medium"
+                                        >
+                                            <svg
+                                                class="w-6 h-6 text-green-400 group-hover:text-white flex-shrink-0"
+                                                fill="currentColor"
+                                                viewBox="0 0 20 20"
+                                            >
+                                                <path
+                                                    fill-rule="evenodd"
+                                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                    clip-rule="evenodd"
+                                                />
+                                            </svg>
+                                            <span>Mobil</span>
+                                        </li>
+                                        <li
+                                            class="flex items-center gap-3 text-base text-gray-300 group-hover:text-white transition-colors duration-300 font-medium"
+                                        >
+                                            <svg
+                                                class="w-6 h-6 text-green-400 group-hover:text-white flex-shrink-0"
+                                                fill="currentColor"
+                                                viewBox="0 0 20 20"
+                                            >
+                                                <path
+                                                    fill-rule="evenodd"
+                                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                    clip-rule="evenodd"
+                                                />
+                                            </svg>
+                                            <span>Driver Profesional</span>
+                                        </li>
+                                        <li
+                                            class="flex items-center gap-3 text-base text-gray-300 group-hover:text-white transition-colors duration-300 font-medium"
+                                        >
+                                            <svg
+                                                class="w-6 h-6 text-green-400 group-hover:text-white flex-shrink-0"
+                                                fill="currentColor"
+                                                viewBox="0 0 20 20"
+                                            >
+                                                <path
+                                                    fill-rule="evenodd"
+                                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                    clip-rule="evenodd"
+                                                />
+                                            </svg>
+                                            <span>BBM</span>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <!-- Exclude Section -->
+                                <div
+                                    class="bg-white/5 rounded-2xl p-6 border border-red-500/20"
+                                >
+                                    <p
+                                        class="text-gray-300 group-hover:text-white leading-relaxed mb-4 transition-colors duration-300 font-bold text-lg flex items-center gap-2"
+                                    >
+                                        <svg
+                                            class="w-6 h-6 text-red-400"
+                                            fill="currentColor"
+                                            viewBox="0 0 20 20"
+                                        >
+                                            <path
+                                                fill-rule="evenodd"
+                                                d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                                                clip-rule="evenodd"
+                                            />
+                                        </svg>
+                                        Tidak Termasuk:
+                                    </p>
+
+                                    <ul class="space-y-3">
+                                        <li
+                                            class="flex items-center gap-3 text-base text-gray-300 group-hover:text-white transition-colors duration-300 font-medium"
+                                        >
+                                            <svg
+                                                class="w-6 h-6 text-red-400 group-hover:text-white flex-shrink-0"
+                                                fill="currentColor"
+                                                viewBox="0 0 20 20"
+                                            >
+                                                <path
+                                                    fill-rule="evenodd"
+                                                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                                    clip-rule="evenodd"
+                                                />
+                                            </svg>
+                                            <span>Parkir</span>
+                                        </li>
+                                        <li
+                                            class="flex items-center gap-3 text-base text-gray-300 group-hover:text-white transition-colors duration-300 font-medium"
+                                        >
+                                            <svg
+                                                class="w-6 h-6 text-red-400 group-hover:text-white flex-shrink-0"
+                                                fill="currentColor"
+                                                viewBox="0 0 20 20"
+                                            >
+                                                <path
+                                                    fill-rule="evenodd"
+                                                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                                    clip-rule="evenodd"
+                                                />
+                                            </svg>
+                                            <span>Tol</span>
+                                        </li>
+                                        <li
+                                            class="flex items-center gap-3 text-base text-gray-300 group-hover:text-white transition-colors duration-300 font-medium"
+                                        >
+                                            <svg
+                                                class="w-6 h-6 text-red-400 group-hover:text-white flex-shrink-0"
+                                                fill="currentColor"
+                                                viewBox="0 0 20 20"
+                                            >
+                                                <path
+                                                    fill-rule="evenodd"
+                                                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                                    clip-rule="evenodd"
+                                                />
+                                            </svg>
+                                            <span>Tiket Wisata</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1107,7 +1283,7 @@ onUnmounted(() => {
                 <!-- Gallery Grid -->
                 <div v-if="visibleRiwayat.length > 0" class="mb-12">
                     <div
-                        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6"
+                        class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10"
                     >
                         <RiwayatCard
                             v-for="(item, index) in visibleRiwayat"

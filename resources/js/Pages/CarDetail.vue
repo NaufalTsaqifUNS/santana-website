@@ -288,8 +288,171 @@ const specifications = computed(() => [
                             </div>
                         </div>
 
+                        <!-- Driver Standards -->
+                        <div class="border-t border-gray-200 pt-4 sm:pt-6">
+                            <h2
+                                class="text-base sm:text-lg font-semibold text-gray-900 mb-3 sm:mb-4"
+                            >
+                                Standar Driver Kami
+                            </h2>
+                            <div
+                                class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4"
+                            >
+                                <!-- Driver Bersih -->
+                                <div
+                                    class="flex items-start space-x-3 bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-4 border border-blue-200"
+                                >
+                                    <div
+                                        class="flex-shrink-0 w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center"
+                                    >
+                                        <svg
+                                            class="w-5 h-5 text-white"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                                            />
+                                        </svg>
+                                    </div>
+                                    <div class="flex-1">
+                                        <h3
+                                            class="text-sm sm:text-base font-bold text-blue-900 mb-1"
+                                        >
+                                            Driver Bersih & Rapi
+                                        </h3>
+                                        <p
+                                            class="text-xs sm:text-sm text-blue-700 leading-relaxed"
+                                        >
+                                            Driver kami selalu berpenampilan
+                                            bersih dan rapi untuk kenyamanan
+                                            perjalanan Anda
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <!-- Driver Wangi -->
+                                <div
+                                    class="flex items-start space-x-3 bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-4 border border-purple-200"
+                                >
+                                    <div
+                                        class="flex-shrink-0 w-10 h-10 bg-purple-500 rounded-lg flex items-center justify-center"
+                                    >
+                                        <svg
+                                            class="w-5 h-5 text-white"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                                            />
+                                        </svg>
+                                    </div>
+                                    <div class="flex-1">
+                                        <h3
+                                            class="text-sm sm:text-base font-bold text-purple-900 mb-1"
+                                        >
+                                            Wangi & Segar
+                                        </h3>
+                                        <p
+                                            class="text-xs sm:text-sm text-purple-700 leading-relaxed"
+                                        >
+                                            Mobil dan driver dipastikan dalam
+                                            kondisi wangi dan segar untuk
+                                            pengalaman berkendara yang
+                                            menyenangkan
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <!-- Driver Profesional -->
+                                <div
+                                    class="flex items-start space-x-3 bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-4 border border-green-200"
+                                >
+                                    <div
+                                        class="flex-shrink-0 w-10 h-10 bg-green-500 rounded-lg flex items-center justify-center"
+                                    >
+                                        <svg
+                                            class="w-5 h-5 text-white"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
+                                            />
+                                        </svg>
+                                    </div>
+                                    <div class="flex-1">
+                                        <h3
+                                            class="text-sm sm:text-base font-bold text-green-900 mb-1"
+                                        >
+                                            Sopan & Profesional
+                                        </h3>
+                                        <p
+                                            class="text-xs sm:text-sm text-green-700 leading-relaxed"
+                                        >
+                                            Driver terlatih dengan attitude baik
+                                            dan pelayanan profesional
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <!-- Driver Berpengalaman -->
+                                <div
+                                    class="flex items-start space-x-3 bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl p-4 border border-orange-200"
+                                >
+                                    <div
+                                        class="flex-shrink-0 w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center"
+                                    >
+                                        <svg
+                                            class="w-5 h-5 text-white"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"
+                                            />
+                                        </svg>
+                                    </div>
+                                    <div class="flex-1">
+                                        <h3
+                                            class="text-sm sm:text-base font-bold text-orange-900 mb-1"
+                                        >
+                                            Berpengalaman
+                                        </h3>
+                                        <p
+                                            class="text-xs sm:text-sm text-orange-700 leading-relaxed"
+                                        >
+                                            Driver berpengalaman dan menguasai
+                                            rute untuk perjalanan yang aman dan
+                                            nyaman
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <!-- Description -->
-                        <div v-if="car.description">
+                        <div
+                            v-if="car.description"
+                            class="border-t border-gray-200 pt-4 sm:pt-6"
+                        >
                             <h2
                                 class="text-base sm:text-lg font-semibold text-gray-900 mb-2 sm:mb-3"
                             >
