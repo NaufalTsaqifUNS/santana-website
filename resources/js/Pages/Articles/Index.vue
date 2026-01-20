@@ -2,30 +2,32 @@
     <MainLayout>
         <!-- Hero Section -->
         <section
-            class="relative bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 text-white py-16 md:py-24"
+            class="relative bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 text-white py-12 sm:py-16 md:py-20 lg:py-24"
         >
             <div class="absolute inset-0 bg-black/20"></div>
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <!-- Badge -->
-                <div class="mb-4">
+                <div class="mb-3 sm:mb-4">
                     <span
-                        class="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-semibold bg-red-500/20 text-red-400 border border-red-500/30"
+                        class="inline-flex items-center px-3 py-1 sm:px-4 sm:py-1.5 rounded-full text-xs font-semibold bg-red-500/20 text-red-400 border border-red-500/30"
                     >
-                        Artikel & Berita
+                        📰 Artikel & Berita
                     </span>
                 </div>
 
                 <!-- Title -->
                 <h1
-                    class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight"
+                    class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-3 sm:mb-4 leading-tight"
                 >
-                    Artikel Santana Cars
+                    Informasi & Tips Rental Mobil
                 </h1>
 
                 <!-- Subtitle -->
-                <p class="text-lg md:text-xl text-gray-300 max-w-3xl">
-                    Temukan tips perjalanan, panduan rental mobil, dan informasi
-                    terbaru seputar dunia otomotif
+                <p
+                    class="text-base sm:text-lg md:text-xl text-gray-300 max-w-2xl"
+                >
+                    Temukan artikel menarik, tips perjalanan, dan informasi
+                    seputar rental mobil
                 </p>
             </div>
         </section>
@@ -82,98 +84,108 @@
                         Rental
                     </button>
                 </div>
-
                 <!-- Articles Grid -->
                 <div
                     v-if="filteredArticles.length > 0"
-                    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
+                    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 mb-8 sm:mb-10 md:mb-12"
                 >
                     <Link
                         v-for="article in filteredArticles"
                         :key="article.id"
                         :href="`/artikel/${article.slug}`"
-                        class="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-1"
+                        class="group"
                     >
-                        <!-- Image -->
-                        <div class="relative h-56 overflow-hidden">
-                            <img
-                                :src="
-                                    article.image_url ||
-                                    '/images/placeholder-article.jpg'
-                                "
-                                :alt="article.title"
-                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                            />
-                            <!-- Type Badge -->
-                            <div class="absolute top-4 left-4">
-                                <span
-                                    class="px-3 py-1.5 rounded-full text-xs font-semibold backdrop-blur-sm"
-                                    :class="getBadgeClass(article.type)"
-                                >
-                                    {{ formatTypeName(article.type) }}
-                                </span>
-                            </div>
-                        </div>
-
-                        <!-- Content -->
-                        <div class="p-6">
-                            <!-- Date -->
+                        <div
+                            class="bg-white rounded-xl sm:rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 h-full flex flex-col"
+                        >
+                            <!-- Image -->
                             <div
-                                class="flex items-center gap-2 text-gray-500 text-sm mb-3"
+                                class="relative h-48 sm:h-52 md:h-56 overflow-hidden"
                             >
-                                <svg
-                                    class="w-4 h-4"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24"
+                                <img
+                                    :src="
+                                        article.image_url ||
+                                        '/images/placeholder-article.jpg'
+                                    "
+                                    :alt="article.title"
+                                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                                />
+                                <div
+                                    class="absolute top-3 right-3 sm:top-4 sm:right-4"
                                 >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                                    />
-                                </svg>
-                                <span>{{
-                                    formatDate(
-                                        article.published_at ||
-                                            article.created_at,
-                                    )
-                                }}</span>
+                                    <span
+                                        :class="[
+                                            'px-2 py-0.5 sm:px-3 sm:py-1 rounded-full text-xs font-semibold backdrop-blur-sm',
+                                            getBadgeClass(article.type),
+                                        ]"
+                                    >
+                                        {{ formatTypeName(article.type) }}
+                                    </span>
+                                </div>
                             </div>
 
-                            <!-- Title -->
-                            <h3
-                                class="text-xl font-bold text-gray-900 mb-3 line-clamp-2 group-hover:text-red-600 transition-colors"
-                            >
-                                {{ article.title }}
-                            </h3>
-
-                            <!-- Preview -->
-                            <p
-                                class="text-gray-600 text-sm leading-relaxed mb-4 whitespace-pre-line line-clamp-4"
-                            >
-                                {{ getPreview(article.content) }}
-                            </p>
-
-                            <!-- Read More Link -->
-                            <div
-                                class="flex items-center gap-2 text-red-600 font-medium text-sm group-hover:gap-3 transition-all"
-                            >
-                                <span>Baca Selengkapnya</span>
-                                <svg
-                                    class="w-4 h-4 group-hover:translate-x-1 transition-transform"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24"
+                            <!-- Content -->
+                            <div class="p-4 sm:p-5 md:p-6 flex-1 flex flex-col">
+                                <!-- Date & Read Time -->
+                                <div
+                                    class="flex items-center gap-3 sm:gap-4 text-gray-500 text-xs sm:text-sm mb-2 sm:mb-3"
                                 >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M9 5l7 7-7 7"
-                                    />
-                                </svg>
+                                    <div class="flex items-center gap-1">
+                                        <svg
+                                            class="w-3.5 h-3.5 sm:w-4 sm:h-4"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                                            />
+                                        </svg>
+                                        <span>{{
+                                            formatDate(
+                                                article.published_at ||
+                                                    article.created_at,
+                                            )
+                                        }}</span>
+                                    </div>
+                                </div>
+
+                                <!-- Title -->
+                                <h3
+                                    class="text-base sm:text-lg md:text-xl font-bold text-gray-900 mb-2 sm:mb-3 line-clamp-2 group-hover:text-red-600 transition-colors"
+                                >
+                                    {{ article.title }}
+                                </h3>
+
+                                <!-- Excerpt -->
+                                <p
+                                    class="text-gray-600 text-xs sm:text-sm line-clamp-3 flex-1 mb-3 sm:mb-4"
+                                >
+                                    {{ getPreview(article.content) }}
+                                </p>
+
+                                <!-- Read More -->
+                                <div
+                                    class="flex items-center gap-2 text-red-600 font-semibold text-xs sm:text-sm group-hover:gap-3 transition-all"
+                                >
+                                    <span>Baca Selengkapnya</span>
+                                    <svg
+                                        class="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M17 8l4 4m0 0l-4 4m4-4H3"
+                                        />
+                                    </svg>
+                                </div>
                             </div>
                         </div>
                     </Link>
@@ -182,10 +194,10 @@
                 <!-- Empty State -->
                 <div
                     v-else
-                    class="text-center py-16 bg-white rounded-2xl shadow-lg"
+                    class="text-center py-12 sm:py-16 bg-white rounded-xl sm:rounded-2xl shadow-lg"
                 >
                     <svg
-                        class="w-24 h-24 mx-auto text-gray-300 mb-4"
+                        class="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 mx-auto text-gray-300 mb-3 sm:mb-4"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -197,35 +209,39 @@
                             d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
                         />
                     </svg>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">
-                        Belum Ada Artikel
+                    <h3
+                        class="text-lg sm:text-xl font-semibold text-gray-900 mb-2"
+                    >
+                        Tidak ada artikel
                     </h3>
-                    <p class="text-gray-600">
-                        Tidak ada artikel untuk kategori ini saat ini.
+                    <p class="text-sm sm:text-base text-gray-600">
+                        Belum ada artikel untuk kategori ini
                     </p>
                 </div>
 
                 <!-- Pagination -->
                 <div
                     v-if="articles.links && articles.links.length > 3"
-                    class="mt-12 flex justify-center"
+                    class="flex justify-center px-2"
                 >
-                    <nav class="flex gap-2">
+                    <nav
+                        class="flex items-center gap-1.5 sm:gap-2 flex-wrap justify-center"
+                    >
                         <component
                             v-for="(link, index) in articles.links"
                             :key="index"
                             :is="link.url ? Link : 'span'"
                             :href="link.url"
                             :class="[
-                                'px-4 py-2 rounded-lg font-medium transition-all duration-300',
+                                'px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-sm sm:text-base font-medium transition-all duration-300',
                                 link.active
                                     ? 'bg-red-600 text-white shadow-lg'
                                     : link.url
-                                      ? 'bg-white text-gray-700 hover:bg-gray-100 shadow'
+                                      ? 'bg-white text-gray-700 hover:bg-gray-100'
                                       : 'bg-gray-100 text-gray-400 cursor-not-allowed',
                             ]"
                             v-html="link.label"
-                        />
+                        ></component>
                     </nav>
                 </div>
             </div>
@@ -239,7 +255,7 @@
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">
                     Siap Memulai Perjalanan Anda?
                 </h2>
-                <p class="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
+                <p class="text-lg text- gray-300 mb-8 max-w-2xl mx-auto">
                     Hubungi kami sekarang untuk mendapatkan penawaran terbaik
                     dan konsultasi gratis
                 </p>
@@ -264,7 +280,7 @@
                         Lihat Daftar Rental
                     </Link>
                     <a
-                        href="https://wa.me/6281391574929"
+                        href="https://wa.me/6281226300063"
                         target="_blank"
                         rel="noopener noreferrer"
                         class="px-8 py-4 bg-white hover:bg-gray-100 text-gray-900 rounded-full font-medium transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 inline-flex items-center gap-2"

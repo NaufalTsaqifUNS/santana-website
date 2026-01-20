@@ -114,7 +114,7 @@ watch(
             <!-- Background Image -->
             <div class="absolute inset-0">
                 <img
-                    src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1283&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    src="/images/Avanza-herosection.png"
                     alt="Rent Your Dream Cars"
                     class="w-full h-full object-cover object-center"
                 />

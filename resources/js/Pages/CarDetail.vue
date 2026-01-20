@@ -20,7 +20,7 @@ const props = defineProps({
 const selectedImage = ref(0);
 
 // WhatsApp Configuration
-const whatsappNumber = "6281391574929";
+const whatsappNumber = "6281226300063";
 
 // Generate WhatsApp link with template message
 const getWhatsAppLink = () => {
@@ -33,7 +33,7 @@ Saya tertarik untuk menyewa kendaraan berikut:
 • Kategori: ${props.car.category}
 • Kapasitas: ${props.car.seats} Seats
 • Bahan Bakar: ${props.car.fuel}
-• Harga: Rp ${Number(props.car.pricePerDay).toLocaleString("id-ID")}/hari
+• Harga: Rp ${Number(props.car.pricePerDay).toLocaleString("id-ID")}/12 jam
 
 Mohon informasi lebih lanjut mengenai:
 - Ketersediaan unit
@@ -233,7 +233,7 @@ const specifications = computed(() => [
                                 <span
                                     class="text-sm sm:text-base text-gray-500 font-medium mb-0.5 sm:mb-1"
                                 >
-                                    / Hari
+                                    / 12 Jam
                                 </span>
                             </div>
                         </div>

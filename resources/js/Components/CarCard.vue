@@ -14,7 +14,7 @@ const props = defineProps({
 });
 
 // WhatsApp Configuration
-const whatsappNumber = "6281391574929"; // Nomor WhatsApp Santana Cars
+const whatsappNumber = "6281226300063"; // Nomor WhatsApp Santana Cars
 
 // Generate WhatsApp link with template message
 const getWhatsAppLink = () => {
@@ -27,7 +27,7 @@ Saya tertarik untuk menyewa kendaraan berikut:
 • Kategori: ${props.category}
 • Kapasitas: ${props.seats} Seats
 • Bahan Bakar: ${props.fuel}
-• Harga: Rp ${Number(props.pricePerDay).toLocaleString("id-ID")}/hari
+• Harga: Rp ${Number(props.pricePerDay).toLocaleString("id-ID")}/12 jam
 
 Mohon informasi lebih lanjut mengenai:
 - Ketersediaan unit
@@ -64,7 +64,7 @@ const handleRentNow = () => {
             <!-- Price -->
             <p class="text-red-500 font-semibold">
                 Rp. {{ Number(pricePerDay).toLocaleString("id-ID") }}
-                <span class="text-gray-500 font-normal">/ Day</span>
+                <span class="text-gray-500 font-normal">/ 12 Jam</span>
             </p>
 
             <!-- Car Name -->

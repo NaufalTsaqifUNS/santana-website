@@ -252,7 +252,7 @@ export default {
             lastScrollPosition: 0,
             scrollThreshold: 100,
             // WhatsApp configuration
-            whatsappNumber: "6281391574929", // Format: country code + number (tanpa +, -, atau spasi)
+            whatsappNumber: "6281226300063", // Format: country code + number (tanpa +, -, atau spasi)
         };
     },
     computed: {

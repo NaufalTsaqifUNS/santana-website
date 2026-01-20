@@ -2,12 +2,14 @@
     <MainLayout>
         <!-- Article Hero Section -->
         <section
-            class="relative bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 text-white py-16 md:py-24"
+            class="relative bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 text-white py-12 sm:py-16 md:py-20 lg:py-24"
         >
             <div class="absolute inset-0 bg-black/20"></div>
             <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <!-- Breadcrumb -->
-                <nav class="mb-6 flex items-center space-x-2 text-sm">
+                <nav
+                    class="mb-4 sm:mb-6 flex items-center space-x-2 text-xs sm:text-sm overflow-x-auto pb-2 sm:pb-0"
+                >
                     <Link
                         href="/"
                         class="text-gray-300 hover:text-white transition-colors"
@@ -26,9 +28,9 @@
                 </nav>
 
                 <!-- Category Badge -->
-                <div class="mb-4">
+                <div class="mb-3 sm:mb-4">
                     <span
-                        class="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-semibold bg-red-500/20 text-red-400 border border-red-500/30"
+                        class="inline-flex items-center px-3 py-1 sm:px-4 sm:py-1.5 rounded-full text-xs font-semibold bg-red-500/20 text-red-400 border border-red-500/30"
                     >
                         {{ article.type || "Umum" }}
                     </span>
@@ -36,7 +38,7 @@
 
                 <!-- Article Title -->
                 <h1
-                    class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 leading-tight"
+                    class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 leading-tight"
                 >
                     {{ article.title }}
                 </h1>
@@ -65,9 +67,12 @@
                             )
                         }}</span>
                     </div>
-                    <div class="flex items-center gap-2" v-if="article.author">
+                    <div
+                        class="flex items-center gap-1.5 sm:gap-2"
+                        v-if="article.author"
+                    >
                         <svg
-                            class="w-5 h-5"
+                            class="w-4 h-4 sm:w-5 sm:h-5"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
@@ -105,13 +110,15 @@
         </section>
 
         <!-- Article Content Section -->
-        <section class="py-12 md:py-16 bg-gray-50">
-            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+        <section class="py-8 sm:py-12 md:py-16 bg-gray-50">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div
+                    class="bg-white rounded-xl sm:rounded-2xl shadow-lg overflow-hidden"
+                >
                     <!-- Featured Image -->
                     <div
-                        v-if="article.image_url"
-                        class="w-full h-64 md:h-96 overflow-hidden"
+                        v-if="article.image_url || article.featured_image"
+                        class="w-full h-48 sm:h-64 md:h-80 lg:h-96 overflow-hidden"
                     >
                         <img
                             :src="article.image_url"
@@ -131,10 +138,10 @@
                         <!-- Tags -->
                         <div
                             v-if="article.tags && article.tags.length > 0"
-                            class="mt-8 pt-8 border-t border-gray-200"
+                            class="mt-6 sm:mt-8 pt-6 sm:pt-8 border-t border-gray-200"
                         >
                             <h3
-                                class="text-sm font-semibold text-gray-900 mb-3"
+                                class="text-xs sm:text-sm font-semibold text-gray-900 mb-3 sm:mb-4"
                             >
                                 Tags:
                             </h3>
@@ -143,7 +150,7 @@
                                     v-for="tag in article.tags"
                                     :key="tag.id"
                                     :href="`/tag/${tag.slug}`"
-                                    class="px-4 py-2 rounded-full text-xs font-medium bg-gray-100 text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors"
+                                    class="px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs font-medium bg-gray-100 text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors"
                                 >
                                     #{{ tag.name }}
                                 </Link>
@@ -151,21 +158,23 @@
                         </div>
 
                         <!-- Share Section -->
-                        <div class="mt-8 pt-8 border-t border-gray-200">
+                        <div
+                            class="mt-6 sm:mt-8 pt-6 sm:pt-8 border-t border-gray-200"
+                        >
                             <h3
-                                class="text-sm font-semibold text-gray-900 mb-3"
+                                class="text-xs sm:text-sm font-semibold text-gray-900 mb-3 sm:mb-4"
                             >
                                 Bagikan Artikel:
                             </h3>
-                            <div class="flex gap-3">
+                            <div class="flex flex-wrap gap-2 sm:gap-3">
                                 <a
                                     :href="shareLinks.whatsapp"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    class="flex items-center gap-2 px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg transition-colors text-sm font-medium"
+                                    class="flex items-center gap-1.5 sm:gap-2 px-3 py-2 sm:px-4 sm:py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg transition-colors text-xs sm:text-sm font-medium"
                                 >
                                     <svg
-                                        class="w-5 h-5"
+                                        class="w-4 h-4 sm:w-5 sm:h-5"
                                         fill="currentColor"
                                         viewBox="0 0 24 24"
                                     >
@@ -179,10 +188,10 @@
                                     :href="shareLinks.facebook"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    class="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors text-sm font-medium"
+                                    class="flex items-center gap-1.5 sm:gap-2 px-3 py-2 sm:px-4 sm:py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors text-xs sm:text-sm font-medium"
                                 >
                                     <svg
-                                        class="w-5 h-5"
+                                        class="w-4 h-4 sm:w-5 sm:h-5"
                                         fill="currentColor"
                                         viewBox="0 0 24 24"
                                     >
@@ -196,10 +205,10 @@
                                     :href="shareLinks.twitter"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    class="flex items-center gap-2 px-4 py-2 bg-gray-900 hover:bg-black text-white rounded-lg transition-colors text-sm font-medium"
+                                    class="flex items-center gap-1.5 sm:gap-2 px-3 py-2 sm:px-4 sm:py-2 bg-gray-900 hover:bg-black text-white rounded-lg transition-colors text-xs sm:text-sm font-medium"
                                 >
                                     <svg
-                                        class="w-5 h-5"
+                                        class="w-4 h-4 sm:w-5 sm:h-5"
                                         fill="currentColor"
                                         viewBox="0 0 24 24"
                                     >
@@ -217,23 +226,23 @@
                 <!-- Related Articles -->
                 <div
                     v-if="relatedArticles && relatedArticles.length > 0"
-                    class="mt-16"
+                    class="mt-12 sm:mt-16"
                 >
                     <h2
-                        class="text-2xl md:text-3xl font-bold text-gray-900 mb-8"
+                        class="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-6 sm:mb-8"
                     >
                         Artikel Terkait
                     </h2>
                     <div
-                        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+                        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"
                     >
                         <Link
                             v-for="related in relatedArticles"
                             :key="related.id"
                             :href="`/artikel/${related.slug}`"
-                            class="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-1"
+                            class="group bg-white rounded-xl sm:rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
                         >
-                            <div class="relative h-48 overflow-hidden">
+                            <div class="relative h-40 sm:h-48 overflow-hidden">
                                 <img
                                     :src="
                                         related.image_url ||
@@ -242,20 +251,22 @@
                                     :alt="related.title"
                                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                                 />
-                                <div class="absolute top-4 left-4">
+                                <div
+                                    class="absolute top-3 left-3 sm:top-4 sm:left-4"
+                                >
                                     <span
-                                        class="px-3 py-1 rounded-full text-xs font-semibold bg-red-500/90 text-white backdrop-blur-sm"
+                                        class="px-2 py-0.5 sm:px-3 sm:py-1 rounded-full text-xs font-semibold bg-red-500/90 text-white backdrop-blur-sm"
                                     >
                                         {{ related.type || "Umum" }}
                                     </span>
                                 </div>
                             </div>
-                            <div class="p-6">
+                            <div class="p-4 sm:p-6">
                                 <div
-                                    class="flex items-center gap-2 text-gray-500 text-xs mb-2"
+                                    class="flex items-center gap-1.5 sm:gap-2 text-gray-500 text-xs mb-2"
                                 >
                                     <svg
-                                        class="w-4 h-4"
+                                        class="w-3.5 h-3.5 sm:w-4 sm:h-4"
                                         fill="none"
                                         stroke="currentColor"
                                         viewBox="0 0 24 24"

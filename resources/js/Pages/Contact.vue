@@ -154,9 +154,9 @@ defineOptions({
                                 Telepon
                             </h3>
                             <a
-                                href="tel:+6281234567890"
+                                href="tel:+6281226300063"
                                 class="text-gray-600 hover:text-red-500 transition-colors duration-200"
-                                >+62 812-3456-7890</a
+                                >+62 812-2630-0063</a
                             >
                         </div>
                     </div>
@@ -195,7 +195,7 @@ defineOptions({
                             <div class="space-y-4">
                                 <!-- Instagram -->
                                 <a
-                                    href="https://instagram.com/santanarental"
+                                    href="https://www.instagram.com/santana.cars_sewamobil.solo?igsh=b3RmZGRsd2ZsMnhr"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     class="flex items-center justify-between p-4 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 rounded-xl transition-all duration-300 group shadow-md hover:shadow-lg"
@@ -221,7 +221,7 @@ defineOptions({
                                                 Instagram
                                             </h4>
                                             <p class="text-white/80 text-sm">
-                                                @santanarental
+                                                @santana.cars_sewamobil.solo
                                             </p>
                                         </div>
                                     </div>
@@ -240,12 +240,12 @@ defineOptions({
                                     </svg>
                                 </a>
 
-                                <!-- Facebook -->
+                                <!-- TikTok -->
                                 <a
-                                    href="https://facebook.com/santanarental"
+                                    href="https://www.tiktok.com/@arissantanacarsso?_r=1&_t=ZS-93CD7yaUR6Y"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    class="flex items-center justify-between p-4 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 rounded-xl transition-all duration-300 group shadow-md hover:shadow-lg"
+                                    class="flex items-center justify-between p-4 bg-gradient-to-r from-gray-900 to-black hover:from-black hover:to-gray-800 rounded-xl transition-all duration-300 group shadow-md hover:shadow-lg"
                                 >
                                     <div class="flex items-center gap-4">
                                         <div
@@ -257,7 +257,7 @@ defineOptions({
                                                 viewBox="0 0 24 24"
                                             >
                                                 <path
-                                                    d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"
+                                                    d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1-.1z"
                                                 />
                                             </svg>
                                         </div>
@@ -265,10 +265,10 @@ defineOptions({
                                             <h4
                                                 class="text-white font-bold text-lg"
                                             >
-                                                Facebook
+                                                TikTok
                                             </h4>
                                             <p class="text-white/80 text-sm">
-                                                Santana Rental
+                                                @arissantanacarsso
                                             </p>
                                         </div>
                                     </div>
@@ -319,7 +319,7 @@ defineOptions({
                                     respon yang lebih cepat
                                 </p>
                                 <a
-                                    href="https://wa.me/6281234567890?text=Halo%20Santana%20Rental,%20saya%20ingin%20bertanya%20tentang%20layanan%20rental%20mobil"
+                                    href="https://wa.me/6281226300063?text=Halo%20Santana%20Rental,%20saya%20ingin%20bertanya%20tentang%20layanan%20rental%20mobil"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     class="inline-flex items-center gap-3 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold py-4 px-8 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-green-500/50 hover:scale-105"

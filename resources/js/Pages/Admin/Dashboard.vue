@@ -52,112 +52,6 @@
 
             <!-- Main Content -->
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                <!-- Stats Grid -->
-                <div
-                    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8"
-                >
-                    <!-- Total Mobil -->
-                    <div
-                        class="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-md transition-shadow"
-                    >
-                        <div class="flex items-center justify-between mb-4">
-                            <div class="p-3 bg-red-50 rounded-lg">
-                                <svg
-                                    class="w-6 h-6 text-red-600"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
-                                    />
-                                </svg>
-                            </div>
-                            <span
-                                class="text-xs font-semibold text-gray-500 uppercase"
-                                >Total</span
-                            >
-                        </div>
-                        <div>
-                            <p class="text-3xl font-bold text-gray-900 mb-1">
-                                {{ stats.totalMobil }}
-                            </p>
-                            <p class="text-sm text-gray-500">Total Mobil</p>
-                        </div>
-                    </div>
-
-                    <!-- Mobil Tersedia -->
-                    <div
-                        class="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-md transition-shadow"
-                    >
-                        <div class="flex items-center justify-between mb-4">
-                            <div class="p-3 bg-green-50 rounded-lg">
-                                <svg
-                                    class="w-6 h-6 text-green-600"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                                    />
-                                </svg>
-                            </div>
-                            <span
-                                class="text-xs font-semibold text-green-600 uppercase"
-                                >Available</span
-                            >
-                        </div>
-                        <div>
-                            <p class="text-3xl font-bold text-gray-900 mb-1">
-                                {{ stats.mobilTersedia }}
-                            </p>
-                            <p class="text-sm text-gray-500">Mobil Tersedia</p>
-                        </div>
-                    </div>
-
-                    <!-- Total Perjalanan -->
-                    <div
-                        class="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-md transition-shadow sm:col-span-2 lg:col-span-1"
-                    >
-                        <div class="flex items-center justify-between mb-4">
-                            <div class="p-3 bg-blue-50 rounded-lg">
-                                <svg
-                                    class="w-6 h-6 text-blue-600"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"
-                                    />
-                                </svg>
-                            </div>
-                            <span
-                                class="text-xs font-semibold text-gray-500 uppercase"
-                                >History</span
-                            >
-                        </div>
-                        <div>
-                            <p class="text-3xl font-bold text-gray-900 mb-1">
-                                {{ stats.totalPerjalanan }}
-                            </p>
-                            <p class="text-sm text-gray-500">
-                                Total Perjalanan
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
                 <!-- Content Grid -->
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
                     <!-- Mobil Terbaru - 2 columns -->
@@ -234,7 +128,7 @@
                                                     ).toLocaleString("id-ID")
                                                 }}<span
                                                     class="text-sm text-gray-500 font-normal"
-                                                    >/hari</span
+                                                    >/12 jam</span
                                                 >
                                             </p>
                                         </div>

@@ -72,144 +72,6 @@
                     </div>
                 </transition>
 
-                <!-- Stats Grid -->
-                <div
-                    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8"
-                >
-                    <!-- Total Mobil -->
-                    <div
-                        class="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-md transition-shadow"
-                    >
-                        <div class="flex items-center justify-between mb-4">
-                            <div class="p-3 bg-blue-50 rounded-lg">
-                                <svg
-                                    class="w-6 h-6 text-blue-600"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0
- 011 1v5m-4 0h4"
-                                    ></path>
-                                </svg>
-                            </div>
-                            <span
-                                class="text-xs font-semibold text-gray-500 uppercase"
-                                >Total</span
-                            >
-                        </div>
-                        <div>
-                            <p class="text-3xl font-bold text-gray-900 mb-1">
-                                {{ mobil.total }}
-                            </p>
-                            <p class="text-sm text-gray-500">Total Mobil</p>
-                        </div>
-                    </div>
-
-                    <!-- Tersedia -->
-                    <div
-                        class="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-md transition-shadow"
-                    >
-                        <div class="flex items-center justify-between mb-4">
-                            <div class="p-3 bg-green-50 rounded-lg">
-                                <svg
-                                    class="w-6 h-6 text-green-600"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                                    ></path>
-                                </svg>
-                            </div>
-                            <span
-                                class="text-xs font-semibold text-green-600 uppercase"
-                                >Available</span
-                            >
-                        </div>
-                        <div>
-                            <p class="text-3xl font-bold text-gray-900 mb-1">
-                                {{ mobil.data.filter((m) => m.status).length }}
-                            </p>
-                            <p class="text-sm text-gray-500">Tersedia</p>
-                        </div>
-                    </div>
-
-                    <!-- Tidak Tersedia -->
-                    <div
-                        class="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-md transition-shadow"
-                    >
-                        <div class="flex items-center justify-between mb-4">
-                            <div class="p-3 bg-red-50 rounded-lg">
-                                <svg
-                                    class="w-6 h-6 text-red-600"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
-                                    ></path>
-                                </svg>
-                            </div>
-                            <span
-                                class="text-xs font-semibold text-red-600 uppercase"
-                                >Unavailable</span
-                            >
-                        </div>
-                        <div>
-                            <p class="text-3xl font-bold text-gray-900 mb-1">
-                                {{ mobil.data.filter((m) => !m.status).length }}
-                            </p>
-                            <p class="text-sm text-gray-500">Tidak Tersedia</p>
-                        </div>
-                    </div>
-
-                    <!-- Halaman -->
-                    <div
-                        class="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-md transition-shadow"
-                    >
-                        <div class="flex items-center justify-between mb-4">
-                            <div class="p-3 bg-purple-50 rounded-lg">
-                                <svg
-                                    class="w-6 h-6 text-purple-600"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"
-                                    ></path>
-                                </svg>
-                            </div>
-                            <span
-                                class="text-xs font-semibold text-gray-500 uppercase"
-                                >Page</span
-                            >
-                        </div>
-                        <div>
-                            <p class="text-3xl font-bold text-gray-900 mb-1">
-                                {{ mobil.current_page }}
-                            </p>
-                            <p class="text-sm text-gray-500">Halaman</p>
-                        </div>
-                    </div>
-                </div>
-
                 <!-- Table Card -->
                 <div
                     class="bg-white rounded-xl border border-gray-200 overflow-hidden"
@@ -228,7 +90,7 @@
                                         scope="col"
                                         class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
                                     >
-                                        Harga/Hari
+                                        Harga/12 Jam
                                     </th>
                                     <th
                                         scope="col"
@@ -301,7 +163,7 @@
                                             }}
                                         </div>
                                         <div class="text-xs text-gray-500">
-                                            per hari
+                                            per 12 jam
                                         </div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">

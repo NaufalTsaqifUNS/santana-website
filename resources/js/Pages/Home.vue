@@ -175,7 +175,7 @@ onUnmounted(() => {
                 <div
                     class="absolute inset-0 bg-center bg-no-repeat bg-cover sm:bg-cover md:bg-cover transition-all duration-300"
                     style="
-                        background-image: url(/images/herosection-img.webp);
+                        background-image: url(/images/Family-herosectionV2.png);
                         background-position: center center;
                     "
                 ></div>
@@ -1352,6 +1352,422 @@ onUnmounted(() => {
                             />
                         </svg>
                     </Link>
+                </div>
+            </div>
+        </section>
+
+        <!-- LOCATIONS SECTION - Temukan Lokasi Kami -->
+        <section class="py-16 sm:py-20 md:py-28 bg-gray-50">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="max-w-6xl mx-auto">
+                    <div
+                        class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100"
+                    >
+                        <div
+                            class="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 p-8"
+                        >
+                            <h2
+                                class="text-3xl font-bold text-white text-center mb-3"
+                            >
+                                Temukan Lokasi Kami
+                            </h2>
+                            <p class="text-gray-300 text-center text-lg">
+                                Kunjungi salah satu cabang kami untuk layanan
+                                yang lebih personal
+                            </p>
+                        </div>
+
+                        <!-- Main Branch with Map -->
+                        <div
+                            class="p-8 bg-gradient-to-br from-gray-50 to-white"
+                        >
+                            <!-- Surabaya Main Branch -->
+                            <div class="mb-8">
+                                <div class="flex items-center gap-3 mb-4">
+                                    <div
+                                        class="w-12 h-12 bg-gradient-to-br from-red-500 to-red-600 rounded-lg flex items-center justify-center shadow-lg shadow-red-500/30"
+                                    >
+                                        <svg
+                                            class="w-6 h-6 text-white"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+                                            />
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h3
+                                            class="text-2xl font-bold text-gray-900"
+                                        >
+                                            Surabaya
+                                        </h3>
+                                        <span
+                                            class="inline-block px-3 py-1 bg-red-100 text-red-600 text-xs font-semibold rounded-full"
+                                            >Kantor Pusat</span
+                                        >
+                                    </div>
+                                </div>
+                                <p
+                                    class="text-gray-600 mb-4 text-lg leading-relaxed"
+                                >
+                                    📍 Sewa Mobil Surabaya Santana, Bella
+                                    Exclusive Tower, Pakuwon City, Surabaya,
+                                    Jawa Timur 60112
+                                </p>
+
+                                <!-- Google Maps -->
+                                <div
+                                    class="w-full h-96 lg:h-[450px] rounded-xl overflow-hidden shadow-lg mb-4"
+                                >
+                                    <iframe
+                                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3957.2857537485835!2d112.8039661!3d-7.2802682!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7fbeb937de84f%3A0xa371ed608b08ddc4!2sSewa%20Mobil%20Surabaya%20Santana!5e0!3m2!1sen!2sid!4v1234567890123!5m2!1sen!2sid"
+                                        class="w-full h-full border-0"
+                                        allowfullscreen=""
+                                        loading="lazy"
+                                        referrerpolicy="no-referrer-when-downgrade"
+                                    ></iframe>
+                                </div>
+
+                                <!-- View on Maps Button -->
+                                <div class="text-center">
+                                    <a
+                                        href="https://www.google.com/maps/place/Sewa+Mobil+Surabaya+Santana/@-7.2802682,112.8061548,840m/data=!3m2!1e3!4b1!4m6!3m5!1s0x2dd7fbeb937de84f:0xa371ed608b08ddc4!8m2!3d-7.2802682!4d112.8061548!16s%2Fg%2F11myly6fpr?entry=ttu&g_ep=EgoyMDI2MDEwNy4wIKXMDSoASAFQAw%3D%3D"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        class="inline-flex items-center gap-3 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-bold py-3 px-8 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-red-500/50 hover:scale-105"
+                                    >
+                                        <svg
+                                            class="w-5 h-5"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                                            />
+                                            <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                                            />
+                                        </svg>
+                                        <span>Lihat di Google Maps</span>
+                                        <svg
+                                            class="w-4 h-4"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                                            />
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Other Branches List -->
+                            <div class="mt-10 pt-8 border-t-2 border-gray-200">
+                                <h3
+                                    class="text-2xl font-bold text-gray-900 mb-6 text-center"
+                                >
+                                    Cabang Lainnya
+                                </h3>
+
+                                <div
+                                    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+                                >
+                                    <!-- Jakarta -->
+                                    <div
+                                        class="bg-white border-2 border-gray-200 rounded-xl p-5 hover:border-red-300 hover:shadow-md transition-all duration-300"
+                                    >
+                                        <div class="flex items-start gap-3">
+                                            <div
+                                                class="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center flex-shrink-0 shadow-md"
+                                            >
+                                                <svg
+                                                    class="w-5 h-5 text-white"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    viewBox="0 0 24 24"
+                                                >
+                                                    <path
+                                                        stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                                                    />
+                                                    <path
+                                                        stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                                                    />
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <h4
+                                                    class="font-bold text-gray-900 mb-1"
+                                                >
+                                                    Jakarta
+                                                </h4>
+                                                <p
+                                                    class="text-sm text-gray-600 leading-relaxed"
+                                                >
+                                                    Teluk Pucung RT 06 RW 02,
+                                                    Teluk Pucung, Bekasi Utara,
+                                                    Kota Bekasi, Jawa Barat
+                                                    17121
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Bandung -->
+                                    <div
+                                        class="bg-white border-2 border-gray-200 rounded-xl p-5 hover:border-red-300 hover:shadow-md transition-all duration-300"
+                                    >
+                                        <div class="flex items-start gap-3">
+                                            <div
+                                                class="w-10 h-10 bg-gradient-to-br from-green-500 to-green-600 rounded-lg flex items-center justify-center flex-shrink-0 shadow-md"
+                                            >
+                                                <svg
+                                                    class="w-5 h-5 text-white"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    viewBox="0 0 24 24"
+                                                >
+                                                    <path
+                                                        stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                                                    />
+                                                    <path
+                                                        stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                                                    />
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <h4
+                                                    class="font-bold text-gray-900 mb-1"
+                                                >
+                                                    Bandung
+                                                </h4>
+                                                <p
+                                                    class="text-sm text-gray-600 leading-relaxed"
+                                                >
+                                                    Jalan Kudus Nomor 8 RT 05 RW
+                                                    012, Antapani Kidul,
+                                                    Antapani, Kota Bandung, Jawa
+                                                    Barat 40291
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Semarang -->
+                                    <div
+                                        class="bg-white border-2 border-gray-200 rounded-xl p-5 hover:border-red-300 hover:shadow-md transition-all duration-300"
+                                    >
+                                        <div class="flex items-start gap-3">
+                                            <div
+                                                class="w-10 h-10 bg-gradient-to-br from-purple-500 to-purple-600 rounded-lg flex items-center justify-center flex-shrink-0 shadow-md"
+                                            >
+                                                <svg
+                                                    class="w-5 h-5 text-white"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    viewBox="0 0 24 24"
+                                                >
+                                                    <path
+                                                        stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                                                    />
+                                                    <path
+                                                        stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                                                    />
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <h4
+                                                    class="font-bold text-gray-900 mb-1"
+                                                >
+                                                    Semarang
+                                                </h4>
+                                                <p
+                                                    class="text-sm text-gray-600 leading-relaxed"
+                                                >
+                                                    Jalan Setia Budi Nomor 9A,
+                                                    Sumurboto, Kec. Banyumanik,
+                                                    Kota Semarang, Jawa Tengah
+                                                    50269
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Yogyakarta -->
+                                    <div
+                                        class="bg-white border-2 border-gray-200 rounded-xl p-5 hover:border-red-300 hover:shadow-md transition-all duration-300"
+                                    >
+                                        <div class="flex items-start gap-3">
+                                            <div
+                                                class="w-10 h-10 bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg flex items-center justify-center flex-shrink-0 shadow-md"
+                                            >
+                                                <svg
+                                                    class="w-5 h-5 text-white"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    viewBox="0 0 24 24"
+                                                >
+                                                    <path
+                                                        stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                                                    />
+                                                    <path
+                                                        stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                                                    />
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <h4
+                                                    class="font-bold text-gray-900 mb-1"
+                                                >
+                                                    Yogyakarta
+                                                </h4>
+                                                <p
+                                                    class="text-sm text-gray-600 leading-relaxed"
+                                                >
+                                                    Jalan Abimanyu, Ngebel,
+                                                    Taman Tirto, Kec. Kasihan,
+                                                    Kab. Bantul, Daerah Istimewa
+                                                    Yogyakarta 55184
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Batam -->
+                                    <div
+                                        class="bg-white border-2 border-gray-200 rounded-xl p-5 hover:border-red-300 hover:shadow-md transition-all duration-300"
+                                    >
+                                        <div class="flex items-start gap-3">
+                                            <div
+                                                class="w-10 h-10 bg-gradient-to-br from-pink-500 to-pink-600 rounded-lg flex items-center justify-center flex-shrink-0 shadow-md"
+                                            >
+                                                <svg
+                                                    class="w-5 h-5 text-white"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    viewBox="0 0 24 24"
+                                                >
+                                                    <path
+                                                        stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                                                    />
+                                                    <path
+                                                        stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                                                    />
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <h4
+                                                    class="font-bold text-gray-900 mb-1"
+                                                >
+                                                    Batam
+                                                </h4>
+                                                <p
+                                                    class="text-sm text-gray-600 leading-relaxed"
+                                                >
+                                                    Jalan Gajah Mada, Tiban
+                                                    Nomor 7, Batam, Kepulauan
+                                                    Riau 29431
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Balikpapan -->
+                                    <div
+                                        class="bg-white border-2 border-gray-200 rounded-xl p-5 hover:border-red-300 hover:shadow-md transition-all duration-300"
+                                    >
+                                        <div class="flex items-start gap-3">
+                                            <div
+                                                class="w-10 h-10 bg-gradient-to-br from-teal-500 to-teal-600 rounded-lg flex items-center justify-center flex-shrink-0 shadow-md"
+                                            >
+                                                <svg
+                                                    class="w-5 h-5 text-white"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    viewBox="0 0 24 24"
+                                                >
+                                                    <path
+                                                        stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                                                    />
+                                                    <path
+                                                        stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                                                    />
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <h4
+                                                    class="font-bold text-gray-900 mb-1"
+                                                >
+                                                    Balikpapan
+                                                </h4>
+                                                <p
+                                                    class="text-sm text-gray-600 leading-relaxed"
+                                                >
+                                                    CF. Afdeling, Rimba Berlian
+                                                    RT 10 RW 0, Semerangkai,
+                                                    Kec. Kapuas, Kab. Sanggau,
+                                                    Kalimantan Barat 78564
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
