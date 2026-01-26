@@ -1,5 +1,5 @@
 <template>
-    <Head title="Login Admin - Santana Rental Mobil Solo" />
+    <Head title="Login Admin - Santana Rental Mobil Indonesia" />
 
     <div
         class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden"

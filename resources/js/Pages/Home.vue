@@ -164,7 +164,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-    <Head title="Beranda - Santana Rental Mobil Solo" />
+    <Head title="Beranda - Santana Rental Mobil Indonesia" />
 
     <div class="min-h-screen bg-gray-50">
         <!-- HERO SECTION - Enhanced & Responsive Background -->
@@ -227,7 +227,7 @@ onUnmounted(() => {
                             </svg>
                             <span
                                 class="text-white text-xs sm:text-sm font-medium"
-                                >#1 Rental Mobil di Solo</span
+                                >#1 Rental Mobil di Indonesia</span
                             >
                         </div>
 

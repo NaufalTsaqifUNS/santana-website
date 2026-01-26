@@ -9,7 +9,7 @@ defineOptions({
 </script>
 
 <template>
-    <Head title="Hubungi Kami - Santana Rental Mobil Solo" />
+    <Head title="Hubungi Kami - Santana Rental Mobil Indonesia" />
 
     <div class="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
         <!-- Hero Section -->

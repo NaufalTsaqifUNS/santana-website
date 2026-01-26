@@ -3,7 +3,7 @@ import { Head, Link } from "@inertiajs/vue3";
 </script>
 
 <template>
-    <Head title="Halaman Tidak Ditemukan - Santana Rental Mobil Solo" />
+    <Head title="Halaman Tidak Ditemukan - Santana Rental Mobil Indonesia" />
 
     <div
         class="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 flex items-center justify-center px-4"

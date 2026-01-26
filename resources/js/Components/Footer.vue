@@ -12,7 +12,7 @@
                         class="flex items-center justify-center sm:justify-start space-x-3"
                     >
                         <img
-                            src="/images/santana-logo.png"
+                            src="/images/rental-indonesia.png"
                             alt="Santana Rental Logo"
                             class="h-12 sm:h-14 md:h-16 w-auto object-contain"
                         />

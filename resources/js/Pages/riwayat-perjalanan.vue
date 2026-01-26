@@ -21,7 +21,7 @@ const getImageUrl = (path) => {
 </script>
 
 <template>
-    <Head title="Riwayat Perjalanan - Santana Rental Mobil Solo" />
+    <Head title="Riwayat Perjalanan - Santana Rental Mobil Indonesia" />
 
     <MainLayout>
         <div class="min-h-screen bg-gray-50">

@@ -10,7 +10,7 @@
                     <div class="flex-shrink-0 flex items-center">
                         <!-- Logo Image -->
                         <img
-                            src="/images/santana-logo.png"
+                            src="/images/rental-indonesia.png"
                             alt="Santana Logo"
                             class="h-12 w-auto"
                         />

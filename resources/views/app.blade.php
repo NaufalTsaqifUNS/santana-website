@@ -7,20 +7,20 @@
         <title inertia>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Meta Tags -->
-        <meta name="description" content="Santana Rental Mobil Solo - Layanan rental mobil terpercaya di Solo dengan harga terjangkau, armada terawat, dan pelayanan profesional. Sewa mobil untuk perjalanan wisata, bisnis, atau kebutuhan pribadi.">
-        <meta name="keywords" content="rental mobil solo, sewa mobil solo, rental mobil murah solo, sewa mobil murah solo, rental mobil sukoharjo, santana rental">
-        <meta name="author" content="Santana Rental Mobil Solo">
+        <meta name="description" content="Santana Rental Mobil Indonesia - Layanan rental mobil terpercaya dengan harga terjangkau, armada terawat, dan pelayanan profesional. Sewa mobil untuk perjalanan wisata, bisnis, atau kebutuhan pribadi.">
+        <meta name="keywords" content="rental mobil indonesia, sewa mobil, rental mobil murah, sewa mobil murah, santana rental">
+        <meta name="author" content="Santana Rental Mobil Indonesia">
 
         <!-- Open Graph / Facebook -->
         <meta property="og:type" content="website">
         <meta property="og:title" content="{{ config('app.name', 'Laravel') }} - Rental Mobil Terpercaya">
-        <meta property="og:description" content="Layanan rental mobil terpercaya di Solo dengan harga terjangkau dan armada terawat.">
+        <meta property="og:description" content="Layanan rental mobil terpercaya dengan harga terjangkau dan armada terawat.">
         <meta property="og:image" content="{{ asset('images/og-image.jpg') }}">
 
         <!-- Twitter -->
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:title" content="{{ config('app.name', 'Laravel') }} - Rental Mobil Terpercaya">
-        <meta name="twitter:description" content="Layanan rental mobil terpercaya di Solo dengan harga terjangkau dan armada terawat.">
+        <meta name="twitter:description" content="Layanan rental mobil terpercaya dengan harga terjangkau dan armada terawat.">
 
         <!-- Favicon -->
         <link rel="icon" type="image/svg+xml" href="{{ asset('images/Logo-santana.svg') }}">

@@ -1,5 +1,5 @@
 <template>
-    <Head title="Dashboard Admin - Santana Rental Mobil Solo" />
+    <Head title="Dashboard Admin - Santana Rental Mobil Indonesia" />
 
     <AdminLayout>
         <div class="min-h-screen bg-gray-50">

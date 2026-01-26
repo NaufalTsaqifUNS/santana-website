@@ -106,7 +106,7 @@ watch(
 </script>
 
 <template>
-    <Head title="Daftar Mobil - Santana Rental Mobil Solo" />
+    <Head title="Daftar Mobil - Santana Rental Mobil Indonesia" />
 
     <MainLayout>
         <!-- Hero Section - Full Screen -->
