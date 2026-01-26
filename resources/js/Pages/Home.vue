@@ -175,7 +175,7 @@ onUnmounted(() => {
                 <div
                     class="absolute inset-0 bg-center bg-no-repeat bg-cover sm:bg-cover md:bg-cover transition-all duration-300"
                     style="
-                        background-image: url(/images/Family-herosectionV2.png);
+                        background-image: url(/images/Avanza-herosectionPUTIH.png);
                         background-position: center center;
                     "
                 ></div>

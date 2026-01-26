@@ -174,18 +174,7 @@
                         Artikel
                     </Link>
                     <Link
-                        href="/tentang-kami"
-                        class="text-gray-700 hover:text-red-600 block px-3 py-2 text-base font-medium transition-colors duration-200"
-                        :class="{
-                            'text-red-600 bg-red-50':
-                                activeMenu === 'tentang-kami',
-                        }"
-                        @click="mobileMenuOpen = false"
-                    >
-                        Tentang Kami
-                    </Link>
-                    <Link
-                        href="/contact"
+                        href="/Contact"
                         class="text-gray-700 hover:text-red-600 block px-3 py-2 text-base font-medium transition-colors duration-200"
                         :class="{
                             'text-red-600 bg-red-50': activeMenu === 'contact',
