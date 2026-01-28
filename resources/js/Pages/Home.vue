@@ -1189,7 +1189,7 @@ onUnmounted(() => {
                                                 />
                                             </svg>
                                             <span
-                                                >Parkir (VIP & Objek
+                                                >Parkir (VIP/Valet & Obyek
                                                 Wisata)</span
                                             >
                                         </li>
@@ -1208,7 +1208,7 @@ onUnmounted(() => {
                                                 />
                                             </svg>
                                             <span
-                                                >Tiket Masuk Objek Wisata</span
+                                                >Tiket Masuk Obyek Wisata</span
                                             >
                                         </li>
                                     </ul>
