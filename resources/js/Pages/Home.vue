@@ -59,13 +59,10 @@ const categories = computed(() => {
 
 // Methods
 const searchHeroCars = () => {
-    // Sinkronkan pencarian hero dengan rental list
-    searchQuery.value = heroSearchQuery.value;
-    // Scroll ke section rental list
-    const rentalSection = document.getElementById("rental-list-section");
-    if (rentalSection) {
-        rentalSection.scrollIntoView({ behavior: "smooth" });
-    }
+    // Redirect ke halaman list-rental dengan parameter pencarian
+    router.get("/list-rental", {
+        search: heroSearchQuery.value,
+    });
 };
 
 const scrollToRentalSection = () => {
@@ -106,8 +103,8 @@ const filteredCars = computed(() => {
         return matchCategory && matchSearch;
     });
 
-    // Batasi hanya menampilkan 3 kendaraan di halaman Home
-    return filtered.slice(0, 3);
+    // Batasi hanya menampilkan 4 kendaraan di halaman Home
+    return filtered.slice(0, 4);
 });
 
 // Data untuk Riwayat Perjalanan - dari props backend
@@ -422,166 +419,9 @@ onUnmounted(() => {
                     <div class="w-16 h-1 mx-auto bg-red-500 rounded-full"></div>
                 </div>
 
-                <!-- Search Bar - Same Style as Hero (Responsive) -->
-                <div class="max-w-2xl mx-auto">
-                    <div
-                        class="relative flex items-center gap-1.5 sm:gap-2 bg-white rounded-full shadow-lg p-1.5 sm:p-2 transition-all duration-300 hover:shadow-red-500/20"
-                    >
-                        <!-- Search Icon - Hidden on mobile inside input -->
-                        <div
-                            class="absolute left-4 sm:left-6 pointer-events-none hidden sm:block"
-                        >
-                            <svg
-                                class="w-5 h-5 sm:w-6 sm:h-6 text-gray-400"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                                />
-                            </svg>
-                        </div>
-
-                        <!-- Input -->
-                        <input
-                            v-model="searchQuery"
-                            type="text"
-                            placeholder="Cari mobil..."
-                            @keypress.enter="searchRentalCars"
-                            class="flex-1 pl-4 pr-2 sm:pl-14 sm:pr-4 py-3 sm:py-4 text-gray-700 text-sm sm:text-base md:text-lg focus:outline-none focus:ring-0 border-0 bg-transparent placeholder-gray-400 rounded-full"
-                        />
-
-                        <!-- Search Button - Icon Only -->
-                        <button
-                            @click="searchRentalCars"
-                            class="group relative bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white p-3 sm:p-4 rounded-full transition-all duration-300 hover:shadow-lg hover:shadow-red-500/50 hover:scale-110 flex items-center justify-center flex-shrink-0"
-                            aria-label="Search"
-                        >
-                            <svg
-                                class="w-5 h-5 sm:w-6 sm:h-6"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                                />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Category Tabs/Dropdown -->
-                <!-- Mobile Dropdown (< 640px) -->
-                <div class="sm:hidden relative">
-                    <button
-                        @click="isDropdownOpen = !isDropdownOpen"
-                        class="w-full px-4 py-3 bg-white rounded-lg border border-gray-200 flex items-center justify-between text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors duration-200"
-                    >
-                        <span class="flex items-center gap-2">
-                            <svg
-                                class="w-5 h-5 text-gray-400"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"
-                                />
-                            </svg>
-                            {{ activeCategoryData.label }} ({{
-                                activeCategoryData.count
-                            }})
-                        </span>
-                        <svg
-                            class="w-5 h-5 text-gray-400 transition-transform duration-200"
-                            :class="{ 'rotate-180': isDropdownOpen }"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                        >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M19 9l-7 7-7-7"
-                            />
-                        </svg>
-                    </button>
-
-                    <!-- Dropdown Menu -->
-                    <transition
-                        enter-active-class="transition ease-out duration-200"
-                        enter-from-class="opacity-0 translate-y-1"
-                        enter-to-class="opacity-100 translate-y-0"
-                        leave-active-class="transition ease-in duration-150"
-                        leave-from-class="opacity-100 translate-y-0"
-                        leave-to-class="opacity-0 translate-y-1"
-                    >
-                        <div
-                            v-show="isDropdownOpen"
-                            class="absolute z-10 w-full mt-2 bg-white rounded-lg shadow-lg border border-gray-200 max-h-64 overflow-y-auto"
-                        >
-                            <button
-                                v-for="cat in categories"
-                                :key="cat.label"
-                                @click="selectCategory(cat.label)"
-                                :class="[
-                                    'w-full px-4 py-3 text-left text-sm transition-colors duration-200',
-                                    'hover:bg-gray-50 flex items-center justify-between',
-                                    activeCategory === cat.label
-                                        ? 'bg-red-50 text-red-600 font-medium'
-                                        : 'text-gray-700',
-                                ]"
-                            >
-                                <span>{{ cat.label }}</span>
-                                <span
-                                    :class="[
-                                        'px-2 py-1 rounded-full text-xs',
-                                        activeCategory === cat.label
-                                            ? 'bg-red-100 text-red-600'
-                                            : 'bg-gray-100 text-gray-600',
-                                    ]"
-                                >
-                                    {{ cat.count }}
-                                </span>
-                            </button>
-                        </div>
-                    </transition>
-                </div>
-
-                <!-- Desktop Tabs (>= 640px) -->
-                <div
-                    class="hidden sm:flex flex-wrap gap-3 justify-start overflow-x-auto pb-2"
-                >
-                    <button
-                        v-for="cat in categories"
-                        :key="cat.label"
-                        @click="activeCategory = cat.label"
-                        :class="[
-                            'px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap border transition-all duration-300',
-                            activeCategory === cat.label
-                                ? 'bg-red-500 text-white border-red-500 shadow-md'
-                                : 'bg-gray-100 text-gray-600 hover:bg-red-50 border-gray-200 hover:border-red-200',
-                        ]"
-                    >
-                        {{ cat.label }} ({{ cat.count }})
-                    </button>
-                </div>
-
                 <!-- Grid Cars -->
                 <div
-                    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+                    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
                 >
                     <CarCard
                         v-for="car in filteredCars"
