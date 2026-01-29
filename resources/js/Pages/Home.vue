@@ -16,6 +16,10 @@ const props = defineProps({
         type: Array,
         default: () => [],
     },
+    allCategories: {
+        type: Array,
+        default: () => [],
+    },
     riwayat: {
         type: Object,
         default: () => ({ data: [] }),
@@ -30,31 +34,20 @@ const searchQuery = ref("");
 const activeCategory = ref("All");
 const isDropdownOpen = ref(false);
 
-// Computed categories - Automatically generated from cars data
+// Computed categories - Use allCategories from backend
 const categories = computed(() => {
-    if (!props.cars || props.cars.length === 0) {
+    if (!props.allCategories || props.allCategories.length === 0) {
         return [{ label: "All", count: 0 }];
     }
 
-    // Count cars by category
-    const categoryCounts = props.cars.reduce((acc, car) => {
-        acc[car.category] = (acc[car.category] || 0) + 1;
-        return acc;
-    }, {});
-
-    // Create categories array with counts
-    const categoryList = Object.entries(categoryCounts).map(
-        ([label, count]) => ({
-            label,
-            count,
-        }),
+    // Calculate total count for "All" category
+    const totalCount = props.allCategories.reduce(
+        (sum, cat) => sum + cat.count,
+        0,
     );
 
-    // Sort alphabetically
-    categoryList.sort((a, b) => a.label.localeCompare(b.label));
-
     // Add "All" category at the beginning
-    return [{ label: "All", count: props.cars.length }, ...categoryList];
+    return [{ label: "All", count: totalCount }, ...props.allCategories];
 });
 
 // Methods
@@ -93,14 +86,15 @@ const activeCategoryData = computed(() => {
 const filteredCars = computed(() => {
     if (!props.cars) return [];
 
+    // Jika ada filter kategori aktif (bukan "All"), redirect ke halaman list-rental
+    // Di home hanya tampilkan 4 mobil terbaru tanpa filter
+    if (activeCategory.value === "All") {
+        return props.cars.slice(0, 4);
+    }
+
+    // Untuk kategori tertentu, filter dari cars yang ada
     const filtered = props.cars.filter((car) => {
-        const matchCategory =
-            activeCategory.value === "All" ||
-            car.category === activeCategory.value;
-        const matchSearch = car.name
-            .toLowerCase()
-            .includes(searchQuery.value.toLowerCase());
-        return matchCategory && matchSearch;
+        return car.category === activeCategory.value;
     });
 
     // Batasi hanya menampilkan 4 kendaraan di halaman Home
@@ -417,6 +411,107 @@ onUnmounted(() => {
                         Daftar Rental Santana
                     </h2>
                     <div class="w-16 h-1 mx-auto bg-red-500 rounded-full"></div>
+                </div>
+
+                <!-- Category Tabs/Dropdown -->
+                <!-- Mobile Dropdown (< 640px) -->
+                <div class="sm:hidden relative">
+                    <button
+                        @click="isDropdownOpen = !isDropdownOpen"
+                        class="w-full px-4 py-3 bg-white rounded-lg border border-gray-200 flex items-center justify-between text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors duration-200"
+                    >
+                        <span class="flex items-center gap-2">
+                            <svg
+                                class="w-5 h-5 text-gray-400"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"
+                                />
+                            </svg>
+                            {{ activeCategoryData.label }} ({{
+                                activeCategoryData.count
+                            }})
+                        </span>
+                        <svg
+                            class="w-5 h-5 text-gray-400 transition-transform duration-200"
+                            :class="{ 'rotate-180': isDropdownOpen }"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M19 9l-7 7-7-7"
+                            />
+                        </svg>
+                    </button>
+
+                    <!-- Dropdown Menu -->
+                    <transition
+                        enter-active-class="transition ease-out duration-200"
+                        enter-from-class="opacity-0 translate-y-1"
+                        enter-to-class="opacity-100 translate-y-0"
+                        leave-active-class="transition ease-in duration-150"
+                        leave-from-class="opacity-100 translate-y-0"
+                        leave-to-class="opacity-0 translate-y-1"
+                    >
+                        <div
+                            v-show="isDropdownOpen"
+                            class="absolute z-10 w-full mt-2 bg-white rounded-lg shadow-lg border border-gray-200 max-h-64 overflow-y-auto"
+                        >
+                            <button
+                                v-for="cat in categories"
+                                :key="cat.label"
+                                @click="selectCategory(cat.label)"
+                                :class="[
+                                    'w-full px-4 py-3 text-left text-sm transition-colors duration-200',
+                                    'hover:bg-gray-50 flex items-center justify-between',
+                                    activeCategory === cat.label
+                                        ? 'bg-red-50 text-red-600 font-medium'
+                                        : 'text-gray-700',
+                                ]"
+                            >
+                                <span>{{ cat.label }}</span>
+                                <span
+                                    :class="[
+                                        'px-2 py-1 rounded-full text-xs',
+                                        activeCategory === cat.label
+                                            ? 'bg-red-100 text-red-600'
+                                            : 'bg-gray-100 text-gray-600',
+                                    ]"
+                                >
+                                    {{ cat.count }}
+                                </span>
+                            </button>
+                        </div>
+                    </transition>
+                </div>
+
+                <!-- Desktop Tabs (>= 640px) -->
+                <div
+                    class="hidden sm:flex flex-wrap gap-3 justify-center overflow-x-auto pb-2"
+                >
+                    <button
+                        v-for="cat in categories"
+                        :key="cat.label"
+                        @click="activeCategory = cat.label"
+                        :class="[
+                            'px-5 py-2.5 rounded-full text-sm font-medium whitespace-nowrap border transition-all duration-300',
+                            activeCategory === cat.label
+                                ? 'bg-red-500 text-white border-red-500 shadow-md'
+                                : 'bg-white text-gray-600 hover:bg-red-50 border-gray-200 hover:border-red-200',
+                        ]"
+                    >
+                        {{ cat.label }} ({{ cat.count }})
+                    </button>
                 </div>
 
                 <!-- Grid Cars -->

@@ -13,22 +13,37 @@ class DaftarRentalController extends Controller
     // Method untuk home page
     public function home()
     {
-        $cars = DaftarRental::where("status", true)
-            ->latest()
-            ->take(6)
-            ->get()
-            ->map(function ($car) {
+        // Ambil semua mobil aktif
+        $allCars = DaftarRental::where("status", true)->latest()->get();
+
+        // Map semua mobil untuk ditampilkan
+        $cars = $allCars->map(function ($car) {
+            return [
+                "id" => $car->id,
+                "name" => $car->namaMobil,
+                "category" => $car->jenisMobil,
+                "pricePerDay" => $car->hargaMobil,
+                "imageUrl" => $car->fotoMobil
+                    ? asset("storage/" . $car->fotoMobil)
+                    : null,
+                "seats" => $car->seat,
+                "fuel" => $car->jenisBahanBakar,
+                "description" => $car->deskripsiMobil,
+            ];
+        });
+
+        // Ambil semua kategori yang unik dari seluruh mobil
+        $allCategories = $allCars
+            ->pluck("jenisMobil")
+            ->unique()
+            ->sort()
+            ->values()
+            ->map(function ($category) use ($allCars) {
                 return [
-                    "id" => $car->id,
-                    "name" => $car->namaMobil,
-                    "category" => $car->jenisMobil,
-                    "pricePerDay" => $car->hargaMobil,
-                    "imageUrl" => $car->fotoMobil
-                        ? asset("storage/" . $car->fotoMobil)
-                        : null,
-                    "seats" => $car->seat,
-                    "fuel" => $car->jenisBahanBakar,
-                    "description" => $car->deskripsiMobil,
+                    "label" => $category,
+                    "count" => $allCars
+                        ->where("jenisMobil", $category)
+                        ->count(),
                 ];
             });
 
@@ -39,6 +54,7 @@ class DaftarRentalController extends Controller
 
         return Inertia::render("Home", [
             "cars" => $cars,
+            "allCategories" => $allCategories,
             "riwayat" => [
                 "data" => $riwayat,
             ],
