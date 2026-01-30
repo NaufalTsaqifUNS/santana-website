@@ -14,7 +14,7 @@ const props = defineProps({
 });
 
 // WhatsApp Configuration
-const whatsappNumber = "6281226300063"; // Nomor WhatsApp Santana Cars
+const whatsappNumber = "6281802597745"; // Nomor WhatsApp Santana Cars
 
 // Generate WhatsApp link with template message
 const getWhatsAppLink = () => {

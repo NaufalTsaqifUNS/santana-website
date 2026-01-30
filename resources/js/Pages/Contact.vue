@@ -319,7 +319,7 @@ defineOptions({
                                     respon yang lebih cepat
                                 </p>
                                 <a
-                                    href="https://wa.me/6281226300063?text=Halo%20Santana%20Rental,%20saya%20ingin%20bertanya%20tentang%20layanan%20rental%20mobil"
+                                    href="https://wa.me/6281802597745?text=Halo%20Santana%20Rental,%20saya%20ingin%20bertanya%20tentang%20layanan%20rental%20mobil"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     class="inline-flex items-center gap-3 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold py-4 px-8 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-green-500/50 hover:scale-105"

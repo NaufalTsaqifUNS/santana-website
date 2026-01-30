@@ -280,7 +280,7 @@
                         Lihat Daftar Rental
                     </Link>
                     <a
-                        href="https://wa.me/6281226300063"
+                        href="https://wa.me/6281802597745"
                         target="_blank"
                         rel="noopener noreferrer"
                         class="px-8 py-4 bg-white hover:bg-gray-100 text-gray-900 rounded-full font-medium transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 inline-flex items-center gap-2"

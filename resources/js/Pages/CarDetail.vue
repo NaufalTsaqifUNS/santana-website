@@ -20,7 +20,7 @@ const props = defineProps({
 const selectedImage = ref(0);
 
 // WhatsApp Configuration
-const whatsappNumber = "6281226300063";
+const whatsappNumber = "6281802597745";
 
 // Generate WhatsApp link with template message
 const getWhatsAppLink = () => {
